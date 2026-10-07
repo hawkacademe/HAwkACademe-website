@@ -5,7 +5,7 @@
     "dev": "concurrently -k -n api,web -c blue,magenta \"npm:dev:api\" \"npm:dev:web\"",
     "dev:api": "nodemon --watch server server/start.js",
     "dev:web": "vite",
-    "build": "node tools/check-brand.mjs && vite build",
+    "build": "node tools/check-brand.mjs && vite build && vite build --ssr src/entry-server.jsx --outDir dist-ssr",
     "start": "NODE_ENV=production node server/start.js",
     "seed": "node server/scripts/seed.js",
     "create-admin": "node server/scripts/create-admin.js",

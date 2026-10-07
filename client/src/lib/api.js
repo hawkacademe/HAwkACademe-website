@@ -33,6 +33,11 @@ export async function api(path, { method = 'GET', body, form } = {}) {
 
 // Cached GET for public content, so moving between pages feels instant.
 const cache = new Map();
+// Stores data the server already sent with the page, so cachedGet does not refetch it.
+export function seedCache(path, data) {
+  cache.set(path, { at: Date.now(), promise: Promise.resolve(data) });
+}
+
 export function cachedGet(path, maxAgeMs = 60000) {
   const hit = cache.get(path);
   if (hit && Date.now() - hit.at < maxAgeMs) return hit.promise;

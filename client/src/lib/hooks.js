@@ -1,11 +1,36 @@
-import { useEffect, useState } from 'react';
-import { cachedGet } from './api.js';
+import { createContext, useContext, useEffect, useState } from 'react';
+import { cachedGet, seedCache, ApiError } from './api.js';
+
+// Data the server already loaded for the first page view: { [apiPath]: { data } | { error } }.
+// On the server it also records any path a page asked for but did not get (missing).
+export const PreloadContext = createContext(null);
+
+function fromPreload(pre, path) {
+  const hit = path && pre?.values?.[path];
+  if (!hit) {
+    if (path && pre?.missing) pre.missing.add(path);
+    return null;
+  }
+  return hit.error
+    ? { data: null, error: new ApiError(hit.error.message, hit.error.status), loading: false }
+    : { data: hit.data, error: null, loading: false };
+}
 
 // Loads public data: { data, error, loading }.
 export function useData(path) {
-  const [state, setState] = useState({ data: null, error: null, loading: !!path });
+  const pre = useContext(PreloadContext);
+  const [state, setState] = useState(() => fromPreload(pre, path) || { data: null, error: null, loading: !!path });
   useEffect(() => {
     if (!path) return undefined;
+    const hit = pre?.values?.[path];
+    if (hit) {
+      // Use the server's copy once (it is also cached for quick back-navigation).
+      if (hit.data) seedCache(path, hit.data);
+      delete pre.values[path];
+      const s = fromPreload({ values: { [path]: hit } }, path);
+      setState((cur) => (cur.data === s.data && cur.error?.status === s.error?.status ? cur : s));
+      return undefined;
+    }
     let live = true;
     setState((s) => ({ ...s, loading: true, error: null }));
     cachedGet(path).then(
@@ -13,7 +38,7 @@ export function useData(path) {
       (error) => live && setState({ data: null, error, loading: false })
     );
     return () => { live = false; };
-  }, [path]);
+  }, [path, pre]);
   return state;
 }
 

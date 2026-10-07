@@ -2,7 +2,8 @@ import { Router } from 'express';
 import rateLimit from 'express-rate-limit';
 import { randomBytes } from 'node:crypto';
 import { z } from 'zod';
-import { Post, Photo, Notice, Review, Enquiry } from '../models/index.js';
+import { Enquiry } from '../models/index.js';
+import { publishedFilter, siteData, noticesData, postsData, postData, galleryData, reviewsData } from '../lib/publicData.js';
 import { ah, getSettings } from '../lib/util.js';
 import { sendEnquiryEmail } from '../lib/mail.js';
 import { config } from '../config.js';
@@ -13,53 +14,18 @@ const r = Router();
 // edits show up straight away.
 const cache = () => (req, res, next) => { res.set('Cache-Control', 'no-cache'); next(); };
 
-export const publishedFilter = () => ({ status: 'published', publishAt: { $lte: new Date() } });
+export { publishedFilter };
 
-const postCard = (p) => ({
-  slug: p.slug, title: p.title, category: p.category, excerpt: p.excerpt, coverStyle: p.coverStyle,
-  cover: p.cover?.url ? { url: p.cover.url, alt: p.cover.alt || p.title } : null, date: p.publishAt, author: p.author
-});
-
-r.get('/site', cache(60), ah(async (req, res) => {
-  const s = await getSettings();
-  res.json({
-    phone: s.phone, whatsapp: s.whatsapp, email: s.email, address: s.address, mapsLink: s.mapsLink, mapEmbed: s.mapEmbed,
-    officeHours: s.officeHours, responseTime: s.responseTime, social: s.social, highlights: s.highlights, programs: s.programs,
-    turnstileSiteKey: config.turnstile.siteKey
-  });
-}));
-
-r.get('/notices', cache(60), ah(async (req, res) => {
-  const limit = Math.min(Number(req.query.limit) || 50, 100);
-  const notices = await Notice.find({ published: true }).sort({ pinned: -1, date: -1 }).limit(limit).lean();
-  res.json({ notices: notices.map((n) => ({ id: String(n._id), title: n.title, text: n.text, category: n.category, date: n.date, link: n.link, pinned: n.pinned })) });
-}));
-
-r.get('/posts', cache(60), ah(async (req, res) => {
-  const q = publishedFilter();
-  if (req.query.category && req.query.category !== 'all') q.category = String(req.query.category);
-  const limit = Math.min(Number(req.query.limit) || 60, 100);
-  const posts = await Post.find(q).sort({ publishAt: -1 }).limit(limit).select('-content').lean();
-  res.json({ posts: posts.map(postCard) });
-}));
-
+r.get('/site', cache(60), ah(async (req, res) => res.json(await siteData())));
+r.get('/notices', cache(60), ah(async (req, res) => res.json(await noticesData(req.query))));
+r.get('/posts', cache(60), ah(async (req, res) => res.json(await postsData(req.query))));
 r.get('/posts/:slug', cache(60), ah(async (req, res) => {
-  const post = await Post.findOne({ ...publishedFilter(), slug: String(req.params.slug).toLowerCase() }).lean();
-  if (!post) return res.status(404).json({ error: 'Post not found' });
-  const related = await Post.find({ ...publishedFilter(), _id: { $ne: post._id } }).sort({ publishAt: -1 }).limit(12).select('-content').lean();
-  related.sort((a, b) => (b.category === post.category) - (a.category === post.category));
-  res.json({ post: { ...postCard(post), content: post.content }, related: related.slice(0, 3).map(postCard) });
+  const d = await postData(req.params.slug);
+  if (!d) return res.status(404).json({ error: 'Post not found' });
+  res.json(d);
 }));
-
-r.get('/gallery', cache(60), ah(async (req, res) => {
-  const photos = await Photo.find().sort({ order: 1, createdAt: -1 }).lean();
-  res.json({ photos: photos.map((p) => ({ id: String(p._id), url: p.url, thumbUrl: p.thumbUrl || p.url, caption: p.caption, alt: p.alt || p.caption, category: p.category, width: p.width, height: p.height })) });
-}));
-
-r.get('/reviews', cache(60), ah(async (req, res) => {
-  const reviews = await Review.find({ published: true }).sort({ order: 1, createdAt: -1 }).lean();
-  res.json({ reviews: reviews.map((x) => ({ id: String(x._id), name: x.name, role: x.role, quote: x.quote })) });
-}));
+r.get('/gallery', cache(60), ah(async (req, res) => res.json(await galleryData())));
+r.get('/reviews', cache(60), ah(async (req, res) => res.json(await reviewsData())));
 
 // ---------- Contact form ----------
 const enquiryLimiter = rateLimit({

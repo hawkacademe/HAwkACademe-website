@@ -13,6 +13,7 @@ import publicRoutes from './routes/public.js';
 import adminRoutes from './routes/admin.js';
 import { UPLOAD_DIR } from './lib/storage.js';
 import { metaFor, sitemapXml, robotsTxt } from './seo.js';
+import { renderPage } from './ssr.js';
 import { ah } from './lib/util.js';
 
 const DIST = join(process.cwd(), 'client', 'dist');
@@ -51,6 +52,15 @@ export function createApp() {
   app.use(compression());
   app.use(express.json({ limit: '1mb' }));
 
+  // One URL per page: /about/ -> /about (keeps the query string).
+  app.use((req, res, next) => {
+    if (req.method === 'GET' && req.path.length > 1 && req.path.endsWith('/') && !req.path.startsWith('/api/')) {
+      const q = req.originalUrl.slice(req.path.length);
+      return res.redirect(301, req.path.replace(/\/+$/, '') + q);
+    }
+    next();
+  });
+
   app.get('/healthz', (req, res) => res.json({ ok: true, db: mongoose.connection.readyState === 1 }));
 
   app.use('/api', session({
@@ -81,7 +91,15 @@ export function createApp() {
     app.get(/^\/(?!api\/|uploads\/).*/, ah(async (req, res) => {
       template ??= await readFile(join(DIST, 'index.html'), 'utf8');
       const { tags, status } = await metaFor(req.path);
-      res.status(status).set('Cache-Control', 'no-cache').type('html').send(template.replace('<!--app-meta-->', tags));
+      let html = template.replace('<!--app-meta-->', tags);
+      const page = await renderPage(req.originalUrl, req.path);
+      if (page) {
+        html = html.replace('<div id="root"></div>', `<div id="root">${page.html}</div>`)
+          .replace('</body>', `<script type="application/json" id="ha-data">${page.json}</script>\n  </body>`);
+      }
+      // Rendered pages may sit in the CDN for a minute; admin edits show up within that time.
+      res.status(status).set('Cache-Control', page && status === 200 ? 'public, max-age=0, s-maxage=60, stale-while-revalidate=600' : 'no-cache')
+        .type('html').send(html);
     }));
   }
 
