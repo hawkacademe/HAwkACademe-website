@@ -5,10 +5,11 @@
 
 /* Shared styles merged from the design concept pages (design concept/project/*.dc.html). */
 html,body{scroll-behavior:smooth}
-@keyframes pgIn{from{opacity:0}to{opacity:1}}
-#top{animation:pgIn .55s ease both;transition:opacity .26s ease}
+/* No fade-in on load: pages arrive fully rendered from the server, and content painted at
+   opacity 0 is not counted as Largest Contentful Paint. */
+#top{transition:opacity .26s ease}
 .card,.btn-red,.btn-navy,.btn-ghost,.pill,.nav a,.subnav a{transition-duration:.25s}
-@media (prefers-reduced-motion: reduce){html,body{scroll-behavior:auto}#top{animation:none}}
+@media (prefers-reduced-motion: reduce){html,body{scroll-behavior:auto}}
 body{margin:0;background:#ffffff}
 *{box-sizing:border-box}
 a{color:#D90A0A;text-decoration:none}a:hover{color:#A80707}

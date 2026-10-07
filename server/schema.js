@@ -8,6 +8,7 @@ import { PAGES, LANDING_SLUGS, landingPath } from '../client/src/lib/seoPages.js
 import { CENTRES } from '../client/src/content/centres.js';
 import { LANDINGS } from '../client/src/content/landing.js';
 import { CONTACT_FAQS } from '../client/src/content/faqs.js';
+import { FOUNDER_NAME } from '../client/src/content/about.js';
 
 const abs = (u) => (/^https?:\/\//.test(u) ? u : config.siteUrl + u);
 const real = (v) => typeof v === 'string' && v.trim() && !/\[[^\]]*\]/.test(v);
@@ -53,6 +54,7 @@ function organization(s) {
     telephone: real(s.phone) ? s.phone : undefined,
     email: real(s.email) ? s.email : undefined,
     areaServed: ['Barasat', 'Madhyamgram', 'New Town', 'Kolkata', 'North 24 Parganas'].map((name) => ({ '@type': 'Place', name })),
+    founder: FOUNDER_NAME ? { '@type': 'Person', name: FOUNDER_NAME } : undefined,
     knowsAbout: ['JEE Main', 'JEE Advanced', 'NEET-UG', 'Foundation course for Class 8 to 10', 'Olympiad preparation'],
     sameAs: Object.values(s.social || {}).filter(real),
     location: CENTRES.map((c) => ({ '@id': centreId(c) }))

@@ -8,11 +8,8 @@ export const DEFAULT_SETTINGS = {
   address: '56/G/1, Rammohan Pally, Nehali, Barasat, Kolkata, West Bengal 700124',
   mapsLink: '',
   mapEmbed: '',
-  officeHours: [
-    { days: 'Monday to Saturday', hours: '[OFFICE HOURS]' },
-    { days: 'Sunday', hours: '[OPEN / CLOSED]' }
-  ],
-  responseTime: 'within [RESPONSE TIME]',
+  officeHours: [{ days: 'Monday to Sunday', hours: '8 am – 9 pm' }],
+  responseTime: 'within one working day',
   enquiryEmail: '',
   social: { facebook: 'https://www.facebook.com/p/hawkacademe-100066454885536/', instagram: 'https://www.instagram.com/hawkacademe/', youtube: 'https://www.youtube.com/channel/UCHVaJRbj3YkqktpuOGEh7AQ', linkedin: '' },
   highlights: [

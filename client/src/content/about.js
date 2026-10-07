@@ -9,8 +9,8 @@ const ALL_STORY = [
 const ALL_FOUNDED = '[YEAR FOUNDED]';
 
 const ALL_FOUNDER = {
-  name: '[FOUNDER NAME]',
-  title: 'Founder & Director, HAwk ACademe',
+  name: 'Ainul Hoque',
+  title: 'Founder, HAwk ACademe',
   message: "[Founder's message — a short line on why HAwk ACademe exists and what it promises every student.]",
   photo: '' // e.g. '/img/founder.webp' (square, at least 400px)
 };
@@ -32,6 +32,8 @@ const FALLBACK_STORY = [
 export const STORY = ALL_STORY.filter(real).length ? ALL_STORY.filter(real) : FALLBACK_STORY;
 export const FOUNDED = real(ALL_FOUNDED) ? ALL_FOUNDED : '';
 export const FOUNDER = real(ALL_FOUNDER.name) && real(ALL_FOUNDER.message) ? ALL_FOUNDER : null;
+// The founder's name is shown on About even before the founder's message is written.
+export const FOUNDER_NAME = real(ALL_FOUNDER.name) ? ALL_FOUNDER.name : '';
 export const FACULTY = ALL_FACULTY.filter((f) => real(f.name) && real(f.qualification) && real(f.experience));
 
 export const SUBJECT_BANDS = {
