@@ -7,7 +7,7 @@ import { fmtDate } from '../lib/format.js';
 import NotFound from './NotFound.jsx';
 import { BRAND_NAME } from '../lib/brand.js';
 import { landingPath } from '../lib/seoPages.js';
-import { LANDINGS } from '../content/landing.jsx';
+import { LANDINGS } from '../content/landing.js';
 
 // Which program page a post should point readers to, from its title and slug.
 function relatedProgram(post) {

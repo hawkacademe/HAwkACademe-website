@@ -6,7 +6,7 @@ import { useSite } from '../lib/site.jsx';
 import { usePathMeta } from '../lib/hooks.js';
 import { telHref, hasPlaceholder } from '../lib/format.js';
 import { LANDING_SLUGS, landingPath } from '../lib/seoPages.js';
-import { LANDINGS } from '../content/landing.jsx';
+import { LANDINGS } from '../content/landing.js';
 
 const fact = { background: '#F6F8FC', borderRadius: 10, padding: '14px 16px' };
 const factLabel = { fontSize: 11, fontWeight: 800, letterSpacing: '.14em', color: '#5A6378' };

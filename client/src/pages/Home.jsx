@@ -12,7 +12,7 @@ import { CENTRES } from '../content/centres.js';
 import { FOUNDER } from '../content/about.js';
 import { HERO_WORDS, TESTS, GROWTH, YEARS_OF_EXCELLENCE } from '../content/home.js';
 import { LANDING_SLUGS, landingPath } from '../lib/seoPages.js';
-import { LANDINGS } from '../content/landing.jsx';
+import { LANDINGS } from '../content/landing.js';
 
 const NB = ' ';
 const wrap = { position: 'relative', maxWidth: 1280, margin: '0 auto', padding: '88px 32px', display: 'flex', flexDirection: 'column', gap: 40 };

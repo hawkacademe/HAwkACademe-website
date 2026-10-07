@@ -3,7 +3,7 @@ import PageHero, { Eyebrow } from '../components/PageHero.jsx';
 import { CtaBand } from '../components/Blocks.jsx';
 import { Tick, Phone, Pin, Arrow, WhatsApp } from '../components/Icons.jsx';
 import NotFound from './NotFound.jsx';
-import { LANDINGS, ADMISSION } from '../content/landing.jsx';
+import { LANDINGS, ADMISSION } from '../content/landing.js';
 import { PROGRAMS, withDetails } from '../content/programs.jsx';
 import { CENTRES } from '../content/centres.js';
 import { LANDING_SLUGS, landingPath } from '../lib/seoPages.js';
