@@ -451,7 +451,7 @@ export default function Home() {
           <div style={{ flex: '2 1 560px', display: 'flex', flexDirection: 'column', gap: 22, minWidth: 0 }}>
             <Eyebrow>OUR CENTRES</Eyebrow>
             <h2 className="h2" style={h2}>Find a Centre <span style={{ color: '#D90A0A' }}>Near You</span></h2>
-            <p style={{ margin: 0, fontSize: 16, lineHeight: 1.6, color: '#3E4860', maxWidth: 520 }}>Two centres, in Barasat and Madhyamgram, so students across North 24 Parganas can learn close to home.</p>
+            <p style={{ margin: 0, fontSize: 16, lineHeight: 1.6, color: '#3E4860', maxWidth: 520 }}>Three centres, in Barasat, Madhyamgram and New Town, so students across North 24 Parganas can learn close to home.</p>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', gap: 14, marginTop: 6 }}>
               {CENTRES.map((c) => (
                 <div key={c.key} className="card" style={{ position: 'relative', borderRadius: 10, overflow: 'hidden', border: '1px solid #E7EAF0', background: '#ffffff' }}>

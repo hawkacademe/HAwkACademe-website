@@ -16,5 +16,12 @@ export const CENTRES = [
     mapsLink: 'https://maps.app.goo.gl/j4cwBHWBGnKAF2Zx9',
     mapEmbed: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3680.8965821448437!2d88.45972507622211!3d22.69489347940481!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39f89f46336e3cbf%3A0xf8bab5d4dc027a0c!2sHAwk%20ACademe!5e0!3m2!1sen!2sin!4v1791384841127!5m2!1sen!2sin',
     img: '/img/classroom.webp', alt: 'Illustration of a classroom with a blackboard'
+  },
+  {
+    key: 'newtown', tag: 'NEW TOWN CENTRE', city: 'New Town', area: 'Rajarhat Chowmatha, New Town',
+    address: 'Siddha Happyville, Rajarhat Chowmatha, New Town, Kolkata, West Bengal',
+    mapsLink: 'https://maps.app.goo.gl/uSVFuqLon24NMKjH6',
+    mapEmbed: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4862.036794022353!2d88.48880721660872!3d22.622786636623342!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39f8a00d0c00ef9d%3A0x2f22a641af0fe45d!2sSiddha%20Happyville!5e0!3m2!1sen!2sin!4v1791385038662!5m2!1sen!2sin',
+    img: '/img/campus-night.webp', alt: 'Illustration of a college building at night'
   }
 ];
