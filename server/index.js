@@ -34,8 +34,8 @@ export function createApp() {
       directives: {
         'default-src': ["'self'"],
         'script-src': ["'self'", 'https://challenges.cloudflare.com'],
-        'style-src': ["'self'", "'unsafe-inline'", 'https://fonts.googleapis.com'],
-        'font-src': ["'self'", 'https://fonts.gstatic.com'],
+        'style-src': ["'self'", "'unsafe-inline'"],
+        'font-src': ["'self'"],
         'img-src': ["'self'", 'data:', 'blob:', 'https://res.cloudinary.com'],
         'frame-src': ['https://www.google.com', 'https://maps.google.com', 'https://challenges.cloudflare.com'],
         'connect-src': ["'self'"],

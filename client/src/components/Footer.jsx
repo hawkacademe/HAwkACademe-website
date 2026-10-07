@@ -20,7 +20,7 @@ export default function Footer() {
     <footer style={{ background: '#ffffff', borderTop: '4px solid #D90A0A' }}>
       <div className="pad ft-grid" style={{ maxWidth: 1280, margin: '0 auto', padding: '32px 32px 20px' }}>
         <div className="ft-brand" style={{ ...col, gap: 10 }}>
-          <img src="/img/logo.webp" alt="HAwk ACademe" width="229" height="34" loading="lazy" style={{ height: 34, width: 'auto', alignSelf: 'flex-start' }} />
+          <img src="/img/logo-480.webp" srcSet="/img/logo-480.webp 480w, /img/logo.webp 1000w" sizes="229px" alt={`${BRAND_NAME} logo`} width="229" height="34" loading="lazy" style={{ height: 34, width: 'auto', alignSelf: 'flex-start' }} />
           <div style={{ fontSize: 13, color: '#5A6378' }}>Discipline | Mentorship | Results</div>
           {socials.length > 0 && (
             <div style={{ display: 'flex', alignItems: 'center', gap: 2, flexWrap: 'wrap', marginLeft: -10 }} aria-label="Follow us">

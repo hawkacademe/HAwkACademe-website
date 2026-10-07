@@ -332,7 +332,7 @@ export default function Home() {
               const red = p.tone === 'red';
               return (
                 <div key={p.key} className="card" style={{ background: '#ffffff', border: '1px solid #E7EAF0', borderRadius: 12, padding: 26, display: 'flex', flexDirection: 'column', gap: 12, boxShadow: '0 10px 30px rgba(11,29,69,.06)' }}>
-                  <img src={p.img} alt={p.alt} width="1280" height="600" loading="lazy" style={{ display: 'block', width: 'calc(100% + 52px)', maxWidth: 'none', margin: '-26px -26px 6px', height: 140, objectFit: 'cover', borderRadius: '12px 12px 0 0' }} />
+                  <img src={p.img.replace('.webp', '-640.webp')} srcSet={`${p.img.replace('.webp', '-640.webp')} 640w, ${p.img} 1280w`} sizes="(max-width: 640px) 100vw, 320px" alt={p.alt} width="1280" height="600" loading="lazy" style={{ display: 'block', width: 'calc(100% + 52px)', maxWidth: 'none', margin: '-26px -26px 6px', height: 140, objectFit: 'cover', borderRadius: '12px 12px 0 0' }} />
                   <div style={{ width: 56, height: 56, borderRadius: '50%', background: red ? '#FFECEC' : '#E9EEF8', color: red ? '#D90A0A' : '#0B1D45', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>{ico(28, p.icon)}</div>
                   <h3 style={{ margin: '4px 0 0', fontSize: 19, fontWeight: 800 }}>{p.name}</h3>
                   <p style={{ margin: 0, fontSize: 14, lineHeight: 1.55, color: '#3E4860' }}>{p.card}</p>

@@ -83,7 +83,7 @@ export default function AdminLogin() {
           <div className="hide-sm" style={{ flex: '1 1 340px', background: '#0B1D45', color: '#ffffff', padding: 40, display: 'flex', flexDirection: 'column', gap: 20, position: 'relative', overflow: 'hidden', borderRadius: '16px 0 0 16px' }}>
             <img src="/img/hero-pattern.webp" alt="" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', opacity: 0.7 }} />
             <div style={{ position: 'relative', display: 'flex', flexDirection: 'column', gap: 18 }}>
-              <img src="/img/logo.webp" alt="HAwk ACademe" style={{ height: 34, width: 'auto', alignSelf: 'flex-start', background: '#ffffff', padding: '8px 12px', borderRadius: 8, boxSizing: 'content-box' }} />
+              <img src="/img/logo-480.webp" alt={`${BRAND_NAME} logo`} style={{ height: 34, width: 'auto', alignSelf: 'flex-start', background: '#ffffff', padding: '8px 12px', borderRadius: 8, boxSizing: 'content-box' }} />
               <div style={{ margin: 0, fontSize: 34, lineHeight: 1.15, fontWeight: 800 }}>Staff <span style={{ color: '#FF4A3A' }}>sign in</span></div>
               <ul style={{ listStyle: 'none', margin: 0, padding: 0, display: 'flex', flexDirection: 'column', gap: 14 }}>
                 {['Write blog posts and add notices', 'Upload gallery photos and update timings', 'Read and export Contact-form enquiries'].map((t) => (

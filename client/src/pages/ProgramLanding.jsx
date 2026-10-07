@@ -41,7 +41,7 @@ export default function ProgramLanding() {
       <PageHero crumbs={[{ href: '/', label: 'Home' }, { href: '/programs', label: 'Programs' }, { label: page.crumb }]} title={page.h1} intro={page.intro}>
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: 12, marginTop: 6 }}>
           {site.phone && <a className="btn-red" href={telHref(site.phone)} data-track="call" style={{ ...btn, background: '#D90A0A', color: '#ffffff' }}><Phone size={18} />Call {site.phone}</a>}
-          {wa && <a href={wa} target="_blank" rel="noopener noreferrer" data-track="whatsapp" style={{ ...btn, background: '#25D366', color: '#ffffff' }}><span style={{ width: 20, height: 20, display: 'flex' }}><WhatsApp /></span>WhatsApp us</a>}
+          {wa && <a href={wa} target="_blank" rel="noopener noreferrer" data-track="whatsapp" style={{ ...btn, background: '#25D366', color: '#0B1D45' }}><span style={{ width: 20, height: 20, display: 'flex' }}><WhatsApp /></span>WhatsApp us</a>}
           <a href={`/contact?program=${key}#enquiry`} data-track="enquire" style={{ ...btn, border: '1.5px solid #ffffff', color: '#ffffff' }}>Send an enquiry <Arrow size={16} /></a>
         </div>
       </PageHero>

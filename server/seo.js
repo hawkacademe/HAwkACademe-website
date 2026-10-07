@@ -60,6 +60,7 @@ export async function metaFor(path) {
   const url = config.siteUrl + (clean === '/' ? '/' : clean);
   const jsonLd = status === 200 && !clean.startsWith('/admin') ? await structuredData({ path: clean, url, meta, post }) : [];
   const tags = [
+    clean === '/' ? '<link rel="preload" as="image" href="/img/campus-night.webp" fetchpriority="high">' : '', // home LCP image
     `<title>${esc(meta.title)}</title>`,
     `<meta name="description" content="${esc(meta.description)}">`,
     `<meta name="robots" content="${robots}">`,

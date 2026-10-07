@@ -45,7 +45,7 @@ export default function Programs() {
           <div className="pad" style={{ maxWidth: 1280, margin: '0 auto', padding: '72px 32px', display: 'flex', flexDirection: 'column', gap: 32 }}>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 360px), 1fr))', gap: 48, alignItems: 'center' }}>
               <div>
-                <img src={p.img} alt={p.alt} width="1280" height="600" loading={i ? 'lazy' : undefined} style={{ display: 'block', width: '100%', height: 'auto', borderRadius: 16, boxShadow: '0 18px 40px rgba(11,29,69,.18)' }} />
+                <img src={p.img} srcSet={`${p.img.replace('.webp', '-640.webp')} 640w, ${p.img} 1280w`} sizes="(max-width: 760px) 100vw, 600px" alt={p.alt} width="1280" height="600" loading={i ? 'lazy' : undefined} style={{ display: 'block', width: '100%', height: 'auto', borderRadius: 16, boxShadow: '0 18px 40px rgba(11,29,69,.18)' }} />
               </div>
               <div style={{ display: 'flex', flexDirection: 'column', gap: 18 }}>
                 <Eyebrow>PROGRAM {String(i + 1).padStart(2, '0')}</Eyebrow>

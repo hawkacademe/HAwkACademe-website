@@ -85,12 +85,12 @@ export function ContactButtons() {
       <div className="cbar-space" aria-hidden="true" />
       <div className="cbar" role="group" aria-label="Contact us">
         {phone && (
-          <a className="cbar-call" href={telHref(phone)} aria-label={`Call us on ${phone}`}>
+          <a className="cbar-call" href={telHref(phone)} data-track="call" aria-label={`Call Now: ${phone}`}>
             <Phone /><span>Call Now</span>
           </a>
         )}
         {whatsapp && (
-          <a className="cbar-wa" href={`https://wa.me/${whatsapp}?text=${text}`} target="_blank" rel="noopener noreferrer" aria-label="Chat with us on WhatsApp">
+          <a className="cbar-wa" href={`https://wa.me/${whatsapp}?text=${text}`} target="_blank" rel="noopener noreferrer" data-track="whatsapp" aria-label="WhatsApp: chat with us">
             <WhatsApp /><span>WhatsApp</span>
           </a>
         )}

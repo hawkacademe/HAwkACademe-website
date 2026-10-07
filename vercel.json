@@ -34,6 +34,13 @@
       "continue": true
     },
     {
+      "src": "/fonts/(.*)",
+      "headers": {
+        "Cache-Control": "public, max-age=2592000, stale-while-revalidate=604800"
+      },
+      "continue": true
+    },
+    {
       "handle": "filesystem"
     },
     {
