@@ -22,7 +22,7 @@ const h2 = { margin: 0, fontSize: 38, lineHeight: 1.1, fontWeight: 800, letterSp
 const wrap = (pad = '72px 32px') => ({ maxWidth: 1280, margin: '0 auto', padding: pad, display: 'flex', flexDirection: 'column', gap: 32 });
 
 export default function About() {
-  usePageMeta('About Us | Hawk Academe', 'Hawk Academe prepares students for JEE, NEET and Foundation exams with focused teaching, personal mentorship and a culture of hard work.');
+  usePageMeta('About Us | HAwk ACademe', 'HAwk ACademe prepares students for JEE, NEET and Foundation exams with focused teaching, personal mentorship and a culture of hard work.');
   return (
     <>
       <PageHero crumb="About" title={<>Built on <span style={{ color: '#FF4A3A' }}>Discipline, Mentorship &amp; Results</span></>}

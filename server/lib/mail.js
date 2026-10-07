@@ -2,7 +2,7 @@ import { config } from '../config.js';
 
 // Email is sent through the Brevo HTTP API (BREVO_API_KEY).
 
-// "Hawk Academe Website <no-reply@hawkacademe.com>" -> { name, email }
+// "HAwk ACademe Website <no-reply@hawkacademe.com>" -> { name, email }
 function parseAddress(s) {
   const m = String(s).match(/^\s*"?([^"<]*?)"?\s*<([^>]+)>\s*$/);
   return m ? { name: m[1].trim() || undefined, email: m[2].trim() } : { email: String(s).trim() };

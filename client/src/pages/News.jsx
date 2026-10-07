@@ -7,7 +7,7 @@ import { useData, usePageMeta } from '../lib/hooks.js';
 const CATS = [['all', 'All'], ['BATCHES', 'Batches'], ['RESULTS', 'Results'], ['NOTICES', 'Notices']];
 
 export default function News() {
-  usePageMeta('News and Announcements | Hawk Academe', 'New batches, admission test dates, results and notices from Hawk Academe.');
+  usePageMeta('News and Announcements | HAwk ACademe', 'New batches, admission test dates, results and notices from HAwk ACademe.');
   const { data, error, loading } = useData('/notices');
   const [cat, setCat] = useState('all');
   const rows = (data?.notices || []).filter((n) => cat === 'all' || n.category === cat);

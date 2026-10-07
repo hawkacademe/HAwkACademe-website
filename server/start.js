@@ -9,4 +9,4 @@ try {
   console.error(`Could not connect to MongoDB at ${config.mongoUri.replace(/\/\/[^@]*@/, '//***@')}: ${e.message}`);
   process.exit(1);
 }
-createApp().listen(config.port, () => console.log(`Hawk Academe server running on http://localhost:${config.port}`));
+createApp().listen(config.port, () => console.log(`HAwk ACademe server running on http://localhost:${config.port}`));

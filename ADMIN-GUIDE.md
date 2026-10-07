@@ -1,6 +1,6 @@
-# Hawk Academe website: admin guide
+# HAwk ACademe website: admin guide
 
-This guide is for the Hawk Academe staff who look after the website. You do not need any technical knowledge.
+This guide is for the HAwk ACademe staff who look after the website. You do not need any technical knowledge.
 
 ## Logging in
 

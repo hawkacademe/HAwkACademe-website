@@ -9,7 +9,7 @@ import { useSite } from '../lib/site.jsx';
 const CATS = ['all', 'Exam Tips', 'Study Plans', 'Parents', 'Updates'];
 
 export default function Blog() {
-  usePageMeta('Blog: Exam Tips and Study Plans | Hawk Academe', 'Exam tips, study plans and guidance for students and parents from the Hawk Academe faculty.');
+  usePageMeta('Blog: Exam Tips and Study Plans | HAwk ACademe', 'Exam tips, study plans and guidance for students and parents from the HAwk ACademe faculty.');
   const [params, setParams] = useSearchParams();
   const cat = CATS.includes(params.get('category')) ? params.get('category') : 'all';
   const { data, error, loading } = useData('/posts');

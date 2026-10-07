@@ -7,7 +7,7 @@ import { useData, usePageMeta } from '../lib/hooks.js';
 const CATS = ['all', 'Classroom', 'Seminars', 'Activities', 'Celebrations', 'Campus'];
 
 export default function Gallery() {
-  usePageMeta('Gallery | Hawk Academe', 'Photos of classrooms, seminars, activities, celebrations and campus life at Hawk Academe.');
+  usePageMeta('Gallery | HAwk ACademe', 'Photos of classrooms, seminars, activities, celebrations and campus life at HAwk ACademe.');
   const { data, error, loading } = useData('/gallery');
   const [cat, setCat] = useState('all');
   const [lb, setLb] = useState(-1);

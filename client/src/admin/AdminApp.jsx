@@ -85,7 +85,7 @@ function Shell() {
 }
 
 export default function AdminApp() {
-  usePageMeta('Admin | Hawk Academe', 'Hawk Academe site administration.');
+  usePageMeta('Admin | HAwk ACademe', 'HAwk ACademe site administration.');
   return (
     <AuthProvider>
       <PageHero compact crumbs={[{ href: '/', label: 'Home' }, { label: 'Admin' }]} title="Admin Dashboard" />

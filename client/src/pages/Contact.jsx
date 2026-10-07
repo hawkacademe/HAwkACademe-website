@@ -51,7 +51,7 @@ function Info({ icon, title, children }) {
 }
 
 export default function Contact() {
-  usePageMeta('Contact Us | Hawk Academe', 'Questions about programs, batches or admission tests? Send us a message, call or visit and our team will guide you.');
+  usePageMeta('Contact Us | HAwk ACademe', 'Questions about programs, batches or admission tests? Send us a message, call or visit and our team will guide you.');
   const site = useSite();
   const [params] = useSearchParams();
   const preProgram = PROGRAMS.some((p) => p.key === params.get('program')) ? params.get('program') : '';
@@ -234,7 +234,7 @@ export default function Contact() {
             {CENTRES.map((c) => (
               <div key={c.key} className="card" style={{ borderRadius: 14, overflow: 'hidden', border: '1px solid #E7EAF0', background: '#ffffff', display: 'flex', flexDirection: 'column' }}>
                 {c.mapEmbed ? (
-                  <iframe title={`Map showing the Hawk Academe ${c.city} centre`} src={c.mapEmbed} loading="lazy" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen
+                  <iframe title={`Map showing the HAwk ACademe ${c.city} centre`} src={c.mapEmbed} loading="lazy" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen
                     style={{ display: 'block', width: '100%', height: 280, border: 0, background: '#F6F8FC' }} />
                 ) : (
                   <img src={c.img} alt={c.alt} width="960" height="520" loading="lazy" style={{ display: 'block', width: '100%', height: 150, objectFit: 'cover' }} />

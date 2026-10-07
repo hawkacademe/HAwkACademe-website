@@ -1,4 +1,4 @@
-// ABOUT AND FOUNDER CONTENT: set at launch from the material Hawk Academe sends
+// ABOUT AND FOUNDER CONTENT: set at launch from the material HAwk ACademe sends
 // (agreement section 10A, "Home and About"). Text in [SQUARE BRACKETS] is a placeholder.
 
 export const STORY = [

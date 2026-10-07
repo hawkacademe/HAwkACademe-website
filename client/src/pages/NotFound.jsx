@@ -5,7 +5,7 @@ const LINKS = [['/', 'Home'], ['/programs', 'Programs'], ['/results', 'Results']
 const tile = { background: '#ffffff', border: '1px solid #E7EAF0', borderRadius: 12, padding: '18px 20px', fontSize: 16, fontWeight: 800, display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 8 };
 
 export default function NotFound() {
-  usePageMeta('Page not found | Hawk Academe', 'The page you were looking for could not be found.');
+  usePageMeta('Page not found | HAwk ACademe', 'The page you were looking for could not be found.');
   return (
     <section style={{ background: '#F6F8FC' }}>
       <div className="pad" style={{ maxWidth: 900, margin: '0 auto', padding: '72px 32px 96px', display: 'flex', flexDirection: 'column', gap: 32 }}>

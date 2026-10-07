@@ -13,7 +13,7 @@ const statIcons = [
 ];
 
 export default function Results() {
-  usePageMeta('Results and Toppers | Hawk Academe', 'Hawk Academe toppers and selections in JEE Advanced, JEE Main, NEET and board exams, year by year.');
+  usePageMeta('Results and Toppers | HAwk ACademe', 'HAwk ACademe toppers and selections in JEE Advanced, JEE Main, NEET and board exams, year by year.');
   const [exam, setExam] = useState('all');
   const [year, setYear] = useState('all');
   const years = useMemo(() => [...new Set(TOPPERS.map((t) => t.year))].sort((a, b) => b - a), []);

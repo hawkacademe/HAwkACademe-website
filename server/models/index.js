@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import { BRAND_NAME } from '../../client/src/lib/brand.js';
 
 const { Schema, model } = mongoose;
 const opts = { timestamps: true };
@@ -30,7 +31,7 @@ const Post = model('Post', new Schema({
   content: { type: String, default: '' },          // sanitised HTML
   cover: imageSchema,                               // optional cover photo
   coverStyle: { type: String, enum: COVER_STYLES, default: 'physics' }, // used when there is no photo
-  author: { type: String, trim: true, default: 'Hawk Academe' },
+  author: { type: String, trim: true, default: BRAND_NAME },
   status: { type: String, enum: ['draft', 'published'], default: 'draft' },
   publishAt: { type: Date, default: Date.now }      // a future date schedules the post
 }, opts).index({ status: 1, publishAt: -1 }));

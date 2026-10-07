@@ -11,7 +11,7 @@ import { shrinkImage } from '../../lib/shrink.js';
 import { COVER_STYLES, isoLocal, fromLocal } from '../../lib/format.js';
 
 const CATS = ['Exam Tips', 'Study Plans', 'Parents', 'Updates'];
-const EMPTY = { title: '', slug: '', category: 'Exam Tips', excerpt: '', content: '', cover: null, coverStyle: 'physics', author: 'Hawk Academe', status: 'draft', publishAt: new Date().toISOString() };
+const EMPTY = { title: '', slug: '', category: 'Exam Tips', excerpt: '', content: '', cover: null, coverStyle: 'physics', author: 'HAwk ACademe', status: 'draft', publishAt: new Date().toISOString() };
 
 async function uploadImage(file) {
   const form = new FormData();

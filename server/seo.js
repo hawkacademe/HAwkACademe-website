@@ -4,17 +4,18 @@ import { Post } from './models/index.js';
 import { publishedFilter } from './routes/public.js';
 import { getSettings, plainText } from './lib/util.js';
 import { config } from './config.js';
+import { BRAND_NAME } from '../client/src/lib/brand.js';
 
-export const SITE_NAME = 'Hawk Academe';
+export const SITE_NAME = BRAND_NAME;
 
 export const PAGES = {
   '/': { title: `${SITE_NAME} | JEE, NEET and Foundation Coaching`, description: 'Focused academic programs for JEE, NEET and Foundation courses with expert faculty, structured learning and proven results.' },
-  '/about': { title: `About Us | ${SITE_NAME}`, description: 'Hawk Academe prepares students for JEE, NEET and Foundation exams with focused teaching, personal mentorship and a culture of hard work.' },
-  '/programs': { title: `Programs: JEE, NEET, Foundation and Integrated | ${SITE_NAME}`, description: 'Four clear paths, one standard of teaching. Classes covered, duration, batch size and mode for every Hawk Academe program.' },
-  '/results': { title: `Results and Toppers | ${SITE_NAME}`, description: 'Hawk Academe toppers and selections in JEE Advanced, JEE Main, NEET and board exams, year by year.' },
-  '/gallery': { title: `Gallery | ${SITE_NAME}`, description: 'Photos of classrooms, seminars, activities, celebrations and campus life at Hawk Academe.' },
-  '/blog': { title: `Blog: Exam Tips and Study Plans | ${SITE_NAME}`, description: 'Exam tips, study plans and guidance for students and parents from the Hawk Academe faculty.' },
-  '/news': { title: `News and Announcements | ${SITE_NAME}`, description: 'New batches, admission test dates, results and notices from Hawk Academe.' },
+  '/about': { title: `About Us | ${SITE_NAME}`, description: 'HAwk ACademe prepares students for JEE, NEET and Foundation exams with focused teaching, personal mentorship and a culture of hard work.' },
+  '/programs': { title: `Programs: JEE, NEET, Foundation and Integrated | ${SITE_NAME}`, description: 'Four clear paths, one standard of teaching. Classes covered, duration, batch size and mode for every HAwk ACademe program.' },
+  '/results': { title: `Results and Toppers | ${SITE_NAME}`, description: 'HAwk ACademe toppers and selections in JEE Advanced, JEE Main, NEET and board exams, year by year.' },
+  '/gallery': { title: `Gallery | ${SITE_NAME}`, description: 'Photos of classrooms, seminars, activities, celebrations and campus life at HAwk ACademe.' },
+  '/blog': { title: `Blog: Exam Tips and Study Plans | ${SITE_NAME}`, description: 'Exam tips, study plans and guidance for students and parents from the HAwk ACademe faculty.' },
+  '/news': { title: `News and Announcements | ${SITE_NAME}`, description: 'New batches, admission test dates, results and notices from HAwk ACademe.' },
   '/contact': { title: `Contact Us | ${SITE_NAME}`, description: 'Questions about programs, batches or admission tests? Send us a message, call or visit and our team will guide you.' }
 };
 
@@ -32,7 +33,7 @@ export async function metaFor(path) {
   let jsonLd = null;
 
   if (!meta && clean.startsWith('/admin')) {
-    meta = { title: `Admin | ${SITE_NAME}`, description: 'Hawk Academe site administration.' };
+    meta = { title: `Admin | ${SITE_NAME}`, description: 'HAwk ACademe site administration.' };
     robots = 'noindex,nofollow';
   } else if (!meta && clean.startsWith('/blog/')) {
     const slug = decodeURIComponent(clean.slice(6)).toLowerCase();

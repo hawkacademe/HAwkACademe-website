@@ -10,7 +10,7 @@ export default function BlogPost() {
   const { slug } = useParams();
   const { data, error, loading } = useData(`/posts/${encodeURIComponent(slug)}`);
   const post = data?.post;
-  usePageMeta(post ? `${post.title} | Hawk Academe` : null, post?.excerpt);
+  usePageMeta(post ? `${post.title} | HAwk ACademe` : null, post?.excerpt);
 
   if (error?.status === 404) return <NotFound />;
   return (

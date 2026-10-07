@@ -10,6 +10,7 @@ import { ah, cleanHtml, plainText, slugify, getSettings, escapeRegex, httpError 
 import { saveImage, removeStored, MAX_UPLOAD_BYTES } from '../lib/storage.js';
 import { mailConfigured } from '../lib/mail.js';
 import { publishedFilter } from './public.js';
+import { BRAND_NAME } from '../../client/src/lib/brand.js';
 
 const r = Router();
 r.use(requireAdmin, requireAjax);
@@ -79,7 +80,7 @@ const postSchema = z.object({
   content: z.string().max(200000).optional().default(''),
   cover: z.object({ url: z.string().max(500), key: z.string().max(200).optional(), alt: z.string().max(200).optional(), width: z.number().optional(), height: z.number().optional() }).nullable().optional(),
   coverStyle: z.enum(COVER_STYLES).optional().default('physics'),
-  author: z.string().trim().max(80).optional().default('Hawk Academe'),
+  author: z.string().trim().max(80).optional().default(BRAND_NAME),
   status: z.enum(['draft', 'published']),
   publishAt: z.coerce.date().optional()
 });
@@ -93,7 +94,7 @@ async function uniqueSlug(base, exceptId) {
 function postFields(d) {
   const content = cleanHtml(d.content);
   return {
-    title: d.title, category: d.category, content, coverStyle: d.coverStyle, author: d.author || 'Hawk Academe', status: d.status,
+    title: d.title, category: d.category, content, coverStyle: d.coverStyle, author: d.author || BRAND_NAME, status: d.status,
     excerpt: d.excerpt || plainText(content).slice(0, 180),
     cover: d.cover?.url && /^(https:\/\/|\/uploads\/|\/img\/)/.test(d.cover.url) ? { url: d.cover.url, key: d.cover.key || '', alt: d.cover.alt || d.title, width: d.cover.width, height: d.cover.height } : undefined,
     publishAt: d.publishAt || new Date()

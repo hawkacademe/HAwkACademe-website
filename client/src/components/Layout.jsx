@@ -79,7 +79,7 @@ export function ContactButtons() {
   const { phone, whatsapp } = useSite();
   const { pathname } = useLocation();
   if ((!phone && !whatsapp) || pathname.startsWith('/admin')) return null;
-  const text = encodeURIComponent('Hello Hawk Academe, I would like to know more about your programs.');
+  const text = encodeURIComponent('Hello HAwk ACademe, I would like to know more about your programs.');
   return (
     <>
       <div className="cbar-space" aria-hidden="true" />

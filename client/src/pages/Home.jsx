@@ -207,7 +207,7 @@ function Roadmap() {
 
 // ---------------- Page ----------------
 export default function Home() {
-  usePageMeta('Hawk Academe | JEE, NEET and Foundation Coaching', 'Focused academic programs for JEE, NEET and Foundation courses with expert faculty, structured learning and proven results.');
+  usePageMeta('HAwk ACademe | JEE, NEET and Foundation Coaching', 'Focused academic programs for JEE, NEET and Foundation courses with expert faculty, structured learning and proven results.');
   const site = useSite();
   const wordIdx = useRotate(HERO_WORDS.length, 2200);
   const notices = useData('/notices?limit=4');
@@ -402,7 +402,7 @@ export default function Home() {
       <section id="about" style={{ position: 'relative', background: '#F6F8FC', overflow: 'hidden' }}>
         <div className="pad" style={{ maxWidth: 1280, margin: '0 auto', padding: '88px 32px', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 460px), 1fr))', gap: 48, alignItems: 'center' }}>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 18 }}>
-            <Eyebrow>ABOUT HAWK ACADEME</Eyebrow>
+            <Eyebrow>ABOUT HAwk ACademe</Eyebrow>
             <h2 className="h2" style={h2}>More Than Coaching,<br />A Commitment to <span style={{ color: '#D90A0A' }}>Your Future</span></h2>
             <p style={{ margin: 0, fontSize: 16, lineHeight: 1.65, color: '#3E4860' }}>HAwk ACademe is built on the belief that every student has the potential to achieve greatness. We combine expert guidance, structured learning and continuous support to help students succeed in JEE, NEET and beyond.</p>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: 12, marginTop: 4 }}>
@@ -502,7 +502,7 @@ export default function Home() {
         <div className="pad" style={{ ...wrap, gap: 36 }}>
           <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'flex-end', gap: 24 }}>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 14, maxWidth: 580 }}>
-              <Eyebrow>LIFE AT HAWK ACADEME</Eyebrow>
+              <Eyebrow>LIFE AT HAwk ACademe</Eyebrow>
               <h2 className="h2" style={h2}>Learn. Grow. <span style={{ color: '#D90A0A' }}>Belong.</span></h2>
               <p style={{ margin: 0, fontSize: 16, lineHeight: 1.6, color: '#3E4860' }}>At HAwk ACademe, it&apos;s not just about studies. We create a dynamic learning environment with activities, workshops and events that help you grow beyond academics.</p>
             </div>

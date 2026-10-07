@@ -21,7 +21,7 @@ function Fact({ label, value, wide }) {
 }
 
 export default function Programs() {
-  usePageMeta('Programs: JEE, NEET, Foundation and Integrated | Hawk Academe', 'Four clear paths, one standard of teaching. Classes covered, duration, batch size and mode for every Hawk Academe program.');
+  usePageMeta('Programs: JEE, NEET, Foundation and Integrated | HAwk ACademe', 'Four clear paths, one standard of teaching. Classes covered, duration, batch size and mode for every HAwk ACademe program.');
   const site = useSite();
   const programs = PROGRAMS.map((p) => withDetails(p, site.programs));
 

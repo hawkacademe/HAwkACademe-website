@@ -1,5 +1,5 @@
 // RESULTS CONTENT: set at launch (agreement section 3.2, "Results: set at launch").
-// Replace every entry with Hawk Academe's real toppers once written consent has been
+// Replace every entry with HAwk ACademe's real toppers once written consent has been
 // received from each student (or a parent, if under 18). Entries marked `sample: true`
 // come from the design concept and must not go live: `npm run check:placeholders` lists them.
 //

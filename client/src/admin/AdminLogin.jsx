@@ -73,7 +73,7 @@ function LoginPanel() {
 }
 
 export default function AdminLogin() {
-  usePageMeta('Admin Login | Hawk Academe', 'Hawk Academe site administration.');
+  usePageMeta('Admin Login | HAwk ACademe', 'HAwk ACademe site administration.');
   return (
     <AuthProvider>
       <PageHero compact crumb="Admin login" title="Admin Login" />

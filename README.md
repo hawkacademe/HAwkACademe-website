@@ -1,4 +1,4 @@
-# Hawk Academe website (Pro plan)
+# HAwk ACademe website (Pro plan)
 
 This is the live website for agreement **HA-WEB-2026-01**. It has the 12 Pro pages, a backend and database, and an admin panel. It is built from the design concept in `../design concept/`.
 
@@ -88,7 +88,7 @@ NODE_ENV=production FORCE_HTTPS=false SITE_URL=http://localhost:4000 npm start  
 ## Go-live checklist (from Annex B)
 
 - [ ] `npm run check:placeholders` reports nothing. This covers the content files, the settings, the sample notices, reviews and blog posts, and the design-concept toppers.
-- [ ] The photos in the design concept are confirmed as Hawk Academe's own, or have been replaced (Part 4A of the scope).
+- [ ] The photos in the design concept are confirmed as HAwk ACademe's own, or have been replaced (Part 4A of the scope).
 - [ ] Every topper has written consent: from the student, or from a parent if the student is under 18.
 - [ ] A Contact-form enquiry is saved in Admin and its email arrives in the office inbox.
 - [ ] The WhatsApp, phone and email buttons are tested on a phone.

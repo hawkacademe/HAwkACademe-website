@@ -1,5 +1,5 @@
 // Starting values for the editable site settings. Anything in [SQUARE BRACKETS] is a
-// placeholder from the design concept and must be replaced with Hawk Academe's real
+// placeholder from the design concept and must be replaced with HAwk ACademe's real
 // details before launch (Admin > Timings & highlights, or `npm run seed`).
 export const DEFAULT_SETTINGS = {
   phone: '+91 98318 25207',

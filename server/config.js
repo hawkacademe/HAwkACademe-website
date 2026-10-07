@@ -20,7 +20,7 @@ export const config = {
   siteUrl: (env.SITE_URL || 'http://localhost:5173').replace(/\/$/, ''),
   mail: {
     brevoApiKey: env.BREVO_API_KEY || '',
-    from: env.MAIL_FROM || 'Hawk Academe Website <no-reply@hawkacademe.com>',
+    from: env.MAIL_FROM || 'HAwk ACademe Website <no-reply@hawkacademe.com>',
     enquiryTo: env.ENQUIRY_TO || ''
   },
   cloudinaryUrl: env.CLOUDINARY_URL || (env.CLOUDINARY_CLOUD_NAME && env.CLOUDINARY_API_KEY && env.CLOUDINARY_API_SECRET
