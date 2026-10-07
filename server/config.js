@@ -23,6 +23,10 @@ export const config = {
     from: env.MAIL_FROM || 'HAwk ACademe Website <no-reply@hawkacademe.com>',
     enquiryTo: env.ENQUIRY_TO || ''
   },
+  // Optional: analytics and search-engine verification (leave empty to turn off).
+  gaId: /^G-[A-Z0-9]{4,}$/.test(env.GA_MEASUREMENT_ID || '') ? env.GA_MEASUREMENT_ID : '',
+  googleVerification: env.GOOGLE_SITE_VERIFICATION || '',
+  bingVerification: env.BING_SITE_VERIFICATION || '',
   cloudinaryUrl: env.CLOUDINARY_URL || (env.CLOUDINARY_CLOUD_NAME && env.CLOUDINARY_API_KEY && env.CLOUDINARY_API_SECRET
     ? `cloudinary://${env.CLOUDINARY_API_KEY}:${env.CLOUDINARY_API_SECRET}@${env.CLOUDINARY_CLOUD_NAME}` : ''),
   turnstile: {

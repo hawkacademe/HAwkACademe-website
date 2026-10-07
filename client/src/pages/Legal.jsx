@@ -42,7 +42,12 @@ function Privacy({ site }) {
       <h2 style={h2}>How long we keep it</h2>
       <p style={p}>We keep an enquiry only as long as we need it to respond and to follow up about admission, and we delete it sooner if you ask.</p>
       <h2 style={h2}>Cookies and third-party content</h2>
-      <p style={p}>The website itself sets one cookie, and only when a staff member logs in to the admin panel. It does not use advertising cookies or analytics cookies. The maps on our Contact page are provided by Google Maps, and the WhatsApp button opens WhatsApp; those services follow their own privacy policies.</p>
+      {site.analytics ? (
+        <p style={p}>We use Google Analytics to count visits and to see which pages and buttons (for example Call, WhatsApp and the enquiry form) are used, so we can improve the website. Google Analytics sets cookies and receives information such as the pages you visit, your approximate location and your device type; it does not receive what you type into the enquiry form. The website also sets one cookie when a staff member logs in to the admin panel. We do not use advertising cookies.</p>
+      ) : (
+        <p style={p}>The website itself sets one cookie, and only when a staff member logs in to the admin panel. It does not use advertising cookies or analytics cookies.</p>
+      )}
+      <p style={p}>The maps on our Contact page are provided by Google Maps, and the WhatsApp button opens WhatsApp; those services follow their own privacy policies.</p>
       <h2 style={h2}>Your rights</h2>
       <p style={p}>You can ask us to show you, correct or delete the details you sent us, or to stop contacting you. To do so, or to raise a concern about how we handle your data, contact:</p>
       <Contact site={site} />

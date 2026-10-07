@@ -80,6 +80,7 @@ export default function Contact() {
       const centreName = CENTRES.find((c) => c.key === f.centre)?.city || f.centre;
       const res = await api('/enquiries', { method: 'POST', body: { ...f, program: programName, studentClass: className, centre: centreName, startedAt: startedAt.current, turnstileToken: token } });
       setStatus({ state: 'sent', ref: res.ref, name: f.name });
+      window.dispatchEvent(new CustomEvent('ha:enquiry-sent', { detail: { program: programName } })); // analytics conversion
       window.scrollTo({ top: formRef.current?.closest('section')?.offsetTop - 100 || 0, behavior: 'smooth' });
     } catch (err) {
       if (err.field) setErrors({ [err.field]: err.message });

@@ -1,0 +1,24 @@
+{
+  "ci": {
+    "collect": {
+      "url": [
+        "https://www.hawkacademe.com/",
+        "https://www.hawkacademe.com/programs/jee-coaching-madhyamgram-kolkata",
+        "https://www.hawkacademe.com/contact",
+        "https://www.hawkacademe.com/blog"
+      ],
+      "numberOfRuns": 2,
+      "settings": { "formFactor": "mobile" }
+    },
+    "assert": {
+      "assertions": {
+        "categories:performance": ["warn", { "minScore": 0.85 }],
+        "categories:seo": ["error", { "minScore": 0.95 }],
+        "categories:accessibility": ["error", { "minScore": 0.95 }],
+        "categories:best-practices": ["warn", { "minScore": 0.95 }],
+        "cumulative-layout-shift": ["error", { "maxNumericValue": 0.1 }],
+        "largest-contentful-paint": ["warn", { "maxNumericValue": 2500 }]
+      }
+    }
+  }
+}

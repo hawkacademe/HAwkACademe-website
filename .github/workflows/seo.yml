@@ -1,0 +1,55 @@
+# Build + brand check + API tests on every push/PR, then SEO and Lighthouse checks
+# against the live site after Vercel deploys main, and once a week.
+name: SEO and quality checks
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  schedule:
+    - cron: '30 3 * * 1' # Mondays 09:00 IST
+  workflow_dispatch:
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    services:
+      mongo:
+        image: mongo:7
+        ports: ['27017:27017']
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 20, cache: npm }
+      - run: npm ci --include=dev
+      - name: Build (fails on any brand spelling other than "HAwk ACademe")
+        run: npm run build
+      - run: npm test
+        env:
+          TEST_MONGODB_URI: mongodb://127.0.0.1:27017/hawk-academe-test
+
+  live-seo:
+    if: github.event_name != 'pull_request'
+    needs: build-and-test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 20 }
+      - name: Wait for the Vercel deployment
+        if: github.event_name == 'push'
+        run: sleep 150
+      - name: Sitemap, HTML, canonical, H1, JSON-LD, placeholders, brand, links, 404
+        run: node tools/seo-check.mjs https://www.hawkacademe.com
+
+  lighthouse:
+    if: github.event_name != 'pull_request'
+    needs: live-seo
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: treosh/lighthouse-ci-action@v12
+        with:
+          configPath: ./lighthouserc.json
+          uploadArtifacts: true
+          temporaryPublicStorage: true

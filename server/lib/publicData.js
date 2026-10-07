@@ -20,7 +20,8 @@ export async function siteData() {
     phone: real(s.phone), whatsapp: s.whatsapp, email: real(s.email), address: real(s.address), mapsLink: s.mapsLink, mapEmbed: s.mapEmbed,
     officeHours: (s.officeHours || []).filter((h) => real(h.days) && real(h.hours)), responseTime: real(s.responseTime),
     social: s.social, highlights: (s.highlights || []).filter((h) => real(h.value) && real(h.label)), programs: s.programs,
-    turnstileSiteKey: config.turnstile.siteKey
+    turnstileSiteKey: config.turnstile.siteKey,
+    analytics: !!config.gaId
   };
 }
 

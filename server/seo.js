@@ -2,7 +2,7 @@
 // crawlers and WhatsApp/Facebook read these from the HTML before any JavaScript runs.
 // Page titles and descriptions live in client/src/lib/seoPages.js (one list for server and browser).
 import { Post } from './models/index.js';
-import { publishedFilter } from './lib/publicData.js';
+import { publishedFilter, noticesData } from './lib/publicData.js';
 import { plainText } from './lib/util.js';
 import { config } from './config.js';
 import { BRAND_NAME } from '../client/src/lib/brand.js';
@@ -38,6 +38,8 @@ export async function metaFor(path) {
   let image = shareFor(clean);
   let robots = NOINDEX_PAGES.has(clean) ? 'noindex,follow' : 'index,follow,max-image-preview:large';
   let post = null;
+  // An empty listing is thin content: keep /news out of search until a real notice exists.
+  if (clean === '/news' && !(await noticesData({ limit: 1 })).notices.length) robots = 'noindex,follow';
 
   if (!meta && clean.startsWith('/admin')) {
     meta = { title: `Admin | ${BRAND_NAME}`, description: `${BRAND_NAME} site administration.` };
@@ -77,6 +79,9 @@ export async function metaFor(path) {
     `<meta property="og:locale" content="en_IN">`,
     post ? `<meta property="article:published_time" content="${new Date(post.publishAt).toISOString()}">` : '',
     post?.updatedAt ? `<meta property="article:modified_time" content="${new Date(post.updatedAt).toISOString()}">` : '',
+    config.googleVerification ? `<meta name="google-site-verification" content="${esc(config.googleVerification)}">` : '',
+    config.bingVerification ? `<meta name="msvalidate.01" content="${esc(config.bingVerification)}">` : '',
+    config.gaId && !clean.startsWith('/admin') ? `<script src="/analytics.js" data-ga="${esc(config.gaId)}" defer></script>` : '',
     `<meta name="twitter:card" content="summary_large_image">`,
     `<meta name="twitter:title" content="${esc(meta.title)}">`,
     `<meta name="twitter:description" content="${esc(meta.description)}">`,
@@ -89,9 +94,10 @@ export async function metaFor(path) {
 
 export async function sitemapXml() {
   const posts = await Post.find(publishedFilter()).select('slug title excerpt content publishAt updatedAt').sort({ publishAt: -1 }).lean();
+  const hasNotices = (await noticesData({ limit: 1 })).notices.length > 0;
   const day = (d) => (d ? new Date(d).toISOString().slice(0, 10) : '');
   const urls = [
-    ...Object.keys(PAGES).filter((p) => !NOINDEX_PAGES.has(p)).map((p) => ({ loc: config.siteUrl + p, lastmod: UPDATED[p] })),
+    ...Object.keys(PAGES).filter((p) => !NOINDEX_PAGES.has(p) && (p !== '/news' || hasNotices)).map((p) => ({ loc: config.siteUrl + p, lastmod: UPDATED[p] })),
     ...posts.filter((p) => !isPlaceholderPost(p)).map((p) => ({ loc: `${config.siteUrl}/blog/${p.slug}`, lastmod: day(p.updatedAt || p.publishAt) }))
   ];
   return `<?xml version="1.0" encoding="UTF-8"?>\n<!-- ${BRAND_NAME} sitemap -->\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls

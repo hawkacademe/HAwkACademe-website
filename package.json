@@ -12,7 +12,8 @@
     "remove-admin": "node server/scripts/remove-admin.js",
     "check:placeholders": "node tools/check-placeholders.mjs",
     "test": "node --test test/",
-    "check:brand": "node tools/check-brand.mjs"
+    "check:brand": "node tools/check-brand.mjs",
+    "check:seo": "node tools/seo-check.mjs"
   },
   "license": "UNLICENSED",
   "description": "HAwk ACademe website (Pro plan): React front end, Express API, MongoDB, admin panel.",
