@@ -14,6 +14,7 @@ import adminRoutes from './routes/admin.js';
 import { UPLOAD_DIR } from './lib/storage.js';
 import { metaFor, sitemapXml, robotsTxt } from './seo.js';
 import { renderPage } from './ssr.js';
+import { llmsTxt } from './llms.js';
 import { ah } from './lib/util.js';
 
 const DIST = join(process.cwd(), 'client', 'dist');
@@ -82,6 +83,7 @@ export function createApp() {
 
   app.get('/sitemap.xml', ah(async (req, res) => res.type('application/xml').send(await sitemapXml())));
   app.get('/robots.txt', (req, res) => res.type('text/plain').send(robotsTxt()));
+  app.get('/llms.txt', ah(async (req, res) => res.type('text/plain').set('Cache-Control', 'public, max-age=0, s-maxage=3600').send(await llmsTxt())));
 
   // The built React app. Hashed asset files are cached for a year; HTML is never cached.
   if (existsSync(DIST)) {
