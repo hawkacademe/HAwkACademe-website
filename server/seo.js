@@ -6,13 +6,21 @@ import { publishedFilter } from './lib/publicData.js';
 import { plainText } from './lib/util.js';
 import { config } from './config.js';
 import { BRAND_NAME } from '../client/src/lib/brand.js';
-import { PAGES, UPDATED } from '../client/src/lib/seoPages.js';
+import { PAGES, UPDATED, landingPath } from '../client/src/lib/seoPages.js';
 import { structuredData } from './schema.js';
 
 export const SITE_NAME = BRAND_NAME;
 export { PAGES };
 
 const SHARE = { url: '/img/share.jpg', width: 1200, height: 630, alt: `${BRAND_NAME}: JEE, NEET and Foundation coaching in Kolkata` };
+// Page-specific share images (tools/make-share-images.py makes them, 1200x630).
+const SHARE_FOR = {
+  [landingPath('jee')]: { url: '/img/share-jee.jpg', alt: `JEE coaching in Madhyamgram, Kolkata at ${BRAND_NAME}` },
+  [landingPath('neet')]: { url: '/img/share-neet.jpg', alt: `NEET coaching in Madhyamgram, Kolkata at ${BRAND_NAME}` },
+  [landingPath('foundation')]: { url: '/img/share-foundation.jpg', alt: `Foundation course for Class 8, 9 and 10 at ${BRAND_NAME}` },
+  '/blog': { url: '/img/share-blog.jpg', alt: `Exam tips and study plans from ${BRAND_NAME}` }
+};
+const shareFor = (path) => (SHARE_FOR[path] ? { ...SHARE, ...SHARE_FOR[path] } : path.startsWith('/blog/') ? { ...SHARE, ...SHARE_FOR['/blog'] } : SHARE);
 const NOINDEX_PAGES = new Set(); // pages to keep out of search results and the sitemap
 
 const esc = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
@@ -27,7 +35,7 @@ export async function metaFor(path) {
   let meta = PAGES[clean];
   let status = 200;
   let type = 'website';
-  let image = SHARE;
+  let image = shareFor(clean);
   let robots = NOINDEX_PAGES.has(clean) ? 'noindex,follow' : 'index,follow,max-image-preview:large';
   let post = null;
 
