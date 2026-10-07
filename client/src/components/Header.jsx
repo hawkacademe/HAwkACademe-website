@@ -42,7 +42,7 @@ export default function Header() {
       </div>
       <div className="pad" style={{ maxWidth: 1280, margin: '0 auto', padding: '14px 32px', display: 'flex', alignItems: 'center', gap: 28 }}>
         <a href="/" aria-label="Hawk Academe home" style={{ display: 'flex', alignItems: 'center', flex: '1 1 0' }}>
-          <img className="logo" src="/img/logo.webp" alt="HAwk ACademe" width="233" height="34" style={{ height: 34, width: 'auto', display: 'block' }} />
+          <img className="logo" src="/img/logo.webp" alt="HAwk ACademe" width="229" height="34" style={{ height: 34, width: 'auto', display: 'block' }} />
         </a>
         <nav className="nav" aria-label="Main" style={{ display: 'flex', gap: 28, justifyContent: 'center', flex: '0 0 auto', whiteSpace: 'nowrap' }}>
           {NAV.map(([href, label]) => (

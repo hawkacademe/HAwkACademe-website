@@ -17,7 +17,7 @@ export default function Footer() {
     <footer style={{ background: '#ffffff', borderTop: '4px solid #D90A0A' }}>
       <div className="pad" style={{ maxWidth: 1280, margin: '0 auto', padding: '40px 32px 20px', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', gap: 28 }}>
         <div style={{ gridColumn: 'span 2', display: 'flex', flexDirection: 'column', gap: 12, minWidth: 0 }}>
-          <img src="/img/logo.webp" alt="HAwk ACademe" width="233" height="34" loading="lazy" style={{ height: 34, width: 'auto', alignSelf: 'flex-start' }} />
+          <img src="/img/logo.webp" alt="HAwk ACademe" width="229" height="34" loading="lazy" style={{ height: 34, width: 'auto', alignSelf: 'flex-start' }} />
           <div style={{ fontSize: 13, color: '#5A6378' }}>Discipline | Mentorship | Results</div>
           {socials.length > 0 && (
             <div style={{ display: 'flex', flexDirection: 'column', gap: 2, marginTop: 6 }}>
