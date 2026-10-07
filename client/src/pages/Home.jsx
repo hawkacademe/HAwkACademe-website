@@ -451,13 +451,13 @@ export default function Home() {
           <div style={{ flex: '2 1 560px', display: 'flex', flexDirection: 'column', gap: 22, minWidth: 0 }}>
             <Eyebrow>OUR CENTRES</Eyebrow>
             <h2 className="h2" style={h2}>Find a Centre <span style={{ color: '#D90A0A' }}>Near You</span></h2>
-            <p style={{ margin: 0, fontSize: 16, lineHeight: 1.6, color: '#3E4860', maxWidth: 520 }}>We are present in multiple cities to make quality education accessible to every aspirant.</p>
+            <p style={{ margin: 0, fontSize: 16, lineHeight: 1.6, color: '#3E4860', maxWidth: 520 }}>Two centres, in Barasat and Madhyamgram, so students across North 24 Parganas can learn close to home.</p>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', gap: 14, marginTop: 6 }}>
-              {CENTRES.map((c, i) => (
+              {CENTRES.map((c) => (
                 <div key={c.key} className="card" style={{ position: 'relative', borderRadius: 10, overflow: 'hidden', border: '1px solid #E7EAF0', background: '#ffffff' }}>
                   <img src={c.img} alt={c.alt} width="960" height="520" loading="lazy" style={{ display: 'block', width: '100%', height: 130, objectFit: 'cover' }} />
                   <div style={{ padding: '10px 12px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                    <div><div style={{ fontWeight: 700, fontSize: 14 }}>{c.city}</div><div style={{ fontSize: 11, color: '#5A6378' }}>{i === 0 ? 'Main Centre' : c.tag.toLowerCase().replace(/\b\w/g, (x) => x.toUpperCase())}</div></div>
+                    <div><div style={{ fontWeight: 700, fontSize: 14 }}>{c.city}</div><div style={{ fontSize: 11, color: '#5A6378' }}>{c.area}</div></div>
                     <a href="/contact#centres" className="stretched" aria-label={`${c.city} centre details`} style={arrowCircle}><Arrow size={14} /></a>
                   </div>
                 </div>
@@ -469,7 +469,7 @@ export default function Home() {
             {CENTRES.map((c, i) => (
               <div key={c.key} style={{ display: 'flex', gap: 12, padding: '12px 0', borderBottom: i < CENTRES.length - 1 ? '1px solid #E1E6EF' : 0 }}>
                 <Pin size={20} style={{ color: '#D90A0A' }} />
-                <div><div style={{ fontWeight: 700, fontSize: 14 }}>{c.city}{i === 0 ? ' (Head Office)' : ''}</div><div style={{ fontSize: 12, color: '#5A6378' }}>{c.area}</div></div>
+                <div><div style={{ fontWeight: 700, fontSize: 14 }}>{c.city}</div><div style={{ fontSize: 12, color: '#5A6378' }}>{c.address}</div></div>
               </div>
             ))}
             <a className="btn-red" href="/contact#centres" style={{ ...btnRed, marginTop: 14, justifyContent: 'center' }}>View All Centres <Arrow size={18} /></a>

@@ -1,6 +1,7 @@
 import { useSite } from '../lib/site.jsx';
 import { telHref } from '../lib/format.js';
 import { Pin, Phone, Mail, Clock, Social } from './Icons.jsx';
+import { CENTRES } from '../content/centres.js';
 
 const col = { display: 'flex', flexDirection: 'column', gap: 9, fontSize: 13 };
 const head = { fontWeight: 800, fontSize: 14, marginBottom: 4 };
@@ -36,7 +37,9 @@ export default function Footer() {
           )}
           <div style={{ display: 'flex', flexDirection: 'column', gap: 10, fontSize: 13, color: '#3E4860', marginTop: 8 }}>
             <div style={{ fontWeight: 800, fontSize: 14, color: '#0A1530', marginBottom: 4 }}>Contact Us</div>
-            {site.address && <div style={row}><Pin style={icon} />{site.address}</div>}
+            {CENTRES.map((c) => (
+              <div key={c.key} style={row}><Pin style={icon} /><a href={c.mapsLink || '/contact#centres'} {...(c.mapsLink ? { target: '_blank', rel: 'noopener noreferrer' } : {})} style={link}><b style={{ color: '#0A1530' }}>{c.city}:</b> {c.address}</a></div>
+            ))}
             {site.phone && <div style={row}><Phone style={icon} /><a href={telHref(site.phone)} style={link}>{site.phone}</a></div>}
             {site.email && <div style={row}><Mail style={icon} /><a href={`mailto:${site.email}`} style={link}>{site.email}</a></div>}
           </div>

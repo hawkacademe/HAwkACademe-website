@@ -35,7 +35,7 @@ try {
   const s = await Settings.findOne({ key: 'site' }).lean();
   const flat = (o, pre = '') => Object.entries(o || {}).flatMap(([k, v]) => (v && typeof v === 'object' ? flat(v, `${pre}${k}.`) : [[pre + k, v]]));
   for (const [k, v] of flat(s)) if (typeof v === 'string' && has(v)) found.push(`database settings  ${k} = ${v}`);
-  for (const k of ['mapEmbed', 'enquiryEmail']) if (!s?.[k]) found.push(`database settings  ${k} is empty`);
+  for (const k of ['enquiryEmail']) if (!s?.[k]) found.push(`database settings  ${k} is empty`);
   for (const n of await Notice.find().lean()) if (has(n.title + n.text)) found.push(`database notice  "${n.title}"`);
   for (const r of await Review.find().lean()) if (has(r.name + r.role + r.quote)) found.push(`database review  "${r.name}"`);
   for (const p of await Post.find().lean()) if (has(p.title + p.content)) found.push(`database blog post  "${p.title}"`);

@@ -1,8 +1,20 @@
-// CENTRES shown on Contact (and the Home "Our Centres" section): set at launch.
-// Keep only the centres Hawk Academe really runs; text in [BRACKETS] is a placeholder.
+// CENTRES shown on Contact (with a map for each), the Home "Our Centres" section and the
+// Contact form's "Preferred centre" list.
+//   mapsLink: the Google Maps share link (Share > Copy link), used for "Get directions"
+//   mapEmbed: the src="..." part of Google Maps' Share > Embed a map code
 export const CENTRES = [
-  { key: 'kolkata', tag: 'HEAD OFFICE', city: 'Kolkata', area: 'Salt Lake, Kolkata', address: '[FULL ADDRESS]', phone: '[PHONE]', img: '/img/centre-kolkata.webp', alt: 'Howrah Bridge, Kolkata' },
-  { key: 'delhi', tag: 'NORTH CENTRE', city: 'Delhi', area: 'Karol Bagh, New Delhi', address: '[FULL ADDRESS]', phone: '[PHONE]', img: '/img/centre-delhi.webp', alt: 'India Gate, Delhi' },
-  { key: 'bangalore', tag: 'SOUTH CENTRE', city: 'Bangalore', area: 'Jayanagar, Bangalore', address: '[FULL ADDRESS]', phone: '[PHONE]', img: '/img/centre-bangalore.webp', alt: 'Vidhana Soudha, Bangalore' },
-  { key: 'mumbai', tag: 'WEST CENTRE', city: 'Mumbai', area: 'Andheri, Mumbai', address: '[FULL ADDRESS]', phone: '[PHONE]', img: '/img/centre-mumbai.webp', alt: 'Gateway of India, Mumbai' }
+  {
+    key: 'barasat', tag: 'BARASAT CENTRE', city: 'Barasat', area: 'Nehali, Barasat',
+    address: '56/G/1, Rammohan Pally, Nehali, Barasat, Kolkata, West Bengal 700124',
+    mapsLink: 'https://maps.app.goo.gl/BxRShh43fz1X1aBN9',
+    mapEmbed: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d366.07592532661357!2d88.48893416798533!3d22.71532767396143!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39f8a21b4b7354d5%3A0xecfdc2d326111a85!2s56%2FG%2F1%2C%20Rammohan%20Pally%2C%20Nehali%2C%20Barasat%2C%20Kolkata%2C%20West%20Bengal%20700124!5e0!3m2!1sen!2sin!4v1791384739592!5m2!1sen!2sin',
+    img: '/img/centre-kolkata.webp', alt: 'Illustration of a Kolkata bridge at sunset'
+  },
+  {
+    key: 'madhyamgram', tag: 'MADHYAMGRAM CENTRE', city: 'Madhyamgram', area: 'Madhyamgram, North 24 Parganas',
+    address: 'Madhyamgram, Kolkata, West Bengal 700129',
+    mapsLink: 'https://maps.app.goo.gl/j4cwBHWBGnKAF2Zx9',
+    mapEmbed: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3680.8965821448437!2d88.45972507622211!3d22.69489347940481!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39f89f46336e3cbf%3A0xf8bab5d4dc027a0c!2sHAwk%20ACademe!5e0!3m2!1sen!2sin!4v1791384841127!5m2!1sen!2sin',
+    img: '/img/classroom.webp', alt: 'Illustration of a classroom with a blackboard'
+  }
 ];

@@ -194,7 +194,12 @@ export default function Contact() {
           </div>
 
           <div style={{ flex: '2 1 320px', minWidth: 0, display: 'flex', flexDirection: 'column', gap: 14 }}>
-            {site.address && <Info icon={<Pin size={22} />} title="HEAD OFFICE">{site.address}{site.mapsLink && <><br /><a href={site.mapsLink} target="_blank" rel="noopener noreferrer" style={{ fontSize: 14 }}>Get directions</a></>}</Info>}
+            {CENTRES.map((c) => (
+              <Info key={c.key} icon={<Pin size={22} />} title={c.tag}>
+                {c.address}
+                {c.mapsLink && <><br /><a href={c.mapsLink} target="_blank" rel="noopener noreferrer" style={{ fontSize: 14 }}>Get directions</a></>}
+              </Info>
+            ))}
             {site.phone && <Info icon={<Phone size={22} />} title="CALL US"><a href={telHref(site.phone)} style={{ color: '#0A1530' }}>{site.phone}</a></Info>}
             {site.email && <Info icon={<Mail size={22} />} title="EMAIL US"><a href={`mailto:${site.email}`} style={{ color: '#0A1530' }}>{site.email}</a></Info>}
             {site.officeHours?.length > 0 && (
@@ -225,26 +230,30 @@ export default function Contact() {
             <Eyebrow>VISIT US</Eyebrow>
             <h2 className="h2" style={{ margin: 0, fontSize: 40, lineHeight: 1.1, fontWeight: 800, letterSpacing: '-.015em' }}>Our <span style={{ color: '#D90A0A' }}>Centres</span></h2>
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 250px), 1fr))', gap: 20 }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 340px), 1fr))', gap: 24 }}>
             {CENTRES.map((c) => (
-              <div key={c.key} className="card" style={{ borderRadius: 12, overflow: 'hidden', border: '1px solid #E7EAF0', background: '#ffffff' }}>
-                <img src={c.img} alt={c.alt} width="960" height="520" loading="lazy" style={{ display: 'block', width: '100%', height: 150, objectFit: 'cover' }} />
-                <div style={{ padding: '18px 20px', display: 'flex', flexDirection: 'column', gap: 6 }}>
+              <div key={c.key} className="card" style={{ borderRadius: 14, overflow: 'hidden', border: '1px solid #E7EAF0', background: '#ffffff', display: 'flex', flexDirection: 'column' }}>
+                {c.mapEmbed ? (
+                  <iframe title={`Map showing the Hawk Academe ${c.city} centre`} src={c.mapEmbed} loading="lazy" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen
+                    style={{ display: 'block', width: '100%', height: 280, border: 0, background: '#F6F8FC' }} />
+                ) : (
+                  <img src={c.img} alt={c.alt} width="960" height="520" loading="lazy" style={{ display: 'block', width: '100%', height: 150, objectFit: 'cover' }} />
+                )}
+                <div style={{ padding: '20px 22px', display: 'flex', flexDirection: 'column', gap: 8, flex: 1 }}>
                   <div style={{ fontSize: 12, fontWeight: 800, letterSpacing: '.14em', color: '#D90A0A' }}>{c.tag}</div>
-                  <h3 style={{ margin: 0, fontSize: 20, fontWeight: 800 }}>{c.city}</h3>
-                  <div style={{ fontSize: 14, lineHeight: 1.5, color: '#3E4860' }}>{c.area}<br />{[c.address, c.phone].filter(Boolean).join(' · ')}</div>
+                  <h3 style={{ margin: 0, fontSize: 22, fontWeight: 800 }}>{c.city}</h3>
+                  <div style={{ fontSize: 15, lineHeight: 1.55, color: '#3E4860' }}>{c.address}</div>
+                  {site.phone && <a href={telHref(site.phone)} style={{ fontSize: 15, fontWeight: 700, color: '#0A1530' }}>{site.phone}</a>}
+                  {c.mapsLink && (
+                    <a className="btn-red" href={c.mapsLink} target="_blank" rel="noopener noreferrer"
+                      style={{ marginTop: 'auto', alignSelf: 'flex-start', minHeight: 44, display: 'inline-flex', alignItems: 'center', gap: 8, padding: '0 18px', background: '#D90A0A', color: '#ffffff', fontWeight: 700, fontSize: 14, borderRadius: 4 }}>
+                      <Pin size={16} />Get directions
+                    </a>
+                  )}
                 </div>
               </div>
             ))}
           </div>
-          {site.mapEmbed ? (
-            <iframe title="Map showing the Hawk Academe head office" src={site.mapEmbed} loading="lazy" referrerPolicy="no-referrer-when-downgrade" allowFullScreen
-              style={{ width: '100%', height: 380, border: 0, borderRadius: 14, background: '#F6F8FC' }} />
-          ) : (
-            <div style={{ border: '2px dashed #B7C4E3', borderRadius: 14, background: '#F6F8FC', minHeight: 220, display: 'flex', alignItems: 'center', justifyContent: 'center', textAlign: 'center', padding: 24, color: '#5A6378', fontSize: 15, fontWeight: 600 }}>
-              [MAP EMBED — add the Google Maps embed code in Admin &gt; Timings &amp; highlights]
-            </div>
-          )}
         </div>
       </section>
 

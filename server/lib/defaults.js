@@ -5,7 +5,7 @@ export const DEFAULT_SETTINGS = {
   phone: '+91 98318 25207',
   whatsapp: '919831825207',
   email: 'hawkacademe@gmail.com',
-  address: 'Salt Lake, Kolkata, WB, India [FULL ADDRESS]',
+  address: '56/G/1, Rammohan Pally, Nehali, Barasat, Kolkata, West Bengal 700124',
   mapsLink: '',
   mapEmbed: '',
   officeHours: [
@@ -14,7 +14,7 @@ export const DEFAULT_SETTINGS = {
   ],
   responseTime: 'within [RESPONSE TIME]',
   enquiryEmail: '',
-  social: { facebook: '', instagram: '', youtube: '', linkedin: '' },
+  social: { facebook: 'https://www.facebook.com/p/hawkacademe-100066454885536/', instagram: 'https://www.instagram.com/hawkacademe/', youtube: 'https://www.youtube.com/channel/UCHVaJRbj3YkqktpuOGEh7AQ', linkedin: '' },
   highlights: [
     { value: '5000+', label: 'Students Trained' },
     { value: '1000+', label: 'Selections in Top Institutes' },
