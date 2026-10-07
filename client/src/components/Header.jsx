@@ -6,9 +6,10 @@ import { Lock, Menu, Close, Phone } from './Icons.jsx';
 
 // Pro plan navigation: only the 12 Pro pages. Links from the design concept to pages
 // outside the plan (store, cart, student login, booking) are removed.
+// About, Programs, Results and News are left out of the header on request; they are
+// still linked from the footer and from the home page.
 export const NAV = [
-  ['/', 'Home'], ['/about', 'About'], ['/programs', 'Programs'], ['/results', 'Results'],
-  ['/gallery', 'Gallery'], ['/blog', 'Blog'], ['/news', 'News'], ['/contact', 'Contact']
+  ['/', 'Home'], ['/gallery', 'Gallery'], ['/blog', 'Blog'], ['/contact', 'Contact']
 ];
 
 const isOn = (path, href) => (href === '/' ? path === '/' : path === href || path.startsWith(href + '/'));
