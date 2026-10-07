@@ -13,7 +13,7 @@ export const EXAMS = [
   { key: 'boards', label: 'Boards', name: 'Board Exams' }
 ];
 
-export const TOPPERS = [
+const ALL_TOPPERS = [
   { sample: true, exam: 'jeeadv', year: 2024, metricLabel: 'AIR', metric: '12', name: 'Rohan Mehta', program: '2 Year Classroom Program', detail: 'IIT Bombay', detailSub: 'Computer Science' },
   { sample: true, exam: 'jeeadv', year: 2024, metricLabel: 'AIR', metric: '28', name: 'Ananya Sharma', program: '4 Year Integrated Program', detail: 'IIT Delhi', detailSub: 'Electrical Engineering' },
   { sample: true, exam: 'neet', year: 2024, metricLabel: 'AIR', metric: '45', name: 'Arjun Singh', program: '2 Year Classroom Program', detail: 'AIIMS Delhi', detailSub: 'MBBS' },
@@ -29,7 +29,7 @@ export const TOPPERS = [
 ];
 
 // Headline numbers on the Results page.
-export const RESULT_STATS = [
+const ALL_RESULT_STATS = [
   { value: '[NUMBER]', label: 'Selections in top institutes' },
   { value: '[NUMBER]', label: 'Ranks under 1000' },
   { value: '[NUMBER]', label: 'Students scoring 90%+' },
@@ -37,12 +37,19 @@ export const RESULT_STATS = [
 ];
 
 // The dark strip shown on Home when an exam filter is picked.
-export const EXAM_STATS = {
+const ALL_EXAM_STATS = {
   jeeadv: [['[X]', 'in Top 100 AIR'], ['[X]', 'State / City Toppers'], ['[X]', 'Students Qualified']],
   jeemain: [['[X]', 'above 99 percentile'], ['[X]', 'State / City Toppers'], ['[X]', 'Students Qualified']],
   neet: [['[X]', 'in Top 1000 AIR'], ['[X]', 'State / City Toppers'], ['[X]', 'Students Qualified']],
   boards: [['[X]', 'scored 95%+'], ['[X]', 'School Toppers'], ['[X]', 'scored 90%+']]
 };
+
+// Only real, consented results and confirmed numbers are shown on the site. Sample
+// entries and anything still holding a [PLACEHOLDER] stay hidden until replaced.
+const confirmed = (v) => !/\[[^\]]*\]/.test(String(v));
+export const TOPPERS = ALL_TOPPERS.filter((t) => !t.sample && confirmed(t.metric) && confirmed(t.name));
+export const RESULT_STATS = ALL_RESULT_STATS.filter((s) => confirmed(s.value));
+export const EXAM_STATS = Object.fromEntries(Object.entries(ALL_EXAM_STATS).map(([k, list]) => [k, list.filter(([v]) => confirmed(v))]).filter(([, list]) => list.length));
 
 export const initials = (name) => {
   const parts = String(name || '').replace(/\[.*?\]/g, '').trim().split(/\s+/).filter(Boolean);

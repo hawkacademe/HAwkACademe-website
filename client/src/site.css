@@ -119,10 +119,11 @@ button,input,select,textarea{font-family:inherit}
 .ft-grid{display:grid;grid-template-columns:minmax(200px,1.1fr) minmax(260px,1.5fr) minmax(170px,1fr) minmax(170px,1fr);gap:24px 32px;align-items:start}
 .ft-two{display:grid;grid-template-columns:1fr;gap:8px}
 .ft-links .ft-two{grid-template-columns:repeat(2,minmax(0,max-content));column-gap:28px}
+.ft-links .ft-two.ft-one{grid-template-columns:1fr}
 @media (max-width: 980px){.ft-grid{grid-template-columns:1fr 1fr}}
 @media (max-width: 640px){
   .ft-grid{grid-template-columns:1fr;gap:18px;padding-top:24px !important}
-  .ft-links .ft-two{grid-template-columns:1fr 1fr;gap:0 16px}
+  .ft-links .ft-two,.ft-links .ft-two.ft-one{grid-template-columns:1fr 1fr;gap:0 16px}
   .ft-links .ft-two a{display:flex;align-items:center;min-height:36px}
 }
 

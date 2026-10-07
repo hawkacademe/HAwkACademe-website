@@ -3,7 +3,7 @@ import PageHero from '../components/PageHero.jsx';
 import { CtaBand, Empty } from '../components/Blocks.jsx';
 import { Trophy } from '../components/Icons.jsx';
 import { TOPPERS, EXAMS, RESULT_STATS, initials, examLabel } from '../content/results.js';
-import { usePageMeta } from '../lib/hooks.js';
+import { usePathMeta } from '../lib/hooks.js';
 
 const statIcons = [
   { color: '#D90A0A', d: <><path d="M8 4h8v5a4 4 0 0 1-8 0z" /><path d="M8 6H5a3 3 0 0 0 3 4M16 6h3a3 3 0 0 1-3 4" /><path d="M12 13v4M8 20h8" /></> },
@@ -13,7 +13,7 @@ const statIcons = [
 ];
 
 export default function Results() {
-  usePageMeta('Results and Toppers | HAwk ACademe', 'HAwk ACademe toppers and selections in JEE Advanced, JEE Main, NEET and board exams, year by year.');
+  usePathMeta('/results');
   const [exam, setExam] = useState('all');
   const [year, setYear] = useState('all');
   const years = useMemo(() => [...new Set(TOPPERS.map((t) => t.year))].sort((a, b) => b - a), []);
@@ -26,9 +26,9 @@ export default function Results() {
   return (
     <>
       <PageHero crumb="Results" title={<>Proven Results, <span style={{ color: '#FF4A3A' }}>Real Success</span></>}
-        intro="Year after year, HAwk ACademe students turn ambition into achievement. Browse our toppers by exam and year." />
+        intro={TOPPERS.length ? "Year after year, HAwk ACademe students turn ambition into achievement. Browse our toppers by exam and year." : "Our results are published with each student's permission, with the exam, year and rank stated exactly as awarded."} />
 
-      <section style={{ background: '#F6F8FC' }}>
+      {RESULT_STATS.length > 0 && <section style={{ background: '#F6F8FC' }}>
         <div className="pad" style={{ maxWidth: 1280, margin: '0 auto', padding: '56px 32px 24px', display: 'flex', flexDirection: 'column', gap: 32 }}>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(210px, 1fr))', gap: 16 }}>
             {RESULT_STATS.map((s, i) => (
@@ -39,10 +39,17 @@ export default function Results() {
             ))}
           </div>
         </div>
-      </section>
+      </section>}
 
       <section style={{ background: '#ffffff' }}>
         <div className="pad" style={{ maxWidth: 1280, margin: '0 auto', padding: '56px 32px 72px', display: 'flex', flexDirection: 'column', gap: 32 }}>
+          {TOPPERS.length === 0 ? (
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 14, maxWidth: 760 }}>
+              <h2 style={{ margin: 0, fontSize: 28, fontWeight: 800 }}>How we publish results</h2>
+              <p style={{ margin: 0, fontSize: 16, lineHeight: 1.7, color: '#3E4860' }}>Every result on this page will name the exam, the year and the rank or score exactly as published by the exam authority (NTA for JEE Main and NEET-UG, the organising IIT for JEE Advanced, and the board for Class 10 and 12). We list a student only after the student, or a parent for students under 18, gives written permission.</p>
+              <p style={{ margin: 0, fontSize: 16, lineHeight: 1.7, color: '#3E4860' }}>Our verified toppers will appear here soon. To ask about past results, call us or send an enquiry.</p>
+            </div>
+          ) : <>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
             <div id="f-exam" style={{ fontSize: 12, fontWeight: 800, letterSpacing: '.14em', color: '#5A6378' }}>EXAM</div>
             <div role="group" aria-labelledby="f-exam" style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
@@ -82,6 +89,7 @@ export default function Results() {
           {(exam !== 'all' || year !== 'all') && (
             <div><button type="button" className="pill on" onClick={() => { setExam('all'); setYear('all'); }}>Show all results</button></div>
           )}
+          </>}
         </div>
       </section>
 

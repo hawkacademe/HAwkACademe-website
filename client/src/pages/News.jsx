@@ -2,12 +2,12 @@ import { useState } from 'react';
 import PageHero from '../components/PageHero.jsx';
 import { NoticeRow } from '../components/Cards.jsx';
 import { Loading, LoadError, Empty } from '../components/Blocks.jsx';
-import { useData, usePageMeta } from '../lib/hooks.js';
+import { useData, usePathMeta } from '../lib/hooks.js';
 
 const CATS = [['all', 'All'], ['BATCHES', 'Batches'], ['RESULTS', 'Results'], ['NOTICES', 'Notices']];
 
 export default function News() {
-  usePageMeta('News and Announcements | HAwk ACademe', 'New batches, admission test dates, results and notices from HAwk ACademe.');
+  usePathMeta('/news');
   const { data, error, loading } = useData('/notices');
   const [cat, setCat] = useState('all');
   const rows = (data?.notices || []).filter((n) => cat === 'all' || n.category === cat);

@@ -13,6 +13,7 @@ import Reviews from './sections/Reviews.jsx';
 import Enquiries from './sections/Enquiries.jsx';
 import Account from './sections/Account.jsx';
 import './admin.css';
+import { BRAND_NAME } from '../lib/brand.js';
 
 // The editor bundle (TipTap) only loads when a post is opened.
 const PostEditor = lazy(() => import('./sections/PostEditor.jsx'));
@@ -85,7 +86,7 @@ function Shell() {
 }
 
 export default function AdminApp() {
-  usePageMeta('Admin | HAwk ACademe', 'HAwk ACademe site administration.');
+  usePageMeta(`Admin | ${BRAND_NAME}`, `${BRAND_NAME} site administration.`);
   return (
     <AuthProvider>
       <PageHero compact crumbs={[{ href: '/', label: 'Home' }, { label: 'Admin' }]} title="Admin Dashboard" />

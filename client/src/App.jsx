@@ -15,6 +15,8 @@ const Blog = lazy(() => import('./pages/Blog.jsx'));
 const BlogPost = lazy(() => import('./pages/BlogPost.jsx'));
 const News = lazy(() => import('./pages/News.jsx'));
 const Contact = lazy(() => import('./pages/Contact.jsx'));
+const ProgramLanding = lazy(() => import('./pages/ProgramLanding.jsx'));
+const Legal = lazy(() => import('./pages/Legal.jsx'));
 
 // The admin panel (with the blog editor) is loaded only when someone opens /admin.
 const AdminLogin = lazy(() => import('./admin/AdminLogin.jsx'));
@@ -30,12 +32,15 @@ export default function App() {
           <Route index element={<Home />} />
           <Route path="about" element={<About />} />
           <Route path="programs" element={<Programs />} />
+          <Route path="programs/:slug" element={<ProgramLanding />} />
           <Route path="results" element={<Results />} />
           <Route path="gallery" element={<Gallery />} />
           <Route path="blog" element={<Blog />} />
           <Route path="blog/:slug" element={<BlogPost />} />
           <Route path="news" element={<News />} />
           <Route path="contact" element={<Contact />} />
+          <Route path="privacy" element={<Legal page="privacy" />} />
+          <Route path="terms" element={<Legal page="terms" />} />
           <Route path="admin/login" element={<Suspense fallback={wait}><AdminLogin /></Suspense>} />
           <Route path="admin/*" element={<Suspense fallback={wait}><AdminApp /></Suspense>} />
           <Route path="*" element={<NotFound />} />

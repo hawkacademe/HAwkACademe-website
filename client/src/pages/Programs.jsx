@@ -3,15 +3,19 @@ import { CtaBand, RedButton } from '../components/Blocks.jsx';
 import { Tick, Phone } from '../components/Icons.jsx';
 import { PROGRAMS, withDetails } from '../content/programs.jsx';
 import { useSite } from '../lib/site.jsx';
-import { usePageMeta } from '../lib/hooks.js';
-import { telHref } from '../lib/format.js';
+import { usePathMeta } from '../lib/hooks.js';
+import { telHref, hasPlaceholder } from '../lib/format.js';
+import { LANDING_SLUGS, landingPath } from '../lib/seoPages.js';
+import { LANDINGS } from '../content/landing.jsx';
 
 const fact = { background: '#F6F8FC', borderRadius: 10, padding: '14px 16px' };
 const factLabel = { fontSize: 11, fontWeight: 800, letterSpacing: '.14em', color: '#5A6378' };
 const factValue = { fontSize: 15, fontWeight: 700, marginTop: 4, lineHeight: 1.4 };
 
+const orAsk = (v) => (v && !hasPlaceholder(v) ? v : 'Ask us');
+
 function Fact({ label, value, wide }) {
-  if (!value) return null;
+  if (!value || hasPlaceholder(value)) return null;
   return (
     <div style={{ ...fact, gridColumn: wide ? '1 / -1' : undefined }}>
       <div style={factLabel}>{label}</div>
@@ -21,7 +25,7 @@ function Fact({ label, value, wide }) {
 }
 
 export default function Programs() {
-  usePageMeta('Programs: JEE, NEET, Foundation and Integrated | HAwk ACademe', 'Four clear paths, one standard of teaching. Classes covered, duration, batch size and mode for every HAwk ACademe program.');
+  usePathMeta('/programs');
   const site = useSite();
   const programs = PROGRAMS.map((p) => withDetails(p, site.programs));
 
@@ -47,6 +51,7 @@ export default function Programs() {
                 <Eyebrow>PROGRAM {String(i + 1).padStart(2, '0')}</Eyebrow>
                 <h2 className="h2" style={{ margin: 0, fontSize: 34, lineHeight: 1.1, fontWeight: 800, letterSpacing: '-.015em' }}>{p.name}</h2>
                 <p style={{ margin: 0, fontSize: 16, lineHeight: 1.6, color: '#3E4860' }}>{p.summary}</p>
+                {LANDING_SLUGS[p.key] && <a href={landingPath(p.key)} style={{ alignSelf: 'flex-start', display: 'inline-flex', alignItems: 'center', gap: 6, fontWeight: 700, fontSize: 15 }}>{LANDINGS[p.key].h1}: syllabus, batches and FAQs<span aria-hidden="true">→</span></a>}
                 <ul style={{ listStyle: 'none', margin: 0, padding: 0, display: 'flex', flexDirection: 'column', gap: 12 }}>
                   {p.bullets.map((b) => (
                     <li key={b} style={{ display: 'flex', gap: 10, alignItems: 'flex-start', fontSize: 15, lineHeight: 1.5, color: '#3E4860' }}>
@@ -86,7 +91,7 @@ export default function Programs() {
                 {programs.map((p) => (
                   <tr key={p.key}>
                     <td style={{ fontWeight: 800, color: '#0A1530' }}><a href={`#${p.key}`} style={{ color: '#0A1530' }}>{p.name}</a></td>
-                    <td>{p.classes}</td><td>{p.goal}</td><td>{p.subjects}</td><td>{p.mode}</td>
+                    <td>{orAsk(p.classes)}</td><td>{p.goal}</td><td>{p.subjects}</td><td>{orAsk(p.mode)}</td>
                   </tr>
                 ))}
               </tbody>

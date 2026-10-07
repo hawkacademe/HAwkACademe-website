@@ -1,5 +1,6 @@
 import { createContext, useContext, useEffect, useState } from 'react';
 import { cachedGet, seedCache, ApiError } from './api.js';
+import { PAGES } from './seoPages.js';
 
 // Data the server already loaded for the first page view: { [apiPath]: { data } | { error } }.
 // On the server it also records any path a page asked for but did not get (missing).
@@ -53,6 +54,11 @@ export function usePageMeta(title, description) {
     set('meta[property="og:title"]', title);
     set('meta[property="og:description"]', description);
   }, [title, description]);
+}
+
+// Title and description for a fixed page, from the central list in seoPages.js.
+export function usePathMeta(path) {
+  usePageMeta(PAGES[path]?.title, PAGES[path]?.description);
 }
 
 // Cycles through a list on a timer (hero words). Stops for reduced-motion users.

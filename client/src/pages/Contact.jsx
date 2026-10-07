@@ -4,7 +4,7 @@ import PageHero, { Eyebrow } from '../components/PageHero.jsx';
 import Turnstile from '../components/Turnstile.jsx';
 import { Arrow, ChevronDown, Pin, Phone, Mail, Clock, Social } from '../components/Icons.jsx';
 import { useSite } from '../lib/site.jsx';
-import { usePageMeta } from '../lib/hooks.js';
+import { usePathMeta } from '../lib/hooks.js';
 import { api } from '../lib/api.js';
 import { telHref } from '../lib/format.js';
 import { CENTRES } from '../content/centres.js';
@@ -51,7 +51,7 @@ function Info({ icon, title, children }) {
 }
 
 export default function Contact() {
-  usePageMeta('Contact Us | HAwk ACademe', 'Questions about programs, batches or admission tests? Send us a message, call or visit and our team will guide you.');
+  usePathMeta('/contact');
   const site = useSite();
   const [params] = useSearchParams();
   const preProgram = PROGRAMS.some((p) => p.key === params.get('program')) ? params.get('program') : '';
@@ -107,7 +107,7 @@ export default function Contact() {
       <PageHero crumb="Contact" title={<>Let&apos;s Talk About <span style={{ color: '#FF4A3A' }}>Your Goals</span></>}
         intro="Questions about programs, batches or admission tests? Send us a message or visit a centre and our team will guide you." />
 
-      <section style={{ background: '#F6F8FC' }}>
+      <section id="enquiry" style={{ background: '#F6F8FC', scrollMarginTop: 120 }}>
         <div className="pad" style={{ maxWidth: 1280, margin: '0 auto', padding: '72px 32px', display: 'flex', flexWrap: 'wrap', gap: 32, alignItems: 'flex-start' }}>
           <div style={{ flex: '3 1 520px', minWidth: 0, background: '#ffffff', border: '1px solid #E7EAF0', borderTop: '4px solid #D90A0A', borderRadius: 14, padding: 32, boxShadow: '0 18px 40px rgba(11,29,69,.08)' }}>
             {status.state !== 'sent' ? (
@@ -175,7 +175,7 @@ export default function Contact() {
                     {site.responseTime && <span style={{ fontSize: 13, color: '#5A6378' }}>We usually reply {site.responseTime}.</span>}
                   </div>
                   <p style={{ gridColumn: '1 / -1', margin: 0, fontSize: 12, lineHeight: 1.5, color: '#5A6378' }}>
-                    We use these details only to reply to your enquiry. <span aria-hidden="true" style={{ color: '#D90A0A' }}>*</span> Required.
+                    We use these details only to reply to your enquiry (see our <a href="/privacy">Privacy Policy</a>). If the student is under 18, please send this as a parent or guardian, or with their consent. <span aria-hidden="true" style={{ color: '#D90A0A' }}>*</span> Required.
                   </p>
                 </form>
               </div>

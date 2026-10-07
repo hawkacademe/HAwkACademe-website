@@ -11,18 +11,22 @@ const postCard = (p) => ({
   cover: p.cover?.url ? { url: p.cover.url, alt: p.cover.alt || p.title } : null, date: p.publishAt, updated: p.updatedAt, author: p.author
 });
 
+// Settings still holding a [PLACEHOLDER] are not shown to visitors (Admin still shows them).
+const real = (v) => (typeof v === 'string' && /\[[^\]]*\]/.test(v) ? '' : v);
+
 export async function siteData() {
   const s = await getSettings();
   return {
-    phone: s.phone, whatsapp: s.whatsapp, email: s.email, address: s.address, mapsLink: s.mapsLink, mapEmbed: s.mapEmbed,
-    officeHours: s.officeHours, responseTime: s.responseTime, social: s.social, highlights: s.highlights, programs: s.programs,
+    phone: real(s.phone), whatsapp: s.whatsapp, email: real(s.email), address: real(s.address), mapsLink: s.mapsLink, mapEmbed: s.mapEmbed,
+    officeHours: (s.officeHours || []).filter((h) => real(h.days) && real(h.hours)), responseTime: real(s.responseTime),
+    social: s.social, highlights: (s.highlights || []).filter((h) => real(h.value) && real(h.label)), programs: s.programs,
     turnstileSiteKey: config.turnstile.siteKey
   };
 }
 
 export async function noticesData({ limit } = {}) {
   const n = Math.min(Number(limit) || 50, 100);
-  const notices = await Notice.find({ published: true }).sort({ pinned: -1, date: -1 }).limit(n).lean();
+  const notices = (await Notice.find({ published: true }).sort({ pinned: -1, date: -1 }).limit(n).lean()).filter((x) => real(x.title) && real(x.text));
   return { notices: notices.map((x) => ({ id: String(x._id), title: x.title, text: x.text, category: x.category, date: x.date, link: x.link, pinned: x.pinned })) };
 }
 
@@ -49,7 +53,7 @@ export async function galleryData() {
 }
 
 export async function reviewsData() {
-  const reviews = await Review.find({ published: true }).sort({ order: 1, createdAt: -1 }).lean();
+  const reviews = (await Review.find({ published: true }).sort({ order: 1, createdAt: -1 }).lean()).filter((x) => real(x.name) && real(x.quote) && real(x.role || ''));
   return { reviews: reviews.map((x) => ({ id: String(x._id), name: x.name, role: x.role, quote: x.quote })) };
 }
 

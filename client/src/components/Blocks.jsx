@@ -62,7 +62,7 @@ export function FounderQuote({ founder, compact = false }) {
         ) : null}
         <div>
           <div style={{ fontWeight: 800, fontSize: 16 }}>{founder.name}</div>
-          <div style={{ fontSize: 13, letterSpacing: '.12em', color: '#5A6378', marginTop: 4 }}>{founder.title.toUpperCase()}</div>
+          <div style={{ fontSize: 13, letterSpacing: '.12em', color: '#5A6378', marginTop: 4 }}>{founder.title}</div>
         </div>
       </div>
     </div>

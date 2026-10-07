@@ -2,6 +2,8 @@ import { useSite } from '../lib/site.jsx';
 import { telHref } from '../lib/format.js';
 import { Pin, Phone, Mail, Clock, Social } from './Icons.jsx';
 import { CENTRES } from '../content/centres.js';
+import { landingPath } from '../lib/seoPages.js';
+import { BRAND_NAME } from '../lib/brand.js';
 
 const col = { display: 'flex', flexDirection: 'column', gap: 8, fontSize: 13, minWidth: 0 };
 const head = { fontWeight: 800, fontSize: 14, color: '#0A1530', marginBottom: 2 };
@@ -56,11 +58,11 @@ export default function Footer() {
         </div>
         <div className="ft-links" style={col}>
           <div style={head}>Programs</div>
-          <div className="ft-two">
-            <a href="/programs#jee" style={link}>JEE</a>
-            <a href="/programs#neet" style={link}>NEET</a>
-            <a href="/programs#foundation" style={link}>Foundation</a>
-            <a href="/programs#integrated" style={link}>Integrated</a>
+          <div className="ft-two ft-one">
+            <a href={landingPath('jee')} style={link}>JEE Coaching</a>
+            <a href={landingPath('neet')} style={link}>NEET Coaching</a>
+            <a href={landingPath('foundation')} style={link}>Foundation (Class 8-10)</a>
+            <a href="/programs#integrated" style={link}>Integrated Programs</a>
           </div>
           {site.officeHours?.length > 0 && (
             <div style={{ ...row, color: '#3E4860', marginTop: 6 }}>
@@ -71,8 +73,10 @@ export default function Footer() {
         </div>
       </div>
       <div className="pad" style={{ maxWidth: 1280, margin: '0 auto', padding: '12px 32px 14px', borderTop: '1px solid #E7EAF0', display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', gap: 12, fontSize: 12, color: '#5A6378' }}>
-        <div>© {year} HAwk ACademe. All rights reserved.</div>
+        <div>© {year} {BRAND_NAME}. All rights reserved.</div>
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px 24px' }}>
+          <a href="/privacy" style={{ color: '#5A6378' }}>Privacy Policy</a>
+          <a href="/terms" style={{ color: '#5A6378' }}>Terms of Use</a>
           <a href="/admin/login" style={{ color: '#5A6378' }}>Admin</a>
         </div>
       </div>

@@ -3,7 +3,7 @@ import { Eyebrow } from '../components/PageHero.jsx';
 import { HighlightTiles, FounderQuote } from '../components/Blocks.jsx';
 import { NoticeRow } from '../components/Cards.jsx';
 import { Arrow, Tick, Chat, Calendar, Circled, Pin, Quote } from '../components/Icons.jsx';
-import { useData, usePageMeta, useRotate } from '../lib/hooks.js';
+import { useData, usePathMeta, useRotate } from '../lib/hooks.js';
 import { useSite } from '../lib/site.jsx';
 import { telHref } from '../lib/format.js';
 import { TOPPERS, EXAMS, EXAM_STATS, initials, examLabel } from '../content/results.js';
@@ -11,6 +11,8 @@ import { PROGRAMS } from '../content/programs.jsx';
 import { CENTRES } from '../content/centres.js';
 import { FOUNDER } from '../content/about.js';
 import { HERO_WORDS, TESTS, GROWTH, YEARS_OF_EXCELLENCE } from '../content/home.js';
+import { LANDING_SLUGS, landingPath } from '../lib/seoPages.js';
+import { LANDINGS } from '../content/landing.jsx';
 
 const NB = ' ';
 const wrap = { position: 'relative', maxWidth: 1280, margin: '0 auto', padding: '88px 32px', display: 'flex', flexDirection: 'column', gap: 40 };
@@ -28,6 +30,21 @@ function Toppers() {
   const shown = more ? filtered : filtered.slice(0, 4);
   const cur = EXAMS.find((e) => e.key === exam);
   const tabs = [{ key: 'all', label: 'All', name: 'All Exams' }, ...EXAMS];
+
+  if (!TOPPERS.length) {
+    return (
+      <div style={{ background: '#ffffff', borderRadius: 14, padding: '28px 28px', boxShadow: '0 10px 30px rgba(11,29,69,.08)', display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between', gap: 18 }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 8, maxWidth: 640 }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 10, fontSize: 12, fontWeight: 800, letterSpacing: '.2em' }}>
+            {ico(20, <><path d="M8 4h8v5a4 4 0 0 1-8 0z" /><path d="M12 13v4M8 20h8" /></>, { color: '#D90A0A' })}OUR TOPPERS
+          </div>
+          <h3 style={{ margin: 0, fontSize: 24, fontWeight: 800, lineHeight: 1.25 }}>Toppers, published with permission</h3>
+          <p style={{ margin: 0, fontSize: 15, lineHeight: 1.6, color: '#3E4860' }}>We show a student's name, exam, year and rank only after the student (or a parent, for students under 18) agrees in writing. Our verified results will appear here.</p>
+        </div>
+        <a className="btn-red" href="/results" style={{ ...btnRed, height: 50, padding: '0 28px', fontSize: 15 }}>About Our Results <Arrow size={18} /></a>
+      </div>
+    );
+  }
 
   return (
     <>
@@ -207,7 +224,7 @@ function Roadmap() {
 
 // ---------------- Page ----------------
 export default function Home() {
-  usePageMeta('HAwk ACademe | JEE, NEET and Foundation Coaching', 'Focused academic programs for JEE, NEET and Foundation courses with expert faculty, structured learning and proven results.');
+  usePathMeta('/');
   const site = useSite();
   const wordIdx = useRotate(HERO_WORDS.length, 2200);
   const notices = useData('/notices?limit=4');
@@ -225,11 +242,11 @@ export default function Home() {
         <div className="pad" style={{ position: 'relative', maxWidth: 1280, margin: '0 auto', padding: '72px 32px 80px', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 460px), 1fr))', gap: 48, alignItems: 'center' }}>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 22 }}>
             <div style={{ fontSize: 12, fontWeight: 800, letterSpacing: '.22em', color: '#0A1530' }}>DISCIPLINE{NB}{NB}|{NB}{NB}MENTORSHIP{NB}{NB}|{NB}{NB}RESULTS</div>
-            <h1 className="h1" style={{ margin: 0, fontSize: 72, lineHeight: 1.02, fontWeight: 800, letterSpacing: '-.02em' }}>Building<br /><span style={{ color: '#D90A0A' }}>Brighter</span><br />Futures</h1>
+            <h1 className="h1" style={{ margin: 0, fontSize: 72, lineHeight: 1.02, fontWeight: 800, letterSpacing: '-.02em' }}>Building{' '}<br /><span style={{ color: '#D90A0A' }}>Brighter</span>{' '}<br />Futures</h1>
             <div style={{ display: 'flex', alignItems: 'center', gap: 10, fontSize: 18, fontWeight: 700, color: '#0A1530' }}>
               Built upon <span style={{ display: 'inline-block', minWidth: 170, padding: '4px 12px', background: '#0B1D45', color: '#ffffff', borderRadius: 4, letterSpacing: '.06em' }}>{HERO_WORDS[wordIdx]}</span>
             </div>
-            <p style={{ margin: 0, fontSize: 17, lineHeight: 1.6, color: '#3E4860', maxWidth: 440 }}>Focused academic programs for JEE, NEET and Foundation courses with expert faculty, structured learning and proven results.</p>
+            <p style={{ margin: 0, fontSize: 17, lineHeight: 1.6, color: '#3E4860', maxWidth: 460 }}>Focused academic programs for JEE, NEET and Foundation courses with expert faculty, structured learning and proven results, at our centres in Barasat, Madhyamgram and New Town, Kolkata.</p>
             <div className="hero-cta" style={{ display: 'flex', gap: 14, flexWrap: 'wrap', marginTop: 6 }}>
               <a className="btn-red" href="#programs" style={{ ...btnRed, height: 50, fontSize: 15 }}>Explore Programs <Arrow size={18} /></a>
               <a className="btn-ghost" href="/contact" style={{ height: 50, display: 'flex', alignItems: 'center', gap: 10, padding: '0 22px', border: '1.5px solid #D90A0A', color: '#D90A0A', fontWeight: 700, fontSize: 15, borderRadius: 4, background: '#ffffff' }}><Chat size={18} /> Talk to Counsellor</a>
@@ -322,7 +339,7 @@ export default function Home() {
                   <ul style={{ listStyle: 'none', margin: '4px 0 0', padding: 0, display: 'flex', flexDirection: 'column', gap: 9, fontSize: 13, color: '#3E4860', flexGrow: 1 }}>
                     {p.cardBullets.map((b) => <li key={b} style={{ display: 'flex', gap: 8, alignItems: 'center' }}><Tick color={red ? '#D90A0A' : '#0B1D45'} />{b}</li>)}
                   </ul>
-                  <a className={red ? 'btn-red' : 'btn-navy'} href={`/programs#${p.key}`} aria-label={`Know more about ${p.name}`} style={{ marginTop: 8, height: 44, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, background: red ? '#D90A0A' : '#0B1D45', color: '#ffffff', fontWeight: 700, fontSize: 14, borderRadius: 4 }}>Know More <Arrow size={16} /></a>
+                  <a className={red ? 'btn-red' : 'btn-navy'} href={LANDING_SLUGS[p.key] ? landingPath(p.key) : `/programs#${p.key}`} aria-label={LANDING_SLUGS[p.key] ? LANDINGS[p.key].h1 : `Know more about ${p.name}`} style={{ marginTop: 8, height: 44, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, background: red ? '#D90A0A' : '#0B1D45', color: '#ffffff', fontWeight: 700, fontSize: 14, borderRadius: 4 }}>Know More <Arrow size={16} /></a>
                 </div>
               );
             })}
@@ -579,11 +596,11 @@ export default function Home() {
       )}
 
       {/* ============ FOUNDER QUOTE ============ */}
-      <section style={{ background: reviewList.length > 0 ? '#ffffff' : '#F6F8FC' }}>
+      {FOUNDER && <section style={{ background: reviewList.length > 0 ? '#ffffff' : '#F6F8FC' }}>
         <div className="pad" style={{ maxWidth: 960, margin: '0 auto', padding: '80px 32px' }}>
           <FounderQuote founder={FOUNDER} />
         </div>
-      </section>
+      </section>}
 
       {/* ============ CONTACT CTA ============ */}
       <section id="contact" style={{ position: 'relative', background: '#0B1D45', color: '#ffffff', overflow: 'hidden' }}>

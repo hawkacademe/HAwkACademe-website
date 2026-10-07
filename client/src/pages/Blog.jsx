@@ -3,13 +3,13 @@ import PageHero, { Eyebrow } from '../components/PageHero.jsx';
 import { PostCard } from '../components/Cards.jsx';
 import { Loading, LoadError, Empty } from '../components/Blocks.jsx';
 import { Megaphone, WhatsApp } from '../components/Icons.jsx';
-import { useData, usePageMeta } from '../lib/hooks.js';
+import { useData, usePathMeta } from '../lib/hooks.js';
 import { useSite } from '../lib/site.jsx';
 
 const CATS = ['all', 'Exam Tips', 'Study Plans', 'Parents', 'Updates'];
 
 export default function Blog() {
-  usePageMeta('Blog: Exam Tips and Study Plans | HAwk ACademe', 'Exam tips, study plans and guidance for students and parents from the HAwk ACademe faculty.');
+  usePathMeta('/blog');
   const [params, setParams] = useSearchParams();
   const cat = CATS.includes(params.get('category')) ? params.get('category') : 'all';
   const { data, error, loading } = useData('/posts');

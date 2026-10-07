@@ -16,9 +16,11 @@ export const TESTS = [
 ];
 
 // Red "Growing World of HAwk ACademe" band.
-export const GROWTH = [
+const ALL_GROWTH = [
   { value: String(CENTRES.length), label: CENTRES.length === 1 ? 'Study Centre' : 'Study Centres' },
   { value: '[XX]', label: 'Expert Faculty' },
   { value: '[XX]', label: 'Active Batches' },
   { value: YEARS_OF_EXCELLENCE, label: 'Years of Excellence' }
 ];
+// Figures still holding a [PLACEHOLDER] are hidden until the real number is filled in.
+export const GROWTH = ALL_GROWTH.filter((g) => !/\[[^\]]*\]/.test(g.value));

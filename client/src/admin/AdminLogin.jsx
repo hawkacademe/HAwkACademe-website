@@ -7,6 +7,7 @@ import { api } from '../lib/api.js';
 import { usePageMeta } from '../lib/hooks.js';
 import { Spinner } from './ui.jsx';
 import './admin.css';
+import { BRAND_NAME } from '../lib/brand.js';
 
 const input = { height: 48, border: '1.5px solid #D5DBE8', borderRadius: 6, padding: '0 14px', fontFamily: 'inherit', fontSize: 15, color: '#0A1530', background: '#ffffff', width: '100%' };
 
@@ -73,7 +74,7 @@ function LoginPanel() {
 }
 
 export default function AdminLogin() {
-  usePageMeta('Admin Login | HAwk ACademe', 'HAwk ACademe site administration.');
+  usePageMeta(`Admin Login | ${BRAND_NAME}`, `${BRAND_NAME} site administration.`);
   return (
     <AuthProvider>
       <PageHero compact crumb="Admin login" title="Admin Login" />

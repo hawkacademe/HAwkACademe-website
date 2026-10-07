@@ -1,7 +1,7 @@
 import PageHero, { Eyebrow } from '../components/PageHero.jsx';
 import { CtaBand, HighlightTiles, RedButton, FounderQuote } from '../components/Blocks.jsx';
 import { STORY, FOUNDED, FOUNDER, FACULTY, SUBJECT_BANDS } from '../content/about.js';
-import { usePageMeta } from '../lib/hooks.js';
+import { usePathMeta } from '../lib/hooks.js';
 
 const PILLARS = [
   ['OUR MISSION', 'To make focused, concept-first preparation accessible to every aspirant, and to build discipline that lasts beyond the exam.',
@@ -22,7 +22,7 @@ const h2 = { margin: 0, fontSize: 38, lineHeight: 1.1, fontWeight: 800, letterSp
 const wrap = (pad = '72px 32px') => ({ maxWidth: 1280, margin: '0 auto', padding: pad, display: 'flex', flexDirection: 'column', gap: 32 });
 
 export default function About() {
-  usePageMeta('About Us | HAwk ACademe', 'HAwk ACademe prepares students for JEE, NEET and Foundation exams with focused teaching, personal mentorship and a culture of hard work.');
+  usePathMeta('/about');
   return (
     <>
       <PageHero crumb="About" title={<>Built on <span style={{ color: '#FF4A3A' }}>Discipline, Mentorship &amp; Results</span></>}
@@ -35,7 +35,7 @@ export default function About() {
               <Eyebrow>OUR STORY</Eyebrow>
               <h2 className="h2" style={h2}>Why <span style={{ color: '#D90A0A' }}>HAwk ACademe</span> exists</h2>
               {STORY.map((p, i) => <p key={i} style={{ margin: 0, fontSize: 16, lineHeight: 1.7, color: '#3E4860' }}>{p}</p>)}
-              <div style={{ fontSize: 14, fontWeight: 700, color: '#0B1D45' }}>Founded in {FOUNDED}</div>
+              {FOUNDED && <div style={{ fontSize: 14, fontWeight: 700, color: '#0B1D45' }}>Founded in {FOUNDED}</div>}
               <div><RedButton href="/contact" arrow>Talk to Us</RedButton></div>
             </div>
             <img src="/img/campus-night.webp" alt="HAwk ACademe campus at night" width="1000" height="700" loading="lazy" style={{ display: 'block', width: '100%', height: 'auto', borderRadius: 16, boxShadow: '0 18px 40px rgba(11,29,69,.2)' }} />
@@ -78,7 +78,7 @@ export default function About() {
         </div>
       </section>
 
-      <section style={{ background: '#F6F8FC' }}>
+      {FACULTY.length > 0 && <section style={{ background: '#F6F8FC' }}>
         <div className="pad" style={wrap()}>
           <Eyebrow>OUR FACULTY</Eyebrow>
           <h2 className="h2" style={h2}>Meet the <span style={{ color: '#D90A0A' }}>mentors</span></h2>
@@ -103,13 +103,13 @@ export default function About() {
             })}
           </div>
         </div>
-      </section>
+      </section>}
 
-      <section style={{ background: '#ffffff' }}>
+      {FOUNDER && <section style={{ background: '#ffffff' }}>
         <div className="pad" style={{ maxWidth: 960, margin: '0 auto', padding: '72px 32px' }}>
           <FounderQuote founder={FOUNDER} compact />
         </div>
-      </section>
+      </section>}
 
       <CtaBand title="Join the HAwk ACademe family" text="Meet our team, visit a centre and find the program that fits you."
         secondary={{ href: '/programs', label: 'Explore Programs' }} />

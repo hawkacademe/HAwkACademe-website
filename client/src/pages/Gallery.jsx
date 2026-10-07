@@ -2,12 +2,12 @@ import { useState } from 'react';
 import PageHero from '../components/PageHero.jsx';
 import Lightbox from '../components/Lightbox.jsx';
 import { CtaBand, Loading, LoadError, Empty } from '../components/Blocks.jsx';
-import { useData, usePageMeta } from '../lib/hooks.js';
+import { useData, usePathMeta } from '../lib/hooks.js';
 
 const CATS = ['all', 'Classroom', 'Seminars', 'Activities', 'Celebrations', 'Campus'];
 
 export default function Gallery() {
-  usePageMeta('Gallery | HAwk ACademe', 'Photos of classrooms, seminars, activities, celebrations and campus life at HAwk ACademe.');
+  usePathMeta('/gallery');
   const { data, error, loading } = useData('/gallery');
   const [cat, setCat] = useState('all');
   const [lb, setLb] = useState(-1);
