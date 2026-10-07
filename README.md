@@ -8,7 +8,7 @@ This is the live website for agreement **HA-WEB-2026-01**. It has the 12 Pro pag
 | Backend | Node.js 20 + Express 5 |
 | Database | MongoDB (MongoDB Atlas free cluster in production) |
 | Photos | Cloudinary in production. Locally they go in the `uploads/` folder. Every photo is resized and saved as WebP. |
-| Email | Any SMTP service (for example Brevo or Zoho). It sends each Contact-form enquiry to the office. |
+| Email | Brevo (through its API). It sends each Contact-form enquiry to the office. |
 
 ## The 12 pages
 
@@ -79,8 +79,8 @@ NODE_ENV=production FORCE_HTTPS=false SITE_URL=http://localhost:4000 npm start  
 
 1. **Database**: create a free MongoDB Atlas cluster in the institute's name (region Mumbai). Add a database user, allow access from anywhere (`0.0.0.0/0`), and copy the connection string.
 2. **Photos**: create a free Cloudinary account and copy the `CLOUDINARY_URL`.
-3. **Email**: create an SMTP sender, for example Brevo's free plan (300 emails a day), and verify the sending domain.
-4. **Hosting**: on Render, choose New › Blueprint and select this repository. `render.yaml` sets everything up. Fill in `SITE_URL`, `MONGODB_URI`, `CLOUDINARY_URL` and the `SMTP_*` values. The free plan sleeps when idle, so the first visit after a quiet period takes a few seconds (Terms, clause 17).
+3. **Email**: create a Brevo account (free plan, 300 emails a day), verify the sender address or domain, and create an API key (Settings › SMTP & API › API Keys).
+4. **Hosting**: on Render, choose New › Blueprint and select this repository. `render.yaml` sets everything up. Fill in `SITE_URL`, `MONGODB_URI`, `CLOUDINARY_URL`, `BREVO_API_KEY`, `MAIL_FROM` and `ENQUIRY_TO`. The free plan sleeps when idle, so the first visit after a quiet period takes a few seconds (Terms, clause 17).
 5. Open the Render shell and run `npm run seed`, then `npm run create-admin -- "Name" email` for each of the two admins.
 6. **Domain**: add the custom domain in Render, set the DNS records at the registrar, and wait for the HTTPS certificate.
 7. **Google**: verify the site in Search Console and submit `https://<domain>/sitemap.xml`. Paste the Google Maps embed code into Admin › Timings & highlights.

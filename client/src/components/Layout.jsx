@@ -3,7 +3,8 @@ import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import Header from './Header.jsx';
 import Footer from './Footer.jsx';
 import { useSite } from '../lib/site.jsx';
-import { WhatsApp } from './Icons.jsx';
+import { WhatsApp, Phone } from './Icons.jsx';
+import { telHref } from '../lib/format.js';
 import ErrorBoundary from './ErrorBoundary.jsx';
 
 // Pages are written with plain <a href="/about"> links (as in the design). This turns
@@ -72,14 +73,29 @@ function useReveal(mainRef) {
   }, [pathname, mainRef]);
 }
 
-export function WhatsAppButton() {
-  const { whatsapp } = useSite();
-  if (!whatsapp) return null;
+// Call and WhatsApp buttons. Phones get a bar fixed to the bottom of the screen;
+// larger screens get two round floating buttons. Hidden in the admin panel.
+export function ContactButtons() {
+  const { phone, whatsapp } = useSite();
+  const { pathname } = useLocation();
+  if ((!phone && !whatsapp) || pathname.startsWith('/admin')) return null;
   const text = encodeURIComponent('Hello Hawk Academe, I would like to know more about your programs.');
   return (
-    <a className="wa-btn" href={`https://wa.me/${whatsapp}?text=${text}`} target="_blank" rel="noopener noreferrer" aria-label="Chat with us on WhatsApp">
-      <WhatsApp />
-    </a>
+    <>
+      <div className="cbar-space" aria-hidden="true" />
+      <div className="cbar" role="group" aria-label="Contact us">
+        {phone && (
+          <a className="cbar-call" href={telHref(phone)} aria-label={`Call us on ${phone}`}>
+            <Phone /><span>Call Now</span>
+          </a>
+        )}
+        {whatsapp && (
+          <a className="cbar-wa" href={`https://wa.me/${whatsapp}?text=${text}`} target="_blank" rel="noopener noreferrer" aria-label="Chat with us on WhatsApp">
+            <WhatsApp /><span>WhatsApp</span>
+          </a>
+        )}
+      </div>
+    </>
   );
 }
 
@@ -97,7 +113,7 @@ export default function Layout({ fallback = null }) {
         <ErrorBoundary key={pathname.startsWith('/admin') ? 'admin' : pathname}><Suspense fallback={fallback}><Outlet /></Suspense></ErrorBoundary>
       </main>
       <Footer />
-      <WhatsAppButton />
+      <ContactButtons />
     </div>
   );
 }

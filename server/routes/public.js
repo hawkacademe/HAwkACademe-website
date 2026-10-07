@@ -109,16 +109,20 @@ r.post('/enquiries', enquiryLimiter, ah(async (req, res) => {
   if (links > 3) return res.status(400).json({ error: 'Please remove the links from your message and try again.' });
 
   const enquiry = await Enquiry.create({ ref, name: d.name, phone: d.phone, email: d.email, studentClass: d.studentClass, program: d.program, centre: d.centre, message: d.message });
+  const notify = async () => {
+    try {
+      const s = await getSettings();
+      const sent = await sendEnquiryEmail(enquiry, s.enquiryEmail || config.mail.enquiryTo);
+      if (sent) await Enquiry.updateOne({ _id: enquiry._id }, { emailSent: true });
+    } catch (e) {
+      console.error('Enquiry email failed', e.message);
+    }
+  };
+  // On a normal server, email after replying so the visitor never waits on the mail server.
+  // Serverless hosts (Vercel) may stop work once the reply is sent, so email first there.
+  if (process.env.VERCEL) await notify();
   res.json({ ok: true, ref });
-
-  // Email after replying so the visitor never waits on the mail server.
-  try {
-    const s = await getSettings();
-    const sent = await sendEnquiryEmail(enquiry, s.enquiryEmail || config.mail.enquiryTo);
-    if (sent) await Enquiry.updateOne({ _id: enquiry._id }, { emailSent: true });
-  } catch (e) {
-    console.error('Enquiry email failed', e.message);
-  }
+  if (!process.env.VERCEL) await notify();
 }));
 
 export default r;

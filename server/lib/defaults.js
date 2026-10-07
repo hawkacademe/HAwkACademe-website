@@ -2,9 +2,9 @@
 // placeholder from the design concept and must be replaced with Hawk Academe's real
 // details before launch (Admin > Timings & highlights, or `npm run seed`).
 export const DEFAULT_SETTINGS = {
-  phone: '+91 98765 43210 [PHONE]',
-  whatsapp: '919876543210',
-  email: 'info@hawkacademe.com',
+  phone: '+91 98318 25207',
+  whatsapp: '919831825207',
+  email: 'hawkacademe@gmail.com',
   address: 'Salt Lake, Kolkata, WB, India [FULL ADDRESS]',
   mapsLink: '',
   mapEmbed: '',

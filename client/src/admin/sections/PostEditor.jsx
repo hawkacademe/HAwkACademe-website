@@ -7,6 +7,7 @@ import { Placeholder } from '@tiptap/extensions';
 import { Field, Msg, Spinner, SectionHead, ConfirmButton } from '../ui.jsx';
 import { StateBadge } from './Overview.jsx';
 import { api, clearCache } from '../../lib/api.js';
+import { shrinkImage } from '../../lib/shrink.js';
 import { COVER_STYLES, isoLocal, fromLocal } from '../../lib/format.js';
 
 const CATS = ['Exam Tips', 'Study Plans', 'Parents', 'Updates'];
@@ -14,7 +15,7 @@ const EMPTY = { title: '', slug: '', category: 'Exam Tips', excerpt: '', content
 
 async function uploadImage(file) {
   const form = new FormData();
-  form.append('file', file);
+  form.append('file', await shrinkImage(file));
   return api('/admin/uploads', { method: 'POST', form });
 }
 

@@ -9,7 +9,10 @@ import { config } from '../config.js';
 
 export const UPLOAD_DIR = join(process.cwd(), 'uploads');
 const useCloud = !!config.cloudinaryUrl;
-if (useCloud) cloudinary.config({ secure: true }); // reads CLOUDINARY_URL
+if (useCloud) {
+  const u = new URL(config.cloudinaryUrl);
+  cloudinary.config({ cloud_name: u.hostname, api_key: decodeURIComponent(u.username), api_secret: decodeURIComponent(u.password), secure: true });
+}
 
 export const MAX_UPLOAD_BYTES = 10 * 1024 * 1024;
 

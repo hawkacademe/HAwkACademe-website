@@ -5,3 +5,5 @@ uploads/
 .DS_Store
 .data/
 *.log
+.env.*
+!.env.example

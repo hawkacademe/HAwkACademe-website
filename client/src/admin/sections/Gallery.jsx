@@ -1,6 +1,7 @@
 import { useRef, useState } from 'react';
 import { useAdmin, Spinner, SectionHead, ConfirmButton, EmptyBox, Msg, Field, useFlash } from '../ui.jsx';
 import { api, clearCache } from '../../lib/api.js';
+import { shrinkImage } from '../../lib/shrink.js';
 
 const CATS = ['Classroom', 'Seminars', 'Activities', 'Celebrations', 'Campus'];
 const MAX_MB = 10;
@@ -25,10 +26,10 @@ function Uploader({ onDone, onError }) {
     if (!files.length) return onError('Please choose at least one photo.');
     setBusy(true);
     try {
-      // Send in small groups so a slow connection does not time out.
-      for (let i = 0; i < files.length; i += 4) {
+      // Send one photo per request: the host limits each request to about 4.5 MB.
+      for (const file of files) {
         const form = new FormData();
-        files.slice(i, i + 4).forEach((f) => form.append('files', f));
+        form.append('files', await shrinkImage(file));
         form.append('category', category);
         form.append('caption', caption);
         form.append('alt', alt);

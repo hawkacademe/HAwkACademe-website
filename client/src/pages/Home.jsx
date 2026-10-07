@@ -40,7 +40,7 @@ function Toppers() {
             Top performers in <span style={{ color: '#D90A0A', borderBottom: '3px solid #D90A0A' }}>{exam === 'all' ? EXAMS[tick % EXAMS.length].name : cur.name}</span>
           </h3>
         </div>
-        <div role="group" aria-label="Filter results by exam" style={{ display: 'flex', flexWrap: 'wrap', gap: 8, background: '#ffffff', padding: 6, borderRadius: 999, boxShadow: '0 6px 18px rgba(11,29,69,.08)' }}>
+        <div role="group" aria-label="Filter results by exam" className="tabs-scroll" style={{ display: 'flex', flexWrap: 'wrap', gap: 8, background: '#ffffff', padding: 6, borderRadius: 999, boxShadow: '0 6px 18px rgba(11,29,69,.08)' }}>
           {tabs.map((d) => {
             const active = d.key === exam;
             const count = d.key === 'all' ? TOPPERS.length : TOPPERS.filter((t) => t.exam === d.key).length;
@@ -161,7 +161,7 @@ function Roadmap() {
       <li className={cls(0)} style={{ padding: '0 0 10px' }}>
         <div className="rm-empty" />
         <div className="rm-marker" style={{ display: 'flex', justifyContent: 'center', position: 'relative', zIndex: 1 }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 8, background: '#D90A0A', color: '#ffffff', fontWeight: 800, fontSize: 13, letterSpacing: '.14em', padding: '12px 18px', borderRadius: 999, border: '4px solid #ffffff', boxShadow: '0 8px 20px rgba(217,10,10,.3)', whiteSpace: 'nowrap' }}>
+          <div className="rm-start" style={{ display: 'flex', alignItems: 'center', gap: 8, background: '#D90A0A', color: '#ffffff', fontWeight: 800, fontSize: 13, letterSpacing: '.14em', padding: '12px 18px', borderRadius: 999, border: '4px solid #ffffff', boxShadow: '0 8px 20px rgba(217,10,10,.3)', whiteSpace: 'nowrap' }}>
             {ico(16, <path d="M5 21V4M5 4h12l-2 4 2 4H5" />)}START
           </div>
         </div>

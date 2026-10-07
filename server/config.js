@@ -19,14 +19,12 @@ export const config = {
   sessionSecret: required('SESSION_SECRET', 'dev-only-secret-change-me'),
   siteUrl: (env.SITE_URL || 'http://localhost:5173').replace(/\/$/, ''),
   mail: {
-    host: env.SMTP_HOST || '',
-    port: Number(env.SMTP_PORT || 587),
-    user: env.SMTP_USER || '',
-    pass: env.SMTP_PASS || '',
+    brevoApiKey: env.BREVO_API_KEY || '',
     from: env.MAIL_FROM || 'Hawk Academe Website <no-reply@hawkacademe.com>',
     enquiryTo: env.ENQUIRY_TO || ''
   },
-  cloudinaryUrl: env.CLOUDINARY_URL || '',
+  cloudinaryUrl: env.CLOUDINARY_URL || (env.CLOUDINARY_CLOUD_NAME && env.CLOUDINARY_API_KEY && env.CLOUDINARY_API_SECRET
+    ? `cloudinary://${env.CLOUDINARY_API_KEY}:${env.CLOUDINARY_API_SECRET}@${env.CLOUDINARY_CLOUD_NAME}` : ''),
   turnstile: {
     siteKey: env.TURNSTILE_SITE_KEY || '',
     secret: env.TURNSTILE_SECRET_KEY || ''

@@ -20,11 +20,11 @@ svg{flex-shrink:0}
 .nav a:hover{color:#D90A0A}
 .rm-row{display:grid;grid-template-columns:minmax(0,1fr) 128px minmax(0,1fr);align-items:center;position:relative}
 .rm-road{left:50%}
-.subnav{position:sticky;top:63px;z-index:15;background:#fff;border-bottom:1px solid #E7EAF0;box-shadow:0 6px 16px rgba(11,29,69,.05)}
+.subnav{position:sticky;top:111px;z-index:15;background:#fff;border-bottom:1px solid #E7EAF0;box-shadow:0 6px 16px rgba(11,29,69,.05)}
 .subnav a{flex-shrink:0;min-height:48px;display:flex;align-items:center;padding:0 16px;font-size:14px;font-weight:700;color:#0A1530;border-bottom:3px solid transparent;white-space:nowrap}
 .subnav a:hover{color:#D90A0A;border-bottom-color:#D90A0A}
-section[id]{scroll-margin-top:120px}
-@media (max-width: 640px){.subnav{top:47px}.subnav a{padding:0 12px;font-size:13px}}
+section[id]{scroll-margin-top:170px}
+@media (max-width: 640px){.subnav{top:65px}section[id]{scroll-margin-top:124px}.subnav a{padding:0 12px;font-size:13px}}
 .rm-row{transition:opacity .6s ease,transform .6s ease}.rm-row.off{opacity:.1;transform:translateY(30px)}.rm-marker{transition:transform .55s cubic-bezier(.3,1.6,.5,1)}.rm-row.off .rm-marker{transform:scale(.55)}.rm-fill{transition:height .18s linear}
 @media (max-width: 760px){.rm-row{grid-template-columns:72px minmax(0,1fr) !important}.rm-empty{display:none !important}.rm-marker{grid-column:1;grid-row:1}.rm-slot{grid-column:2;grid-row:1}.rm-road{left:36px !important}.rm-center{justify-content:flex-start !important;padding-left:0 !important}}
 @media (max-width: 1180px){.nav{gap:16px !important;margin-left:8px !important}.nav a{font-size:13px}}
@@ -83,10 +83,38 @@ button,input,select,textarea{font-family:inherit}
 .reveal.in{opacity:1;transform:none}
 @media (prefers-reduced-motion: reduce){.reveal{opacity:1;transform:none;transition:none}.card,.card:hover{transition:none;transform:none}}
 
-/* Floating WhatsApp button */
-.wa-btn{position:fixed;right:calc(18px + env(safe-area-inset-right,0px));bottom:calc(18px + env(safe-area-inset-bottom,0px));z-index:90;width:58px;height:58px;border-radius:50%;background:#25D366;color:#fff !important;display:flex;align-items:center;justify-content:center;box-shadow:0 10px 28px rgba(0,0,0,.25);transition:transform .2s ease}
-.wa-btn:hover{transform:scale(1.06)}
-.wa-btn svg{width:32px;height:32px}
+/* Call and WhatsApp buttons: floating circles on larger screens, a bottom bar on phones */
+.cbar{position:fixed;right:calc(18px + env(safe-area-inset-right,0px));bottom:calc(18px + env(safe-area-inset-bottom,0px));z-index:90;display:flex;flex-direction:column;gap:12px}
+.cbar a{width:58px;height:58px;border-radius:50%;color:#fff !important;display:flex;align-items:center;justify-content:center;box-shadow:0 10px 28px rgba(0,0,0,.25);transition:transform .2s ease;font-weight:800;font-size:15px}
+.cbar a:hover{transform:scale(1.06)}
+.cbar a span{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}
+.cbar svg{width:30px;height:30px}
+.cbar .ico{width:26px;height:26px;stroke-width:2}
+.cbar-call{background:#D90A0A}
+.cbar-wa{background:#25D366}
+.cbar-space{display:none}
+@media (max-width: 760px){
+  .cbar{left:0;right:0;bottom:0;flex-direction:row;gap:0;background:#fff;border-top:1px solid #E7EAF0;box-shadow:0 -8px 24px rgba(11,29,69,.10);padding:8px 10px calc(8px + env(safe-area-inset-bottom,0px));gap:10px}
+  .cbar a{flex:1 1 0;width:auto;height:50px;border-radius:10px;gap:10px;box-shadow:none}
+  .cbar a:hover{transform:none}
+  .cbar a span{position:static;width:auto;height:auto;overflow:visible;clip:auto}
+  .cbar svg{width:24px;height:24px}
+  .cbar .ico{width:22px;height:22px}
+  .cbar-space{display:block;height:calc(66px + env(safe-area-inset-bottom,0px))}
+}
+@media print{.cbar,.cbar-space{display:none !important}}
+
+/* Phone layout fixes */
+@media (max-width: 640px){
+  .topbar{display:none}
+  footer a{display:inline-flex;align-items:center;min-height:40px}
+  .tabs-scroll{flex-wrap:nowrap !important;overflow-x:auto;max-width:100%;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+  .tabs-scroll::-webkit-scrollbar{display:none}
+  .tabs-scroll > *{flex-shrink:0}
+}
+@media (max-width: 760px){
+  .rm-start{font-size:0 !important;letter-spacing:0 !important;gap:0 !important;padding:12px !important}
+}
 
 /* Long-form text written in the admin panel (blog posts) */
 .prose{font-size:17px;line-height:1.8;color:#2B3550}
