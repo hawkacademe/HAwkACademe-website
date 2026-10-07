@@ -171,7 +171,7 @@ export default function Contact() {
                     {site.responseTime && <span style={{ fontSize: 13, color: '#5A6378' }}>We usually reply {site.responseTime}.</span>}
                   </div>
                   <p style={{ gridColumn: '1 / -1', margin: 0, fontSize: 12, lineHeight: 1.5, color: '#5A6378' }}>
-                    We use these details only to reply to your enquiry (see our <a href="/privacy">Privacy Policy</a>). If the student is under 18, please send this as a parent or guardian, or with their consent. <span aria-hidden="true" style={{ color: '#D90A0A' }}>*</span> Required.
+                    We use these details only to reply to your enquiry (see our <a href="/privacy" style={{ textDecoration: 'underline' }}>Privacy Policy</a>). If the student is under 18, please send this as a parent or guardian, or with their consent. <span aria-hidden="true" style={{ color: '#D90A0A' }}>*</span> Required.
                   </p>
                 </form>
               </div>
