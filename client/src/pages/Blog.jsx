@@ -19,7 +19,7 @@ export default function Blog() {
   return (
     <>
       <PageHero crumb="Blog" title={<>Tips, Guides &amp; <span style={{ color: '#FF4A3A' }}>Updates</span></>}
-        intro="Practical advice for JEE, NEET and Foundation students, and news from HAwk ACademe." />
+        intro="Practical advice for JEE, NEET and CBSE, ICSE and ISC board students, and news from HAwk ACademe." />
 
       <section style={{ background: '#F6F8FC' }}>
         <div className="pad" style={{ maxWidth: 1280, margin: '0 auto', padding: '72px 32px', display: 'flex', flexDirection: 'column', gap: 32 }}>

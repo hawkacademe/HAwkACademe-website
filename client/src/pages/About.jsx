@@ -26,7 +26,7 @@ export default function About() {
   return (
     <>
       <PageHero crumb="About" title={<>Built on <span style={{ color: '#FF4A3A' }}>Discipline, Mentorship &amp; Results</span></>}
-        intro="HAwk ACademe prepares students for JEE, NEET and Foundation exams with focused teaching, personal mentorship and a culture of hard work." />
+        intro="HAwk ACademe teaches CBSE, ICSE and ISC students from Class 7 to 12 and prepares them for JEE, NEET and Foundation exams, with focused teaching, personal mentorship and a culture of hard work." />
 
       <section style={{ background: '#ffffff' }}>
         <div className="pad" style={wrap()}>
@@ -38,7 +38,7 @@ export default function About() {
               {(FOUNDED || FOUNDER_NAME) && <div style={{ fontSize: 14, fontWeight: 700, color: '#0B1D45' }}>{FOUNDER_NAME ? `Founded by ${FOUNDER_NAME}` : 'Founded'}{FOUNDED ? ` in ${FOUNDED}` : ''}</div>}
               <div><RedButton href="/contact" arrow>Talk to Us</RedButton></div>
             </div>
-            <img src="/img/campus-night.webp" alt="HAwk ACademe campus at night" width="1000" height="700" loading="lazy" style={{ display: 'block', width: '100%', height: 'auto', borderRadius: 16, boxShadow: '0 18px 40px rgba(11,29,69,.2)' }} />
+            <img src="/img/life/photo-14.webp" alt="A large HAwk ACademe batch with their teacher in the classroom" width="1600" height="1200" loading="lazy" style={{ display: 'block', width: '100%', height: 'auto', borderRadius: 16, boxShadow: '0 18px 40px rgba(11,29,69,.2)' }} />
           </div>
         </div>
       </section>

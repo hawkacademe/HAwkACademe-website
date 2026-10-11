@@ -3,6 +3,8 @@ import PageHero from '../components/PageHero.jsx';
 import Lightbox from '../components/Lightbox.jsx';
 import { CtaBand, Loading, LoadError, Empty } from '../components/Blocks.jsx';
 import { useData, usePathMeta } from '../lib/hooks.js';
+import PhotoTile from '../components/PhotoTile.jsx';
+import { LIFE_PHOTOS } from '../content/gallery.js';
 
 const CATS = ['all', 'Classroom', 'Seminars', 'Activities', 'Celebrations', 'Campus'];
 
@@ -11,7 +13,7 @@ export default function Gallery() {
   const { data, error, loading } = useData('/gallery');
   const [cat, setCat] = useState('all');
   const [lb, setLb] = useState(-1);
-  const photos = data?.photos || [];
+  const photos = [...LIFE_PHOTOS, ...(data?.photos || [])];
   const list = photos.filter((p) => cat === 'all' || p.category === cat);
   const cats = CATS.filter((c) => c === 'all' || photos.some((p) => p.category === c));
 
@@ -29,23 +31,19 @@ export default function Gallery() {
               ))}
             </div>
           )}
-          {loading && <Loading label="Loading photos…" />}
-          {error && <LoadError error={error} />}
-          {data && list.length === 0 && <Empty>No photos here yet.</Empty>}
+          {loading && photos.length === 0 && <Loading label="Loading photos…" />}
+          {error && photos.length === 0 && <LoadError error={error} />}
+          {!loading && list.length === 0 && <Empty>No photos here yet.</Empty>}
           {list.length > 0 && (
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 280px), 1fr))', gap: 16 }}>
               {list.map((g, i) => (
-                <button key={g.id} type="button" onClick={() => setLb(i)} aria-label={`Open photo: ${g.caption || g.alt}`} className="card"
-                  style={{ padding: 0, border: 0, background: '#ffffff', borderRadius: 12, overflow: 'hidden', cursor: 'zoom-in', textAlign: 'left', fontFamily: 'inherit', color: '#0A1530', boxShadow: '0 8px 22px rgba(11,29,69,.08)' }}>
-                  <img src={g.thumbUrl} alt={g.alt} loading={i > 5 ? 'lazy' : undefined} decoding="async" style={{ display: 'block', width: '100%', height: 190, objectFit: 'cover' }} />
-                  {g.caption && <div style={{ padding: '12px 16px', fontSize: 14, fontWeight: 700 }}>{g.caption}</div>}
-                </button>
+                <PhotoTile key={g.id} photo={g} lazy={i > 5} onOpen={() => setLb(i)} />
               ))}
             </div>
           )}
         </div>
       </section>
-      {lb >= 0 && <Lightbox items={list} index={lb} onIndex={setLb} onClose={() => setLb(-1)} />}
+      {lb >= 0 && <Lightbox items={list.map(({ caption, ...p }) => p)} index={lb} onIndex={setLb} onClose={() => setLb(-1)} />}
 
       <CtaBand title="Want to be part of it?" text="Join a community that inspires you to achieve more."
         secondary={{ href: '/programs', label: 'Explore Programs' }} />

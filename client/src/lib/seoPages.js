@@ -16,15 +16,15 @@ export const landingPath = (key) => `/programs/${LANDING_SLUGS[key]}`;
 export const PAGES = {
   '/': {
     title: `JEE & NEET Coaching in Madhyamgram, Kolkata | ${BRAND_NAME}`,
-    description: `${BRAND_NAME} offers JEE, NEET and Class 8 to 10 Foundation coaching at centres in Barasat, Madhyamgram and New Town, Kolkata. Call or WhatsApp to enquire.`
+    description: `${BRAND_NAME}: JEE, NEET and Foundation coaching, and Class 7 to 12 CBSE, ICSE & ISC tuition, at centres in Barasat, Madhyamgram and New Town, Kolkata.`
   },
   '/about': {
     title: `About ${BRAND_NAME} | JEE & NEET Coaching, Kolkata`,
-    description: `How ${BRAND_NAME} teaches JEE, NEET and Foundation students in Kolkata: concept-first classes, regular tests, weekly doubt sessions and personal mentoring.`
+    description: `How ${BRAND_NAME} teaches JEE, NEET and Class 7 to 12 school students in Kolkata: concept-first classes, regular tests, weekly doubt sessions and personal mentoring.`
   },
   '/programs': {
-    title: `JEE, NEET & Foundation Courses in Kolkata | ${BRAND_NAME}`,
-    description: `Compare ${BRAND_NAME}'s JEE (Main & Advanced), NEET (UG), Class 8 to 10 Foundation and Integrated programs: subjects, classes, batch size and mode.`
+    title: `JEE, NEET, Foundation & School Tuition, Kolkata | ${BRAND_NAME}`,
+    description: `Compare ${BRAND_NAME}'s JEE, NEET, Class 7 to 12 school tuition (CBSE, ICSE, ISC), Foundation and Integrated programs: subjects, classes and batches.`
   },
   '/results': {
     title: `JEE & NEET Results and Toppers | ${BRAND_NAME} Kolkata`,
@@ -36,7 +36,7 @@ export const PAGES = {
   },
   '/blog': {
     title: `JEE & NEET Exam Tips and Study Plans | ${BRAND_NAME} Blog`,
-    description: `Exam strategy, study plans and advice for students and parents preparing for JEE, NEET and Class 8 to 10 Foundation, from the ${BRAND_NAME} faculty in Kolkata.`
+    description: `Exam strategy, study plans and advice for students and parents preparing for JEE, NEET and CBSE, ICSE and ISC board exams, from the ${BRAND_NAME} faculty in Kolkata.`
   },
   '/news': {
     title: `Admissions, Batches & Test Dates | ${BRAND_NAME} News`,
@@ -44,7 +44,7 @@ export const PAGES = {
   },
   '/contact': {
     title: `Contact ${BRAND_NAME} | Barasat, Madhyamgram, New Town`,
-    description: `Call, WhatsApp or send an enquiry to ${BRAND_NAME}, or visit our JEE, NEET and Foundation coaching centres in Barasat, Madhyamgram and New Town, Kolkata.`
+    description: `Call, WhatsApp or send an enquiry to ${BRAND_NAME}, or visit our JEE, NEET and school tuition centres in Barasat, Madhyamgram and New Town, Kolkata.`
   },
   [landingPath('jee')]: {
     title: `JEE Coaching in Madhyamgram, Kolkata | ${BRAND_NAME}`,

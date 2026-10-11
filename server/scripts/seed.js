@@ -3,9 +3,10 @@
 //   npm run seed
 import mongoose from 'mongoose';
 import { config } from '../config.js';
-import { Settings, Photo, Notice, Review, Post } from '../models/index.js';
+import { Settings, Notice, Review, Post } from '../models/index.js';
 import { DEFAULT_SETTINGS } from '../lib/defaults.js';
-import { slugify } from '../lib/util.js';
+import { cleanHtml } from '../lib/util.js';
+import { POSTS, postFields } from '../content/posts.js';
 
 await mongoose.connect(config.mongoUri);
 const done = [];
@@ -15,19 +16,7 @@ if (!(await Settings.exists({ key: 'site' }))) {
   done.push('settings');
 }
 
-if (!(await Photo.exists({}))) {
-  const G = [
-    ['Classroom', 'classroom', 'Classroom with blackboard and desks', 'Classroom learning'],
-    ['Classroom', 'doubt-sessions', 'Doubt session chat bubbles', 'Doubt sessions'],
-    ['Seminars', 'seminars', 'Seminar presentation screen', 'Seminars and workshops'],
-    ['Activities', 'activities', 'Chess, football and science activities', 'Student activities'],
-    ['Celebrations', 'celebrations', 'Trophy and confetti celebration', 'Celebrations'],
-    ['Campus', 'campus-night', 'HAwk ACademe campus at night', 'The campus'],
-    ['Classroom', 'study-desk', 'Study books, laptop and notes on a desk', 'Study resources']
-  ];
-  await Photo.insertMany(G.map(([category, file, alt, caption], i) => ({ url: `/img/${file}.webp`, thumbUrl: `/img/${file}.webp`, alt, caption, category, order: i })));
-  done.push('gallery');
-}
+// The Gallery starts with the institute's own photos (client/src/content/gallery.js), so nothing is seeded here.
 
 if (!(await Notice.exists({}))) {
   const now = Date.now();
@@ -49,19 +38,8 @@ if (!(await Review.exists({}))) {
 }
 
 if (!(await Post.exists({}))) {
-  const P = [
-    ['Exam Tips', 'How to plan the last 90 days before JEE Main', 'A calm, week-by-week way to use your final months well.', 'physics'],
-    ['Exam Tips', 'Reading NCERT Biology the right way for NEET', 'What to underline, what to revise and what to practise.', 'biology'],
-    ['Parents', 'Handling exam stress: a guide for parents', 'How to support your child without adding pressure.', 'chemistry'],
-    ['Study Plans', 'Why Class 9 matters more than you think', 'Foundation habits that pay off in Classes 11 and 12.', 'maths'],
-    ['Study Plans', 'Building a daily study routine that lasts', 'Small, repeatable blocks beat occasional marathons.', 'physics'],
-    ['Exam Tips', 'What a good mock test review looks like', 'Turn every test into a list of fixes, not just a score.', 'maths']
-  ];
   const now = Date.now();
-  await Post.insertMany(P.map(([category, title, excerpt, coverStyle], i) => ({
-    category, title, excerpt, coverStyle, slug: slugify(title), status: 'published', publishAt: new Date(now - i * 3 * 86400000),
-    content: `<p>${excerpt}</p><p>[ARTICLE TEXT — replace this sample post with the full article in Admin &gt; Blog, or delete it.]</p>`
-  })));
+  await Post.insertMany(POSTS.map((p, i) => ({ slug: p.slug, publishAt: new Date(now - i * 86400000), ...postFields(p, cleanHtml) })));
   done.push('blog posts');
 }
 

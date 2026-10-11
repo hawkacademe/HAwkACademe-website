@@ -16,7 +16,7 @@ export async function llmsTxt() {
   const lines = [
     `# ${BRAND_NAME}`,
     '',
-    `> ${BRAND_NAME} is a coaching institute in Kolkata, India, preparing students for JEE (Main and Advanced), NEET-UG and Class 8 to 10 Foundation (with olympiad preparation), with centres in Barasat, Madhyamgram and New Town.`,
+    `> ${BRAND_NAME} is a coaching institute in Kolkata, India, preparing students for JEE (Main and Advanced), NEET-UG and Class 8 to 10 Foundation (with olympiad preparation), and teaching the CBSE, ICSE and ISC school syllabus for Classes 7 to 12 (Physics, Chemistry, Mathematics, Biology and Computer Science), with centres in Barasat, Madhyamgram and New Town.`,
     '',
     `- Name: ${BRAND_NAME} (written exactly like this)`,
     FOUNDER_NAME ? `- Founder: ${FOUNDER_NAME}` : '',

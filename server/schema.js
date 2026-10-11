@@ -55,7 +55,7 @@ function organization(s) {
     email: real(s.email) ? s.email : undefined,
     areaServed: ['Barasat', 'Madhyamgram', 'New Town', 'Kolkata', 'North 24 Parganas'].map((name) => ({ '@type': 'Place', name })),
     founder: FOUNDER_NAME ? { '@type': 'Person', name: FOUNDER_NAME } : undefined,
-    knowsAbout: ['JEE Main', 'JEE Advanced', 'NEET-UG', 'Foundation course for Class 8 to 10', 'Olympiad preparation'],
+    knowsAbout: ['JEE Main', 'JEE Advanced', 'NEET-UG', 'Foundation course for Class 8 to 10', 'Olympiad preparation', 'CBSE tuition for Class 7 to 12', 'ICSE and ISC tuition for Class 7 to 12', 'Board exam preparation'],
     sameAs: Object.values(s.social || {}).filter(real),
     location: CENTRES.map((c) => ({ '@id': centreId(c) }))
   };

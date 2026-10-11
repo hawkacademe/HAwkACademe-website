@@ -21,6 +21,7 @@ export const DEFAULT_SETTINGS = {
   programs: [
     { key: 'jee', name: 'JEE (Main & Advanced)', classes: 'Classes 11, 12 & droppers', duration: '[DURATION]', batchSize: '[BATCH SIZE]', mode: '[ONLINE / OFFLINE]', timings: '[BATCH TIMINGS]' },
     { key: 'neet', name: 'NEET (UG)', classes: 'Classes 11, 12 & droppers', duration: '[DURATION]', batchSize: '[BATCH SIZE]', mode: '[ONLINE / OFFLINE]', timings: '[BATCH TIMINGS]' },
+    { key: 'school', name: 'School Tuition (Classes 7-12)', classes: 'Classes 7 to 12 (CBSE, ICSE & ISC)', duration: '[DURATION]', batchSize: '[BATCH SIZE]', mode: '[ONLINE / OFFLINE]', timings: '[BATCH TIMINGS]' },
     { key: 'foundation', name: 'Foundation Courses', classes: 'Classes 8, 9 & 10', duration: '[DURATION]', batchSize: '[BATCH SIZE]', mode: '[ONLINE / OFFLINE]', timings: '[BATCH TIMINGS]' },
     { key: 'integrated', name: 'Integrated Programs', classes: '[CLASSES]', duration: '[DURATION]', batchSize: '[BATCH SIZE]', mode: '[ONLINE / OFFLINE]', timings: '[BATCH TIMINGS]' }
   ]

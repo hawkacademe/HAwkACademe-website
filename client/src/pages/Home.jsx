@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { Eyebrow } from '../components/PageHero.jsx';
 import { HighlightTiles, FounderQuote } from '../components/Blocks.jsx';
 import { NoticeRow } from '../components/Cards.jsx';
-import { Arrow, Tick, Chat, Calendar, Circled, Pin, Quote } from '../components/Icons.jsx';
+import { Arrow, ArrowLeft, Tick, Chat, Calendar, Circled, Pin, Quote } from '../components/Icons.jsx';
 import { useData, usePathMeta, useRotate } from '../lib/hooks.js';
 import { useSite } from '../lib/site.jsx';
 import { telHref } from '../lib/format.js';
@@ -10,10 +10,17 @@ import { TOPPERS, EXAMS, EXAM_STATS, initials, examLabel } from '../content/resu
 import { PROGRAMS } from '../content/programs.jsx';
 import { CENTRES } from '../content/centres.js';
 import { FOUNDER } from '../content/about.js';
-import { HERO_WORDS, TESTS, GROWTH, YEARS_OF_EXCELLENCE } from '../content/home.js';
+import { HERO_WORDS, HERO_QUOTES, TESTS, GROWTH, YEARS_OF_EXCELLENCE } from '../content/home.js';
 import { LANDING_SLUGS, landingPath } from '../lib/seoPages.js';
 import { LANDINGS } from '../content/landing.js';
+import PhotoTile from '../components/PhotoTile.jsx';
+import Lightbox from '../components/Lightbox.jsx';
+import { LIFE_PHOTOS } from '../content/gallery.js';
 
+// Hero slideshow: every Gallery photo in turn. The first uses a lighter 1200px file because it is the LCP image;
+// each later photo is only requested once the slideshow is about to reach it.
+const HERO_SLIDES = LIFE_PHOTOS.map((p, i) => ({ id: p.id, alt: p.alt, src: i === 0 ? '/img/life/hero-1200.webp' : p.url, quote: HERO_QUOTES[p.id] || ['Learn', 'Grow', 'Achieve'] }));
+const HOME_LIFE = [7, 2, 11, 4, 13].map((n) => LIFE_PHOTOS.find((p) => p.id === `life-${n}`));
 const NB = ' ';
 const wrap = { position: 'relative', maxWidth: 1280, margin: '0 auto', padding: '88px 32px', display: 'flex', flexDirection: 'column', gap: 40 };
 const h2 = { margin: 0, fontSize: 44, lineHeight: 1.1, fontWeight: 800, letterSpacing: '-.015em' };
@@ -38,8 +45,8 @@ function Toppers() {
           <div style={{ display: 'flex', alignItems: 'center', gap: 10, fontSize: 12, fontWeight: 800, letterSpacing: '.2em' }}>
             {ico(20, <><path d="M8 4h8v5a4 4 0 0 1-8 0z" /><path d="M12 13v4M8 20h8" /></>, { color: '#D90A0A' })}OUR TOPPERS
           </div>
-          <h3 style={{ margin: 0, fontSize: 24, fontWeight: 800, lineHeight: 1.25 }}>Toppers, published with permission</h3>
-          <p style={{ margin: 0, fontSize: 15, lineHeight: 1.6, color: '#3E4860' }}>We show a student's name, exam, year and rank only after the student (or a parent, for students under 18) agrees in writing. Our verified results will appear here.</p>
+          <h3 style={{ margin: 0, fontSize: 24, fontWeight: 800, lineHeight: 1.25 }}>Our next topper <span style={{ color: '#D90A0A' }}>could be you</span></h3>
+          <p style={{ margin: 0, fontSize: 15, lineHeight: 1.6, color: '#3E4860' }}>Clear concepts, regular tests and mentors who know every student by name. That is how our students walk into JEE, NEET and board exams ready. This year&apos;s achievers will be celebrated right here.</p>
         </div>
         <a className="btn-red" href="/results" style={{ ...btnRed, height: 50, padding: '0 28px', fontSize: 15 }}>About Our Results <Arrow size={18} /></a>
       </div>
@@ -223,10 +230,68 @@ function Roadmap() {
 }
 
 // ---------------- Page ----------------
+// Program cards as a deck: the active card in front, one on each side, the rest tucked behind.
+// Slides on its own every few seconds (paused on hover or focus, off for reduced motion).
+function ProgramDeck() {
+  const n = PROGRAMS.length;
+  const [cur, setCur] = useState(0);
+  const [paused, setPaused] = useState(false);
+  const go = (i) => setCur(((i % n) + n) % n);
+  useEffect(() => {
+    if (paused || window.matchMedia?.('(prefers-reduced-motion: reduce)').matches) return undefined;
+    const t = setInterval(() => setCur((x) => (x + 1) % n), 4000);
+    return () => clearInterval(t);
+  }, [paused, n]);
+
+  return (
+    <div onMouseEnter={() => setPaused(true)} onMouseLeave={() => setPaused(false)} onFocus={() => setPaused(true)} onBlur={() => setPaused(false)}
+      role="region" aria-roledescription="carousel" aria-label="Our programs" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 22 }}>
+      <div className="deck-stage">
+        {PROGRAMS.map((p, i) => {
+          let d = i - cur;
+          if (d > n / 2) d -= n;
+          if (d < -n / 2) d += n;
+          const pos = d === 0 ? 'front' : d === -1 ? 'left' : d === 1 ? 'right' : d < 0 ? 'back-left' : 'back-right';
+          const red = p.tone === 'red';
+          return (
+            <div key={p.key} className={`deck-card deck-${pos}`} inert={Math.abs(d) > 1 ? true : undefined} aria-hidden={d !== 0 ? 'true' : undefined}
+              onClickCapture={(e) => { if (d !== 0) { e.preventDefault(); go(i); } }}
+              style={{ cursor: d === 0 ? 'auto' : 'pointer', background: '#ffffff', border: '1px solid #E7EAF0', borderRadius: 12, padding: 26, display: 'flex', flexDirection: 'column', gap: 12, overflow: 'hidden' }}>
+              <img src={p.img.replace('.webp', '-640.webp')} srcSet={`${p.img.replace('.webp', '-640.webp')} 640w, ${p.img} 1280w`} sizes="(max-width: 640px) 100vw, 360px" alt={p.alt} width="1280" height="600" loading="lazy" style={{ display: 'block', width: 'calc(100% + 52px)', maxWidth: 'none', margin: '-26px -26px 6px', height: 150, objectFit: 'cover' }} />
+              <div style={{ width: 56, height: 56, borderRadius: '50%', background: red ? '#FFECEC' : '#E9EEF8', color: red ? '#D90A0A' : '#0B1D45', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>{ico(28, p.icon)}</div>
+              <h3 style={{ margin: '4px 0 0', fontSize: 19, fontWeight: 800 }}>{p.name}</h3>
+              <p style={{ margin: 0, fontSize: 14, lineHeight: 1.55, color: '#3E4860' }}>{p.card}</p>
+              <ul style={{ listStyle: 'none', margin: '4px 0 0', padding: 0, display: 'flex', flexDirection: 'column', gap: 9, fontSize: 13, color: '#3E4860', flexGrow: 1 }}>
+                {p.cardBullets.map((b) => <li key={b} style={{ display: 'flex', gap: 8, alignItems: 'center' }}><Tick color={red ? '#D90A0A' : '#0B1D45'} />{b}</li>)}
+              </ul>
+              <a className={red ? 'btn-red' : 'btn-navy'} tabIndex={d === 0 ? undefined : -1} href={LANDING_SLUGS[p.key] ? landingPath(p.key) : `/programs#${p.key}`} aria-label={LANDING_SLUGS[p.key] ? LANDINGS[p.key].h1 : `Know more about ${p.name}`} style={{ marginTop: 8, height: 44, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, background: red ? '#D90A0A' : '#0B1D45', color: '#ffffff', fontWeight: 700, fontSize: 14, borderRadius: 4 }}>Know More <Arrow size={16} /></a>
+            </div>
+          );
+        })}
+      </div>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
+        <button type="button" className="deck-btn" onClick={() => go(cur - 1)} aria-label="Previous program"><ArrowLeft size={20} /></button>
+        <div style={{ display: 'flex', gap: 8 }}>
+          {PROGRAMS.map((p, i) => (
+            <button key={p.key} type="button" onClick={() => go(i)} aria-label={`Show ${p.name}`} aria-current={i === cur ? 'true' : undefined}
+              style={{ width: i === cur ? 26 : 10, height: 10, borderRadius: 5, border: 0, padding: 0, cursor: 'pointer', background: i === cur ? '#D90A0A' : '#C9D0DE', transition: 'width .3s ease, background .3s ease' }} />
+          ))}
+        </div>
+        <button type="button" className="deck-btn" onClick={() => go(cur + 1)} aria-label="Next program"><Arrow size={20} /></button>
+      </div>
+      <div aria-live="polite" className="sr-only">{PROGRAMS[cur].name}</div>
+    </div>
+  );
+}
+
 export default function Home() {
   usePathMeta('/');
   const site = useSite();
   const wordIdx = useRotate(HERO_WORDS.length, 2200);
+  const [lb, setLb] = useState(-1);
+  const heroIdx = useRotate(HERO_SLIDES.length, 4500);
+  const [heroSeen, setHeroSeen] = useState(0);
+  useEffect(() => { setHeroSeen((n) => Math.max(n, Math.min(heroIdx + 1, HERO_SLIDES.length - 1))); }, [heroIdx]);
   const notices = useData('/notices?limit=4');
   const reviews = useData('/reviews');
   const badge = site.highlights?.[1];
@@ -239,21 +304,26 @@ export default function Home() {
         <div className="hide-sm" style={{ position: 'absolute', top: 0, right: 0, bottom: 0, width: '56%', background: '#0B1D45', clipPath: 'polygon(22% 0,100% 0,100% 100%,0 100%)' }} />
         <div className="hide-sm" style={{ position: 'absolute', top: 0, right: 0, bottom: 0, width: '56%', background: 'linear-gradient(118deg,#D90A0A 0 30%,transparent 30%)', clipPath: 'polygon(22% 0,30% 0,8% 100%,0 100%)' }} />
         <div className="hide-sm" style={{ position: 'absolute', top: 0, right: 0, bottom: 0, width: '56%', background: 'repeating-linear-gradient(118deg,rgba(255,255,255,.04) 0 18px,transparent 18px 60px)' }} />
-        <div className="pad" style={{ position: 'relative', maxWidth: 1280, margin: '0 auto', padding: '72px 32px 80px', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 460px), 1fr))', gap: 48, alignItems: 'center' }}>
+        <div className="pad hero-grid" style={{ position: 'relative', maxWidth: 1440, margin: '0 auto', padding: '72px 32px 80px', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 460px), 1fr))', gap: 48, alignItems: 'center' }}>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 22 }}>
             <div style={{ fontSize: 12, fontWeight: 800, letterSpacing: '.22em', color: '#0A1530' }}>DISCIPLINE{NB}{NB}|{NB}{NB}MENTORSHIP{NB}{NB}|{NB}{NB}RESULTS</div>
             <h1 className="h1" style={{ margin: 0, fontSize: 72, lineHeight: 1.02, fontWeight: 800, letterSpacing: '-.02em' }}>Building{' '}<br /><span style={{ color: '#D90A0A' }}>Brighter</span>{' '}<br />Futures</h1>
             <div style={{ display: 'flex', alignItems: 'center', gap: 10, fontSize: 18, fontWeight: 700, color: '#0A1530' }}>
               Built upon <span style={{ display: 'inline-block', minWidth: 170, padding: '4px 12px', background: '#0B1D45', color: '#ffffff', borderRadius: 4, letterSpacing: '.06em' }}>{HERO_WORDS[wordIdx]}</span>
             </div>
-            <p style={{ margin: 0, fontSize: 17, lineHeight: 1.6, color: '#3E4860', maxWidth: 460 }}>Focused academic programs for JEE, NEET and Foundation courses with expert faculty, structured learning and proven results, at our centres in Barasat, Madhyamgram and New Town, Kolkata.</p>
+            <p style={{ margin: 0, fontSize: 17, lineHeight: 1.6, color: '#3E4860', maxWidth: 460 }}>JEE, NEET and Foundation coaching, plus school tuition for Classes 7 to 12 (CBSE, ICSE &amp; ISC), with expert faculty and structured learning, at our centres in Barasat, Madhyamgram and New Town, Kolkata.</p>
             <div className="hero-cta" style={{ display: 'flex', gap: 14, flexWrap: 'wrap', marginTop: 6 }}>
               <a className="btn-red" href="#programs" style={{ ...btnRed, height: 50, fontSize: 15 }}>Explore Programs <Arrow size={18} /></a>
               <a className="btn-ghost" href="/contact" style={{ height: 50, display: 'flex', alignItems: 'center', gap: 10, padding: '0 22px', border: '1.5px solid #D90A0A', color: '#D90A0A', fontWeight: 700, fontSize: 15, borderRadius: 4, background: '#ffffff' }}><Chat size={18} /> Talk to Counsellor</a>
             </div>
           </div>
-          <div className="hero-visual" style={{ position: 'relative', minHeight: 440, display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: 20, overflow: 'hidden', boxShadow: '0 30px 60px rgba(0,0,0,.35)' }}>
-            <img src="/img/campus-night.webp" alt="HAwk ACademe campus at night" width="1000" height="700" fetchPriority="high" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />
+          <div className="hero-visual hero-glow" style={{ position: 'relative', minHeight: 620, display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: 20, overflow: 'hidden' }}>
+            {HERO_SLIDES.map((g, i) => (
+              <img key={g.id} src={i <= heroSeen ? g.src : undefined} alt={i === heroIdx ? g.alt : ''} aria-hidden={i === heroIdx ? undefined : 'true'}
+                width="1600" height="1200" fetchPriority={i === 0 ? 'high' : undefined} decoding="async"
+                style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center 35%', filter: 'brightness(1.15) contrast(1.05) saturate(1.08)', opacity: i === heroIdx ? 1 : 0, transition: 'opacity .9s ease' }} />
+            ))}
+            <div aria-hidden="true" style={{ position: 'absolute', inset: 0, background: 'linear-gradient(200deg, rgba(11,29,69,.45) 0%, rgba(11,29,69,0) 35%)' }} />
             {badge && (
               <div className="hero-badge" style={{ position: 'absolute', left: 18, bottom: 22, background: '#ffffff', borderRadius: 10, padding: '14px 18px', display: 'flex', gap: 12, alignItems: 'center', boxShadow: '0 18px 40px rgba(0,0,0,.18)' }}>
                 <div style={{ width: 40, height: 40, borderRadius: '50%', background: '#FFECEC', color: '#D90A0A', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
@@ -262,10 +332,12 @@ export default function Home() {
                 <div><div style={{ fontWeight: 800, fontSize: 18, color: '#D90A0A' }}>{badge.value}</div><div style={{ fontSize: 12, color: '#3E4860' }}>{badge.label}</div></div>
               </div>
             )}
-            <div className="hide-sm" aria-hidden="true" style={{ position: 'absolute', right: 28, top: 28, fontFamily: "'Caveat', cursive", fontSize: 46, lineHeight: 1.05, color: '#ffffff', transform: 'rotate(-12deg)', textAlign: 'left' }}>
-              Learn<br />{NB}Grow<br />{NB}{NB}Achieve
-              <div style={{ height: 3, width: 150, background: '#D90A0A', borderRadius: 3, marginTop: 4, marginLeft: 30 }} />
-            </div>
+            {HERO_SLIDES.map((g, i) => (
+              <div key={g.id} className="hide-sm" aria-hidden="true" style={{ position: 'absolute', right: 28, top: 28, fontFamily: "'Caveat', cursive", fontSize: 46, lineHeight: 1.05, color: '#ffffff', transform: 'rotate(-12deg)', textAlign: 'left', textShadow: '0 2px 12px rgba(0,0,0,.45)', opacity: i === heroIdx ? 1 : 0, transition: 'opacity .9s ease' }}>
+                {g.quote.map((line, j) => <div key={j}>{NB.repeat(j * 2)}{line}</div>)}
+                <div style={{ height: 3, width: 150, background: '#D90A0A', borderRadius: 3, marginTop: 4, marginLeft: 30 }} />
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -327,23 +399,7 @@ export default function Home() {
             <Eyebrow>OUR PROGRAMS</Eyebrow>
             <h2 className="h2" style={{ ...h2, fontSize: 46, lineHeight: 1.08 }}>Programs for <span style={{ color: '#D90A0A' }}>Every Aspirant</span></h2>
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: 20 }}>
-            {PROGRAMS.map((p) => {
-              const red = p.tone === 'red';
-              return (
-                <div key={p.key} className="card" style={{ background: '#ffffff', border: '1px solid #E7EAF0', borderRadius: 12, padding: 26, display: 'flex', flexDirection: 'column', gap: 12, boxShadow: '0 10px 30px rgba(11,29,69,.06)' }}>
-                  <img src={p.img.replace('.webp', '-640.webp')} srcSet={`${p.img.replace('.webp', '-640.webp')} 640w, ${p.img} 1280w`} sizes="(max-width: 640px) 100vw, 320px" alt={p.alt} width="1280" height="600" loading="lazy" style={{ display: 'block', width: 'calc(100% + 52px)', maxWidth: 'none', margin: '-26px -26px 6px', height: 140, objectFit: 'cover', borderRadius: '12px 12px 0 0' }} />
-                  <div style={{ width: 56, height: 56, borderRadius: '50%', background: red ? '#FFECEC' : '#E9EEF8', color: red ? '#D90A0A' : '#0B1D45', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>{ico(28, p.icon)}</div>
-                  <h3 style={{ margin: '4px 0 0', fontSize: 19, fontWeight: 800 }}>{p.name}</h3>
-                  <p style={{ margin: 0, fontSize: 14, lineHeight: 1.55, color: '#3E4860' }}>{p.card}</p>
-                  <ul style={{ listStyle: 'none', margin: '4px 0 0', padding: 0, display: 'flex', flexDirection: 'column', gap: 9, fontSize: 13, color: '#3E4860', flexGrow: 1 }}>
-                    {p.cardBullets.map((b) => <li key={b} style={{ display: 'flex', gap: 8, alignItems: 'center' }}><Tick color={red ? '#D90A0A' : '#0B1D45'} />{b}</li>)}
-                  </ul>
-                  <a className={red ? 'btn-red' : 'btn-navy'} href={LANDING_SLUGS[p.key] ? landingPath(p.key) : `/programs#${p.key}`} aria-label={LANDING_SLUGS[p.key] ? LANDINGS[p.key].h1 : `Know more about ${p.name}`} style={{ marginTop: 8, height: 44, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, background: red ? '#D90A0A' : '#0B1D45', color: '#ffffff', fontWeight: 700, fontSize: 14, borderRadius: 4 }}>Know More <Arrow size={16} /></a>
-                </div>
-              );
-            })}
-          </div>
+          <ProgramDeck />
           <div style={{ background: '#ffffff', borderRadius: 12, boxShadow: '0 10px 30px rgba(11,29,69,.08)', padding: '22px 28px', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(210px, 1fr))', gap: 20 }}>
             {[
               [site.highlights?.[0]?.value, site.highlights?.[0]?.label, '#D90A0A', <><path d="M2 9l10-5 10 5-10 5z" /><path d="M6 11v5c3 2.5 9 2.5 12 0v-5" /></>],
@@ -526,19 +582,8 @@ export default function Home() {
             <div className="hide-sm" aria-hidden="true" style={{ fontFamily: "'Caveat', cursive", fontSize: 34, lineHeight: 1.1, color: '#0B1D45', transform: 'rotate(-8deg)' }}>“A community<br />that inspires you<br />to achieve more.”</div>
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 16 }}>
-            {[
-              ['classroom', 'Classroom with blackboard and desks', 'Classroom Learning'],
-              ['doubt-sessions', 'Doubt session chat bubbles', 'Doubt Sessions'],
-              ['seminars', 'Seminar presentation screen', 'Seminars & Workshops'],
-              ['activities', 'Chess, football and science activities', 'Student Activities'],
-              ['celebrations', 'Trophy and confetti celebration', 'Celebrations']
-            ].map(([img, alt, label]) => (
-              <a key={img} className="card" href="/gallery" style={{ display: 'block', borderRadius: 10, overflow: 'hidden', background: '#ffffff', color: '#0A1530', boxShadow: '0 8px 22px rgba(11,29,69,.08)' }}>
-                <img src={`/img/${img}.webp`} alt={alt} width="960" height="600" loading="lazy" style={{ display: 'block', width: '100%', height: 150, objectFit: 'cover' }} />
-                <div style={{ padding: '14px 16px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontWeight: 700, fontSize: 14 }}>
-                  {label}<span style={arrowCircle} aria-hidden="true"><Arrow size={14} /></span>
-                </div>
-              </a>
+            {HOME_LIFE.map((g, i) => (
+              <PhotoTile key={g.id} photo={g} height={170} onOpen={() => setLb(i)} />
             ))}
           </div>
         </div>
@@ -625,6 +670,7 @@ export default function Home() {
           </div>
         </div>
       </section>
+      {lb >= 0 && <Lightbox items={HOME_LIFE} index={lb} onIndex={setLb} onClose={() => setLb(-1)} />}
     </>
   );
 }

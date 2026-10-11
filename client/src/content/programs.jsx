@@ -20,6 +20,16 @@ export const PROGRAMS = [
     icon: <><path d="M6 3v6a4 4 0 0 0 8 0V3" /><path d="M10 13v2a5 5 0 0 0 10 0v-2" /><circle cx="20" cy="11" r="2" /></>
   },
   {
+    key: 'school', name: 'School Tuition (Classes 7-12)', short: 'School Tuition', img: '/img/program-school.webp', alt: 'HAwk ACademe students studying with their notes in class',
+    classes: 'Classes 7 to 12 (CBSE, ICSE & ISC)',
+    summary: 'Regular school-syllabus classes for CBSE, ICSE and ISC students in Classes 7 to 12, with board exam preparation.',
+    card: 'For Classes 7 to 12, CBSE, ICSE & ISC. Stronger school marks and board results.',
+    bullets: ['Physics, Chemistry, Mathematics and Biology, taught chapter by chapter with the school syllabus', 'Computer Science classes, now starting', 'Regular chapter tests, sample papers and board-pattern practice', 'Doubt sessions and progress updates for parents'],
+    cardBullets: ['CBSE, ICSE & ISC', 'Board Exam Preparation', 'Regular Chapter Tests'],
+    goal: 'School exams and boards', subjects: 'Physics, Chemistry, Maths, Biology, Computer Science', tone: 'navy',
+    icon: <><path d="M4 19V6a2 2 0 0 1 2-2h12v15H6a2 2 0 0 0-2 2z" /><path d="M8 8h6M8 11h6" /></>
+  },
+  {
     key: 'foundation', name: 'Foundation Courses', short: 'Foundation Courses', img: '/img/program-foundation.webp', alt: 'Foundation courses for classes 8 to 10',
     summary: 'Build a strong base for future success in Classes 8, 9 and 10, with olympiad preparation.',
     card: 'For Classes 8, 9 & 10. Build a strong base for future success.',
@@ -42,5 +52,5 @@ export const PROGRAMS = [
 // Combines the description with the editable batch details for one programme.
 export function withDetails(program, settingsPrograms = []) {
   const d = settingsPrograms.find((p) => p.key === program.key) || {};
-  return { ...program, classes: d.classes || '', duration: d.duration || '', batchSize: d.batchSize || '', mode: d.mode || '', timings: d.timings || '' };
+  return { ...program, classes: d.classes || program.classes || '', duration: d.duration || '', batchSize: d.batchSize || '', mode: d.mode || '', timings: d.timings || '' };
 }

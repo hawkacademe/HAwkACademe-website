@@ -62,7 +62,7 @@ export default function BlogPost() {
                   {post.updated && !sameDay(post.updated, post.date) && <><span aria-hidden="true">·</span><span>Updated <time dateTime={post.updated}>{fmtDate(post.updated)}</time></span></>}
                   <span aria-hidden="true">·</span><span>{readingMinutes(post.content)} min read</span>
                 </div>
-                {post.author && <div style={{ fontSize: 14, color: '#3E4860' }}>By <strong style={{ color: '#0A1530' }}>{post.author}</strong>{post.author === BRAND_NAME ? ', the teaching team at our JEE, NEET and Foundation centres in Barasat, Madhyamgram and New Town, Kolkata.' : ''}</div>}
+                {post.author && <div style={{ fontSize: 14, color: '#3E4860' }}>By <strong style={{ color: '#0A1530' }}>{post.author}</strong>{post.author === BRAND_NAME ? ', the teaching team at our JEE, NEET and school tuition centres in Barasat, Madhyamgram and New Town, Kolkata.' : ''}</div>}
                 {post.cover && <img src={post.cover.url} alt={post.cover.alt || ''} style={{ display: 'block', width: '100%', height: 'auto', borderRadius: 14 }} />}
                 {toc.length >= 3 && (
                   <nav aria-label="In this article" style={{ background: '#F6F8FC', borderRadius: 12, padding: '16px 20px' }}>

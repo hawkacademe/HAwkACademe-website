@@ -61,6 +61,7 @@ export default function Footer() {
           <div className="ft-two ft-one">
             <a href={landingPath('jee')} style={link}>JEE Coaching</a>
             <a href={landingPath('neet')} style={link}>NEET Coaching</a>
+            <a href="/programs#school" style={link}>School Tuition (Class 7-12)</a>
             <a href={landingPath('foundation')} style={link}>Foundation (Class 8-10)</a>
             <a href="/programs#integrated" style={link}>Integrated Programs</a>
           </div>
@@ -78,6 +79,16 @@ export default function Footer() {
           <a href="/privacy" style={{ color: '#5A6378' }}>Privacy Policy</a>
           <a href="/terms" style={{ color: '#5A6378' }}>Terms of Use</a>
           <a href="/admin/login" style={{ color: '#5A6378' }}>Admin</a>
+        </div>
+      </div>
+      <div className="credit-bar">
+        <div className="pad credit-inner">
+          <span className="credit-by">Website made by <span className="credit-name">KOUSTAV DAS</span></span>
+          <div className="credit-links">
+            <a className="credit-chip" href="tel:+919123924645"><Phone size={14} />+91 91239 24645</a>
+            <a className="credit-chip" href="mailto:daskoustav04@gmail.com"><Mail size={14} />daskoustav04@gmail.com</a>
+            <a className="credit-chip" href="https://www.linkedin.com/in/koustav-das-037ba22a1/" target="_blank" rel="noopener noreferrer"><Social.linkedin size={14} />LinkedIn</a>
+          </div>
         </div>
       </div>
     </footer>
