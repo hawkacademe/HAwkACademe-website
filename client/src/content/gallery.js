@@ -1,6 +1,7 @@
 // HAwk ACademe's own photos (from the institute, October 2026).
 // Files live in client/public/img/life (full size and -640 thumbnails).
-// They are shown on the Gallery page before any photos added in Admin › Gallery.
+// Used by the Home hero slideshow and photo cards. The Gallery page shows the copies uploaded to
+// photo storage (npm run upload-own-photos), which can be managed in Admin › Gallery.
 
 const photo = (n, category, alt) => ({
   id: `life-${n}`,

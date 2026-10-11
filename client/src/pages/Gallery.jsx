@@ -4,7 +4,6 @@ import Lightbox from '../components/Lightbox.jsx';
 import { CtaBand, Loading, LoadError, Empty } from '../components/Blocks.jsx';
 import { useData, usePathMeta } from '../lib/hooks.js';
 import PhotoTile from '../components/PhotoTile.jsx';
-import { LIFE_PHOTOS } from '../content/gallery.js';
 
 const CATS = ['all', 'Classroom', 'Seminars', 'Activities', 'Celebrations', 'Campus'];
 
@@ -13,7 +12,7 @@ export default function Gallery() {
   const { data, error, loading } = useData('/gallery');
   const [cat, setCat] = useState('all');
   const [lb, setLb] = useState(-1);
-  const photos = [...LIFE_PHOTOS, ...(data?.photos || [])];
+  const photos = data?.photos || [];
   const list = photos.filter((p) => cat === 'all' || p.category === cat);
   const cats = CATS.filter((c) => c === 'all' || photos.some((p) => p.category === c));
 
@@ -31,9 +30,9 @@ export default function Gallery() {
               ))}
             </div>
           )}
-          {loading && photos.length === 0 && <Loading label="Loading photos…" />}
-          {error && photos.length === 0 && <LoadError error={error} />}
-          {!loading && list.length === 0 && <Empty>No photos here yet.</Empty>}
+          {loading && <Loading label="Loading photos…" />}
+          {error && <LoadError error={error} />}
+          {data && list.length === 0 && <Empty>No photos here yet.</Empty>}
           {list.length > 0 && (
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 280px), 1fr))', gap: 16 }}>
               {list.map((g, i) => (

@@ -18,9 +18,13 @@ await mongoose.connect(config.mongoUri);
 let added = 0, updated = 0;
 const now = Date.now();
 for (const [i, p] of POSTS.entries()) {
+  const fields = postFields(p, cleanHtml);
+  // keep a cover that was uploaded to photo storage (npm run upload-own-photos, or Admin)
+  const existing = await Post.findOne({ slug: p.slug }, { cover: 1 }).lean();
+  if (existing?.cover?.url && !existing.cover.url.startsWith('/img/blog/')) delete fields.cover;
   const res = await Post.updateOne(
     { slug: p.slug },
-    { $set: postFields(p, cleanHtml), $setOnInsert: { slug: p.slug, publishAt: new Date(now - i * 86400000) } },
+    { $set: fields, $setOnInsert: { slug: p.slug, publishAt: new Date(now - i * 86400000) } },
     { upsert: true }
   );
   if (res.upsertedCount) added++; else if (res.modifiedCount) updated++;

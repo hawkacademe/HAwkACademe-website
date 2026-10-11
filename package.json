@@ -14,7 +14,8 @@
     "test": "node --test test/",
     "check:brand": "node tools/check-brand.mjs",
     "check:seo": "node tools/seo-check.mjs",
-    "update-content": "node server/scripts/update-content.js"
+    "update-content": "node server/scripts/update-content.js",
+    "upload-own-photos": "node server/scripts/upload-own-photos.js"
   },
   "license": "UNLICENSED",
   "description": "HAwk ACademe website (Pro plan): React front end, Express API, MongoDB, admin panel.",
