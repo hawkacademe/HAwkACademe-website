@@ -114,7 +114,7 @@ function course(key, url) {
 }
 
 const PAGE_NAMES = {
-  '/about': 'About', '/programs': 'Programs', '/results': 'Results', '/gallery': 'Gallery', '/blog': 'Blog', '/news': 'News',
+  '/about': 'About', '/programs': 'Programs', '/results': 'Results', '/faculty': 'Faculty', '/gallery': 'Gallery', '/blog': 'Blog', '/news': 'News',
   '/contact': 'Contact', '/privacy': 'Privacy Policy', '/terms': 'Terms of Use'
 };
 

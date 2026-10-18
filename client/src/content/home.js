@@ -25,14 +25,22 @@ const ALL_GROWTH = [
 // Figures still holding a [PLACEHOLDER] are hidden until the real number is filled in.
 export const GROWTH = ALL_GROWTH.filter((g) => !/\[[^\]]*\]/.test(g.value));
 
-// Handwritten quote shown over each hero slideshow photo, by Gallery photo id (content/gallery.js).
+// Hero slideshow on Home: the photos it shows, IN THIS ORDER, each with the handwritten quote shown
+// over it. Keys are Gallery photo ids (content/gallery.js). The first photo stays 'life-15': the page
+// preloads a lighter copy of it (/img/life/hero-1200.webp) for a fast first paint.
 export const HERO_QUOTES = {
   'life-15': ['Learn', 'Grow', 'Achieve'],
+  'life-18': ['One batch,', 'one family'],
   'life-7': ['One concept', 'at a time'],
+  'life-17': ['Thank you,', 'teacher'],
   'life-2': ['Mentors who', 'believe in you'],
+  'life-16': ['Guided by', 'the best'],
   'life-14': ['Together', 'we rise'],
+  'life-19': ['Smiles before', 'success'],
   'life-4': ['Grateful for', 'our teachers'],
+  'life-21': ['Bonds beyond', 'books'],
   'life-13': ['Work hard,', 'celebrate harder'],
+  'life-20': ['Every day', 'counts'],
   'life-11': ['Dream big,', 'work bigger'],
   'life-3': ['Small thanks,', 'big hearts'],
   'life-5': ['Every day', 'is a lesson'],

@@ -1,5 +1,6 @@
 // HAwk ACademe's own photos (from the institute, October 2026).
-// Files live in client/public/img/life (full size and -640 thumbnails).
+// Originals are in images/gallery/photo-N.jpg; `node tools/process-photos.mjs` makes the web copies in
+// client/public/img/life (full size and -640 thumbnails).
 // Used by the Home hero slideshow and photo cards. The Gallery page shows the copies uploaded to
 // photo storage (npm run upload-own-photos), which can be managed in Admin › Gallery.
 
@@ -25,6 +26,12 @@ export const LIFE_PHOTOS = [
   photo(6, 'Celebrations', 'Students taking a selfie with their teacher, holding gifts'),
   photo(9, 'Classroom', 'Students standing with their teacher in a HAwk ACademe classroom'),
   photo(1, 'Classroom', 'A group of students in a bright HAwk ACademe classroom'),
-  photo(10, 'Celebrations', 'Students with a teacher holding a cake in the classroom')
+  photo(10, 'Celebrations', 'Students with a teacher holding a cake in the classroom'),
+  photo(16, 'Classroom', 'HAwk ACademe students standing together with their teachers in the classroom'),
+  photo(17, 'Celebrations', 'Students crowding around their teacher as he receives a wrapped gift'),
+  photo(18, 'Classroom', 'A HAwk ACademe batch posing together with their teacher in a bright classroom'),
+  photo(19, 'Celebrations', 'A teacher taking a selfie with his students in a classroom decorated with bunting'),
+  photo(20, 'Celebrations', 'Students and their teacher in a classroom decorated with balloons and a banner'),
+  photo(21, 'Celebrations', 'Students holding gifts with their teachers at a HAwk ACademe celebration')
 ];
 

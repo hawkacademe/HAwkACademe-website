@@ -194,3 +194,11 @@ textarea.fld{min-height:120px;resize:vertical;line-height:1.5}
 .credit-chip{display:inline-flex;align-items:center;gap:7px;padding:6px 12px;border:1px solid rgba(255,255,255,.18);border-radius:999px;font-size:12px;font-weight:600;color:#E3E8F4;background:rgba(255,255,255,.04);transition:background .2s ease,border-color .2s ease,color .2s ease,transform .2s ease}
 .credit-chip:hover,.credit-chip:focus-visible{background:#D90A0A;border-color:#D90A0A;color:#fff;transform:translateY(-1px)}
 @media (max-width: 640px){.credit-inner{justify-content:center;text-align:center}}
+/* Faculty slider (home) */
+.fac-track{list-style:none;margin:0;padding:4px 2px 18px;display:grid;grid-auto-flow:column;grid-auto-columns:calc((100% - 60px) / 4);gap:20px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;scrollbar-width:none;overscroll-behavior-x:contain}
+.fac-track::-webkit-scrollbar{display:none}
+.fac-card{scroll-snap-align:start}
+@media (max-width: 980px){.fac-track{grid-auto-columns:calc((100% - 40px) / 3)}}
+@media (max-width: 760px){.fac-track{grid-auto-columns:calc((100% - 20px) / 2)}}
+@media (max-width: 480px){.fac-track{grid-auto-columns:80%}}
+@media (prefers-reduced-motion: reduce){.fac-track{scroll-behavior:auto}}

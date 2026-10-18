@@ -1,6 +1,6 @@
 // Uploads the institute's own photos and the blog cover photos to photo storage (Cloudinary in
 // production) and saves them in the database, so they can be managed in Admin like any upload.
-//  - Gallery: the photos listed in client/src/content/gallery.js, read from the original files in images/
+//  - Gallery: the photos listed in client/src/content/gallery.js, read from the original files in images/gallery/
 //  - Blog: each post in server/content/posts.js that still uses a built-in /img/blog/ cover
 // Safe to run more than once: photos already in the Gallery (same description) are skipped.
 //   npm run upload-own-photos
@@ -18,7 +18,7 @@ let gallery = 0;
 for (const [i, p] of LIFE_PHOTOS.entries()) {
   if (await Photo.exists({ alt: p.alt })) continue;
   const n = p.id.replace('life-', '');
-  const img = await saveImage(await readFile(`images/image-${n}.jpg`), { folder: 'gallery', maxWidth: 1600, thumbWidth: 640 });
+  const img = await saveImage(await readFile(`images/gallery/photo-${n}.jpg`), { folder: 'gallery', maxWidth: 1600, thumbWidth: 640 });
   await Photo.create({ url: img.url, key: img.key, thumbUrl: img.thumbUrl, thumbKey: img.thumbKey, width: img.width, height: img.height, caption: '', alt: p.alt, category: p.category, order: i });
   gallery++;
 }

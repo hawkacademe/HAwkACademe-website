@@ -21,6 +21,7 @@ function scan(dir) {
         const hits = line.match(RX);
         if (hits) found.push(`${p.replace(ROOT, '')}:${i + 1}  ${[...new Set(hits)].join(' ')}`);
         if (/sample:\s*true/.test(line)) found.push(`${p.replace(ROOT, '')}:${i + 1}  sample topper from the design concept`);
+        if (/placeholder:\s*true/.test(line)) found.push(`${p.replace(ROOT, '')}:${i + 1}  placeholder faculty member (name and photo)`);
       });
     }
   }

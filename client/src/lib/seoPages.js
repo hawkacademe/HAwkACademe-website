@@ -30,6 +30,10 @@ export const PAGES = {
     title: `JEE & NEET Results and Toppers | ${BRAND_NAME} Kolkata`,
     description: `How ${BRAND_NAME} publishes JEE Main, JEE Advanced, NEET-UG and board results: the exact rank, exam and year, shown only with the student's written consent.`
   },
+  '/faculty': {
+    title: `Our Faculty: JEE & NEET Teachers, Kolkata | ${BRAND_NAME}`,
+    description: `Meet ${BRAND_NAME}'s full-time Physics, Chemistry, Maths and Biology teachers who guide JEE, NEET, Foundation and school students in Kolkata.`
+  },
   '/gallery': {
     title: `Photo Gallery: Classes & Events | ${BRAND_NAME} Kolkata`,
     description: `Photos of classrooms, seminars, student activities and celebrations at ${BRAND_NAME}'s JEE, NEET and Foundation coaching centres in North Kolkata.`
@@ -71,7 +75,7 @@ export const PAGES = {
 // Date each page's content last changed (YYYY-MM-DD), used as <lastmod> in sitemap.xml.
 // Update it when you change a page's text.
 export const UPDATED = {
-  '/': '2026-10-07', '/about': '2026-10-07', '/programs': '2026-10-07', '/results': '2026-10-07', '/gallery': '2026-10-07',
+  '/': '2026-10-12', '/about': '2026-10-07', '/programs': '2026-10-07', '/results': '2026-10-07', '/faculty': '2026-10-12', '/gallery': '2026-10-07',
   '/blog': '2026-10-07', '/news': '2026-10-07', '/contact': '2026-10-07',
   [landingPath('jee')]: '2026-10-07', [landingPath('neet')]: '2026-10-07', [landingPath('foundation')]: '2026-10-07',
   '/privacy': '2026-10-07', '/terms': '2026-10-07'

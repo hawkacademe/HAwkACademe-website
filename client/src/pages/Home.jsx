@@ -16,10 +16,12 @@ import { LANDINGS } from '../content/landing.js';
 import PhotoTile from '../components/PhotoTile.jsx';
 import Lightbox from '../components/Lightbox.jsx';
 import { LIFE_PHOTOS } from '../content/gallery.js';
+import { FACULTY_LIST, FACULTY_UNDER_MAINTENANCE, subjectName } from '../content/faculty.js';
 
-// Hero slideshow: every Gallery photo in turn. The first uses a lighter 1200px file because it is the LCP image;
+// Hero slideshow: the Gallery photos listed in HERO_QUOTES (content/home.js), in that order. The first uses a lighter 1200px file because it is the LCP image;
 // each later photo is only requested once the slideshow is about to reach it.
-const HERO_SLIDES = LIFE_PHOTOS.map((p, i) => ({ id: p.id, alt: p.alt, src: i === 0 ? '/img/life/hero-1200.webp' : p.url, quote: HERO_QUOTES[p.id] || ['Learn', 'Grow', 'Achieve'] }));
+const HERO_SLIDES = Object.keys(HERO_QUOTES).map((id) => LIFE_PHOTOS.find((p) => p.id === id)).filter(Boolean)
+  .map((p, i) => ({ id: p.id, alt: p.alt, src: i === 0 ? '/img/life/hero-1200.webp' : p.url, quote: HERO_QUOTES[p.id] }));
 const HOME_LIFE = [7, 2, 11, 4, 13].map((n) => LIFE_PHOTOS.find((p) => p.id === `life-${n}`));
 const NB = ' ';
 const wrap = { position: 'relative', maxWidth: 1280, margin: '0 auto', padding: '88px 32px', display: 'flex', flexDirection: 'column', gap: 40 };
@@ -284,6 +286,57 @@ function ProgramDeck() {
   );
 }
 
+// ---------------- Faculty slider ----------------
+// A row of faculty cards that scrolls one card at a time (swipe on touch, arrows on desktop).
+// Advances on its own every few seconds, paused on hover or focus, off for reduced motion.
+function FacultySlider() {
+  const track = useRef(null);
+  const [paused, setPaused] = useState(false);
+  const step = (dir) => {
+    const t = track.current;
+    if (!t) return;
+    const card = t.firstElementChild;
+    const w = card ? card.getBoundingClientRect().width + 20 : t.clientWidth;
+    const atEnd = t.scrollLeft + t.clientWidth >= t.scrollWidth - 4;
+    const atStart = t.scrollLeft <= 4;
+    if (dir > 0 && atEnd) t.scrollTo({ left: 0, behavior: 'smooth' });
+    else if (dir < 0 && atStart) t.scrollTo({ left: t.scrollWidth, behavior: 'smooth' });
+    else t.scrollBy({ left: dir * w, behavior: 'smooth' });
+  };
+  useEffect(() => {
+    if (paused || window.matchMedia?.('(prefers-reduced-motion: reduce)').matches) return undefined;
+    const id = setInterval(() => step(1), 3500);
+    return () => clearInterval(id);
+  }, [paused]);
+
+  return (
+    <div role="region" aria-roledescription="carousel" aria-label="Our faculty" style={{ display: 'flex', flexDirection: 'column', gap: 22 }}
+      onMouseEnter={() => setPaused(true)} onMouseLeave={() => setPaused(false)} onFocus={() => setPaused(true)} onBlur={() => setPaused(false)}>
+      <ul ref={track} className="fac-track">
+        {FACULTY_LIST.map((f) => (
+          <li key={f.id} className="card fac-card" style={{ position: 'relative', background: '#ffffff', border: '1px solid #E7EAF0', borderRadius: 14, overflow: 'hidden', boxShadow: '0 10px 28px rgba(11,29,69,.08)', display: 'flex', flexDirection: 'column' }}>
+            <div style={{ position: 'relative' }}>
+              <img src={f.photo} alt={f.placeholder ? '' : f.name} width="400" height="400" loading="lazy" style={{ display: 'block', width: '100%', height: 'auto', aspectRatio: '1 / 1', objectFit: 'cover', objectPosition: 'center top', background: '#E9EEF8' }} />
+              <div style={{ position: 'absolute', left: 0, bottom: 0, background: '#D90A0A', color: '#ffffff', fontSize: 11, fontWeight: 800, letterSpacing: '.14em', padding: '7px 14px', borderTopRightRadius: 10 }}>{subjectName(f.subject).toUpperCase()}</div>
+            </div>
+            <div style={{ padding: '16px 18px 18px', display: 'flex', flexDirection: 'column', gap: 4, flexGrow: 1 }}>
+              <h3 style={{ margin: 0, fontSize: 18, fontWeight: 800 }}>{f.name}</h3>
+              <div style={{ fontSize: 13, color: '#3E4860' }}>{f.role}</div>
+              <div style={{ fontSize: 12, color: '#5A6378' }}>{f.experience}</div>
+              <a href={`/faculty#${f.id}`} className="stretched" aria-label={`${f.name}, ${f.role}: view profile`} style={{ marginTop: 10, display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 13, fontWeight: 700, color: '#D90A0A' }}>View profile <Arrow size={14} /></a>
+            </div>
+          </li>
+        ))}
+      </ul>
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 16 }}>
+        <button type="button" className="deck-btn" onClick={() => step(-1)} aria-label="Previous faculty"><ArrowLeft size={20} /></button>
+        <a className="btn-red" href="/faculty" style={btnRed}>Meet All Faculty <Arrow size={18} /></a>
+        <button type="button" className="deck-btn" onClick={() => step(1)} aria-label="Next faculty"><Arrow size={20} /></button>
+      </div>
+    </div>
+  );
+}
+
 export default function Home() {
   usePathMeta('/');
   const site = useSite();
@@ -363,7 +416,7 @@ export default function Home() {
       <div className="subnav">
         <nav aria-label="Sections" className="pad" style={{ maxWidth: 1280, margin: '0 auto', padding: '0 32px', display: 'flex', gap: 4, overflowX: 'auto' }}>
           <a href="#results">Results</a><a href="#programs">Programs</a><a href="#tests">Admission Tests</a><a href="#news">News</a>
-          <a href="#about">About</a><a href="#methodology">Roadmap</a><a href="#centres">Centres</a><a href="#students">Student Life</a>
+          <a href="#about">About</a><a href="#methodology">Roadmap</a><a href="#faculty">Faculty</a><a href="#centres">Centres</a><a href="#students">Student Life</a>
         </nav>
       </div>
 
@@ -515,6 +568,20 @@ export default function Home() {
           <div style={{ display: 'flex', justifyContent: 'center' }}>
             <a className="btn-red" href="/about" style={{ ...btnRed, padding: '0 26px' }}>Why HAwk ACademe <Arrow size={18} /></a>
           </div>
+        </div>
+      </section>
+
+      {/* ============ FACULTY ============ */}
+      <section id="faculty" style={{ position: 'relative', background: '#F6F8FC', overflow: 'hidden' }}>
+        <div className="pad" style={wrap}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 14, alignItems: 'center', textAlign: 'center' }}>
+            <Eyebrow center>OUR FACULTY</Eyebrow>
+            <h2 className="h2" style={h2}>Meet the <span style={{ color: '#D90A0A' }}>Mentors</span> Behind Every Result</h2>
+            <p style={{ margin: 0, fontSize: 16, lineHeight: 1.6, color: '#3E4860', maxWidth: 620 }}>Experienced, full-time subject experts who stay with a batch through the year and know every student by name.</p>
+          </div>
+          {FACULTY_UNDER_MAINTENANCE ? (
+            <div style={{ textAlign: 'center', padding: '48px 24px', background: '#ffffff', border: '1px dashed #C9D0DE', borderRadius: 14, color: '#3E4860' }}><div style={{ fontSize: 18, fontWeight: 800, color: '#0B1D45' }}>Faculty section under maintenance</div><p style={{ margin: '8px 0 0', fontSize: 15 }}>We are updating our faculty profiles. Please check back soon.</p></div>
+          ) : <FacultySlider />}
         </div>
       </section>
 

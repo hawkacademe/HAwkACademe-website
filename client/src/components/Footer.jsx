@@ -53,6 +53,7 @@ export default function Footer() {
             <a href="/programs" style={link}>Programs</a>
             <a href="/news" style={link}>News</a>
             <a href="/results" style={link}>Results</a>
+            <a href="/faculty" style={link}>Faculty</a>
             <a href="/contact" style={link}>Contact</a>
           </div>
         </div>

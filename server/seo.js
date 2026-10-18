@@ -8,6 +8,7 @@ import { config } from './config.js';
 import { BRAND_NAME } from '../client/src/lib/brand.js';
 import { PAGES, UPDATED, landingPath } from '../client/src/lib/seoPages.js';
 import { structuredData } from './schema.js';
+import { FACULTY_HAS_PLACEHOLDERS } from '../client/src/content/faculty.js';
 
 export const SITE_NAME = BRAND_NAME;
 export { PAGES };
@@ -21,7 +22,8 @@ const SHARE_FOR = {
   '/blog': { url: '/img/share-blog.jpg', alt: `Exam tips and study plans from ${BRAND_NAME}` }
 };
 const shareFor = (path) => (SHARE_FOR[path] ? { ...SHARE, ...SHARE_FOR[path] } : path.startsWith('/blog/') ? { ...SHARE, ...SHARE_FOR['/blog'] } : SHARE);
-const NOINDEX_PAGES = new Set(); // pages to keep out of search results and the sitemap
+// Pages to keep out of search results and the sitemap. /faculty stays out until real teachers replace the placeholders.
+const NOINDEX_PAGES = new Set(FACULTY_HAS_PLACEHOLDERS ? ['/faculty'] : []);
 
 const esc = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 const abs = (u) => (/^https?:\/\//.test(u) ? u : config.siteUrl + u);

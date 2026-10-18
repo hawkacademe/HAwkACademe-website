@@ -11,6 +11,7 @@ const About = lazy(() => import('./pages/About.jsx'));
 const Programs = lazy(() => import('./pages/Programs.jsx'));
 const Results = lazy(() => import('./pages/Results.jsx'));
 const Gallery = lazy(() => import('./pages/Gallery.jsx'));
+const Faculty = lazy(() => import('./pages/Faculty.jsx'));
 const Blog = lazy(() => import('./pages/Blog.jsx'));
 const BlogPost = lazy(() => import('./pages/BlogPost.jsx'));
 const News = lazy(() => import('./pages/News.jsx'));
@@ -35,6 +36,7 @@ export default function App() {
           <Route path="programs/:slug" element={<ProgramLanding />} />
           <Route path="results" element={<Results />} />
           <Route path="gallery" element={<Gallery />} />
+          <Route path="faculty" element={<Faculty />} />
           <Route path="blog" element={<Blog />} />
           <Route path="blog/:slug" element={<BlogPost />} />
           <Route path="news" element={<News />} />
