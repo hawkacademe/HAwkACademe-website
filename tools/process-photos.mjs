@@ -31,9 +31,40 @@ for (const f of readdirSync(`${ROOT}images/gallery`)) {
 
 const FACULTY = `${ROOT}client/public/img/faculty/`;
 mkdirSync(FACULTY, { recursive: true });
-for (const f of readdirSync(`${ROOT}images/faculty`)) {
-  const m = f.match(/^([a-z0-9-]+)\.(jpe?g|png|webp)$/i);
-  if (m) await make(`${ROOT}images/faculty/${f}`, `${FACULTY}${m[1].toLowerCase()}.webp`, { width: 600, height: 600, fit: 'cover', position: 'top' }, 80);
+
+const FACULTY_MAP = {
+  '1. Hawk Sir Chemistry "Bridging complex theory and absolute clarity.".png': 'hawk-sir.webp',
+  '2. R G Sir Physics "Where complex concepts click and potential energy becomes brilliance.".png': 'rg-sir.webp',
+  'Deb Sir Computer "Building the algorithmic foundations today for technologies we have yet to imagine.".png': 'deb-sir.webp',
+  'Momin Sir Mathametics "Transforming raw variables into vectors of absolute precision.".png': 'momin-sir.webp',
+  'Tapas Sir Biology "Where complex life science sparks and dormant genius finds its pulse.".png': 'tapas-sir.webp'
+};
+
+const STAFF_MAP = {
+  '1. Subhojit Sir.png': 'subhojit-sir.webp',
+  "2. Tania Ma'am.webp": 'tania-maam.webp',
+  "Antara Ma'am.png": 'antara-maam.webp',
+  'Sanjay Sir.png': 'sanjay-sir.webp'
+};
+
+if (existsSync(`${ROOT}images/faculty`)) {
+  for (const f of readdirSync(`${ROOT}images/faculty`)) {
+    if (f.startsWith('.')) continue;
+    const target = FACULTY_MAP[f] || (f.match(/^([a-z0-9-]+)\.(jpe?g|png|webp)$/i)?.[1]?.toLowerCase() + '.webp');
+    if (target) {
+      await make(`${ROOT}images/faculty/${f}`, `${FACULTY}${target}`, { width: 600, height: 600, fit: 'cover', position: 'top' }, 82);
+    }
+  }
+}
+
+if (existsSync(`${ROOT}images/staff`)) {
+  for (const f of readdirSync(`${ROOT}images/staff`)) {
+    if (f.startsWith('.')) continue;
+    const target = STAFF_MAP[f] || (f.match(/^([a-z0-9-]+)\.(jpe?g|png|webp)$/i)?.[1]?.toLowerCase() + '.webp');
+    if (target) {
+      await make(`${ROOT}images/staff/${f}`, `${FACULTY}${target}`, { width: 600, height: 600, fit: 'cover', position: 'top' }, 82);
+    }
+  }
 }
 
 console.log(`Made ${made} image file(s).`);

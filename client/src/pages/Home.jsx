@@ -318,11 +318,29 @@ function FacultySlider() {
             <div style={{ position: 'relative' }}>
               <img src={f.photo} alt={f.placeholder ? '' : f.name} width="400" height="400" loading="lazy" style={{ display: 'block', width: '100%', height: 'auto', aspectRatio: '1 / 1', objectFit: 'cover', objectPosition: 'center top', background: '#E9EEF8' }} />
               <div style={{ position: 'absolute', left: 0, bottom: 0, background: '#D90A0A', color: '#ffffff', fontSize: 11, fontWeight: 800, letterSpacing: '.14em', padding: '7px 14px', borderTopRightRadius: 10 }}>{subjectName(f.subject).toUpperCase()}</div>
+              {f.isFounder && (
+                <div style={{ position: 'absolute', top: 10, right: 10, background: '#D90A0A', color: '#ffffff', fontSize: 10, fontWeight: 800, letterSpacing: '.12em', padding: '4px 10px', borderRadius: 999, boxShadow: '0 4px 12px rgba(217,10,10,.4)' }}>FOUNDER</div>
+              )}
             </div>
             <div style={{ padding: '16px 18px 18px', display: 'flex', flexDirection: 'column', gap: 4, flexGrow: 1 }}>
               <h3 style={{ margin: 0, fontSize: 18, fontWeight: 800 }}>{f.name}</h3>
-              <div style={{ fontSize: 13, color: '#3E4860' }}>{f.role}</div>
+              <div style={{ fontSize: 13, color: '#D90A0A', fontWeight: 700 }}>{f.role}</div>
               <div style={{ fontSize: 12, color: '#5A6378' }}>{f.experience}</div>
+              {f.quote && (
+                <div style={{
+                  margin: '6px 0 2px',
+                  padding: '6px 10px',
+                  background: '#F6F8FC',
+                  borderLeft: '2px solid #D90A0A',
+                  borderRadius: '0 6px 6px 0',
+                  fontStyle: 'italic',
+                  fontSize: 12.5,
+                  lineHeight: 1.45,
+                  color: '#0B1D45'
+                }}>
+                  “{f.quote}”
+                </div>
+              )}
               <a href={`/faculty#${f.id}`} className="stretched" aria-label={`${f.name}, ${f.role}: view profile`} style={{ marginTop: 10, display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 13, fontWeight: 700, color: '#D90A0A' }}>View profile <Arrow size={14} /></a>
             </div>
           </li>

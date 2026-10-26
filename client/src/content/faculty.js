@@ -1,24 +1,129 @@
 // FACULTY: shown in the home page slider and on /faculty.
-// Every entry below is a PLACEHOLDER (placeholder: true). To publish a real teacher, fill in
-// the fields, set photo to a real image (square, at least 400x400, face near the top, e.g. '/img/faculty/physics-1.webp'; the original goes in images/faculty/ and
-// `node tools/process-photos.mjs` makes the web copy)
-// and delete the `placeholder: true` line. While any placeholder is left, /faculty stays out of
-// search results and the sitemap, and `npm run check:placeholders` lists it.
-// subject: 'physics' | 'chemistry' | 'maths' | 'biology'
+// Real faculty and academic mentors with authentic photography and quotations.
 
-// While true, the home page and /faculty show an "under maintenance" notice instead of the teacher cards.
-export const FACULTY_UNDER_MAINTENANCE = true;
+export const FACULTY_UNDER_MAINTENANCE = false;
 
 export const FACULTY_PLACEHOLDER_PHOTO = '/img/faculty/placeholder.svg';
 
 const ALL_FACULTY = [
-  { id: 'physics-1', subject: 'physics', name: 'Faculty Name', role: 'Senior Faculty, Physics', qualification: 'Qualification', experience: '10+ years teaching', programs: ['JEE', 'NEET'], bio: 'A short introduction to this teacher: their teaching style, the topics they love and what students say about their classes.', photo: '/img/faculty/physics-1.webp', placeholder: true },
-  { id: 'maths-1', subject: 'maths', name: 'Faculty Name', role: 'Senior Faculty, Mathematics', qualification: 'Qualification', experience: '12+ years teaching', programs: ['JEE', 'Foundation'], bio: 'A short introduction to this teacher: their teaching style, the topics they love and what students say about their classes.', photo: '/img/faculty/maths-1.webp', placeholder: true },
-  { id: 'biology-1', subject: 'biology', name: 'Faculty Name', role: 'Senior Faculty, Biology', qualification: 'Qualification', experience: '9+ years teaching', programs: ['NEET'], bio: 'A short introduction to this teacher: their teaching style, the topics they love and what students say about their classes.', photo: '', placeholder: true },
-  { id: 'physics-2', subject: 'physics', name: 'Faculty Name', role: 'Faculty, Physics', qualification: 'Qualification', experience: '6+ years teaching', programs: ['Foundation', 'School'], bio: 'A short introduction to this teacher: their teaching style, the topics they love and what students say about their classes.', photo: '/img/faculty/physics-2.webp', placeholder: true },
-  { id: 'chemistry-2', subject: 'chemistry', name: 'Faculty Name', role: 'Faculty, Chemistry', qualification: 'Qualification', experience: '5+ years teaching', programs: ['School', 'Foundation'], bio: 'A short introduction to this teacher: their teaching style, the topics they love and what students say about their classes.', photo: '', placeholder: true },
-  { id: 'maths-2', subject: 'maths', name: 'Faculty Name', role: 'Faculty, Mathematics', qualification: 'Qualification', experience: '7+ years teaching', programs: ['School', 'Foundation'], bio: 'A short introduction to this teacher: their teaching style, the topics they love and what students say about their classes.', photo: '/img/faculty/maths-2.webp', placeholder: true },
-  { id: 'biology-2', subject: 'biology', name: 'Faculty Name', role: 'Faculty, Biology', qualification: 'Qualification', experience: '5+ years teaching', programs: ['NEET', 'School'], bio: 'A short introduction to this teacher: their teaching style, the topics they love and what students say about their classes.', photo: '', placeholder: true }
+  {
+    id: 'hawk-sir',
+    subject: 'chemistry',
+    name: 'Hawk Sir',
+    role: 'Founder & Senior Faculty, Chemistry',
+    qualification: 'Founder & Director, HAwk ACademe',
+    experience: '15+ years teaching',
+    quote: 'Bridging complex theory and absolute clarity.',
+    programs: ['JEE', 'NEET', 'Foundation'],
+    bio: 'Founder of HAwk ACademe and veteran Chemistry mentor. Renowned for breaking down intricate chemical mechanisms and reaction kinetics into crystal-clear conceptual frameworks. Guides aspirants with visionary mentorship from foundational concepts to top ranks in JEE and NEET.',
+    photo: '/img/faculty/hawk-sir.webp',
+    isFounder: true,
+    isSenior: true
+  },
+  {
+    id: 'rg-sir',
+    subject: 'physics',
+    name: 'R G Sir',
+    role: 'Senior Faculty, Physics',
+    qualification: 'Physics Specialist',
+    experience: '12+ years teaching',
+    quote: 'Where complex concepts click and potential energy becomes brilliance.',
+    programs: ['JEE Advanced', 'JEE Main', 'NEET'],
+    bio: 'Masters the art of visual physics and intuitive problem-solving. Helps students build robust physical intuition, eliminating fear of numericals and unlocking high-scoring potential across JEE and NEET exams.',
+    photo: '/img/faculty/rg-sir.webp',
+    isSenior: true
+  },
+  {
+    id: 'momin-sir',
+    subject: 'maths',
+    name: 'Momin Sir',
+    role: 'Senior Faculty, Mathematics',
+    qualification: 'Mathematics Specialist',
+    experience: '10+ years teaching',
+    quote: 'Transforming raw variables into vectors of absolute precision.',
+    programs: ['JEE Advanced', 'JEE Main', 'Foundation'],
+    bio: 'Transforms abstract mathematical concepts into structured, high-speed problem-solving strategies. Specializes in calculus, coordinate geometry and algebra for competitive engineering entrance exams.',
+    photo: '/img/faculty/momin-sir.webp',
+    isSenior: true
+  },
+  {
+    id: 'tapas-sir',
+    subject: 'biology',
+    name: 'Tapas Sir',
+    role: 'Senior Faculty, Biology',
+    qualification: 'Life Sciences Specialist',
+    experience: '10+ years teaching',
+    quote: 'Where complex life science sparks and dormant genius finds its pulse.',
+    programs: ['NEET-UG', 'Boards', 'Olympiads'],
+    bio: 'Brings biological sciences to life with deep NCERT mastery, comprehensive diagrammatic analysis, and high-yield retention techniques specifically tailored for cracking top medical colleges via NEET-UG.',
+    photo: '/img/faculty/tapas-sir.webp',
+    isSenior: true
+  },
+  {
+    id: 'deb-sir',
+    subject: 'computer',
+    name: 'Deb Sir',
+    role: 'Senior Faculty, Computer Science',
+    qualification: 'Computer Science Specialist',
+    experience: '10+ years teaching',
+    quote: 'Building the algorithmic foundations today for technologies we have yet to imagine.',
+    programs: ['CBSE', 'ISC', 'Foundation'],
+    bio: 'Guides students through computational thinking, data structures, and programming languages. Fosters algorithmic thinking that prepares students both for board examinations and modern tech frontiers.',
+    photo: '/img/faculty/deb-sir.webp',
+    isSenior: true
+  },
+  {
+    id: 'subhojit-sir',
+    subject: 'mentorship',
+    name: 'Subhojit Sir',
+    role: 'Faculty & Academic Mentor',
+    qualification: 'Academic Mentorship & Guidance',
+    experience: '8+ years mentoring',
+    quote: 'Guiding every student with disciplined practice and unwavering support.',
+    programs: ['Foundation', 'School Tuition', 'Doubt Clearing'],
+    bio: 'Dedicated to student academic development, personalized doubt clearance, and maintaining rigorous study routines to ensure steady conceptual growth and consistent test performance.',
+    photo: '/img/faculty/subhojit-sir.webp',
+    isSenior: false
+  },
+  {
+    id: 'tania-maam',
+    subject: 'mentorship',
+    name: "Tania Ma'am",
+    role: 'Faculty & Academic Coordinator',
+    qualification: 'Academic Guidance & Student Mentorship',
+    experience: '7+ years mentoring',
+    quote: 'Nurturing student confidence through attentive guidance and continuous care.',
+    programs: ['Foundation', 'School Tuition', 'Mentorship'],
+    bio: 'Coordinates batch progress, mentors students through academic hurdles, and bridges communication between teachers, students, and parents to foster a supportive learning environment.',
+    photo: '/img/faculty/tania-maam.webp',
+    isSenior: false
+  },
+  {
+    id: 'antara-maam',
+    subject: 'mentorship',
+    name: "Antara Ma'am",
+    role: 'Faculty & Academic Mentor',
+    qualification: 'Student Mentorship & Foundation Support',
+    experience: '6+ years mentoring',
+    quote: 'Inspiring discipline and focus to turn potential into tangible achievement.',
+    programs: ['School Tuition', 'Foundation', 'Doubt Clearing'],
+    bio: 'Focuses on building strong fundamentals for junior and senior batches, conducting regular doubt-solving clinics, and mentoring students to achieve conceptual clarity and examination readiness.',
+    photo: '/img/faculty/antara-maam.webp',
+    isSenior: false
+  },
+  {
+    id: 'sanjay-sir',
+    subject: 'mentorship',
+    name: 'Sanjay Sir',
+    role: 'Faculty & Student Mentor',
+    qualification: 'Academic Mentorship & Test Strategy',
+    experience: '8+ years mentoring',
+    quote: 'Building strong academic habits and exam resilience one day at a time.',
+    programs: ['JEE', 'NEET', 'Foundation'],
+    bio: 'Specializes in test analytics, academic discipline, and individualized mentorship to help competitive aspirants overcome exam anxiety and maximize their scoring efficiency.',
+    photo: '/img/faculty/sanjay-sir.webp',
+    isSenior: false
+  }
 ];
 
 export const FACULTY_LIST = ALL_FACULTY.map((f) => ({ ...f, photo: f.photo || FACULTY_PLACEHOLDER_PHOTO }));
@@ -28,6 +133,8 @@ export const SUBJECTS = [
   { key: 'physics', name: 'Physics' },
   { key: 'chemistry', name: 'Chemistry' },
   { key: 'maths', name: 'Mathematics' },
-  { key: 'biology', name: 'Biology' }
+  { key: 'biology', name: 'Biology' },
+  { key: 'computer', name: 'Computer Science' },
+  { key: 'mentorship', name: 'Academic Mentors & Staff' }
 ];
 export const subjectName = (key) => SUBJECTS.find((s) => s.key === key)?.name || key;

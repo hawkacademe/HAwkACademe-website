@@ -9,18 +9,19 @@ const ALL_STORY = [
 const ALL_FOUNDED = '[YEAR FOUNDED]';
 
 const ALL_FOUNDER = {
-  name: 'Ainul Hoque',
-  title: 'Founder, HAwk ACademe',
-  message: "[Founder's message — a short line on why HAwk ACademe exists and what it promises every student.]",
-  photo: '' // e.g. '/img/founder.webp' (square, at least 400px)
+  name: 'Hawk Sir (Ainul Hoque)',
+  title: 'Founder & Director, HAwk ACademe',
+  message: 'Bridging complex theory and absolute clarity to empower every student to achieve their highest academic potential.',
+  photo: '/img/faculty/hawk-sir.webp'
 };
 
-// Faculty snapshot on About. subject: 'physics' | 'chemistry' | 'maths' | 'biology'
+// Faculty snapshot on About. subject: 'physics' | 'chemistry' | 'maths' | 'biology' | 'computer'
 const ALL_FACULTY = [
-  { subject: 'physics', name: '[FACULTY NAME]', qualification: '[QUALIFICATION]', experience: '[EXPERIENCE]', photo: '' },
-  { subject: 'chemistry', name: '[FACULTY NAME]', qualification: '[QUALIFICATION]', experience: '[EXPERIENCE]', photo: '' },
-  { subject: 'maths', name: '[FACULTY NAME]', qualification: '[QUALIFICATION]', experience: '[EXPERIENCE]', photo: '' },
-  { subject: 'biology', name: '[FACULTY NAME]', qualification: '[QUALIFICATION]', experience: '[EXPERIENCE]', photo: '' }
+  { subject: 'chemistry', name: 'Hawk Sir', qualification: 'Founder & Senior Faculty, Chemistry', experience: '15+ years teaching', photo: '/img/faculty/hawk-sir.webp' },
+  { subject: 'physics', name: 'R G Sir', qualification: 'Senior Faculty, Physics', experience: '12+ years teaching', photo: '/img/faculty/rg-sir.webp' },
+  { subject: 'maths', name: 'Momin Sir', qualification: 'Senior Faculty, Mathematics', experience: '10+ years teaching', photo: '/img/faculty/momin-sir.webp' },
+  { subject: 'biology', name: 'Tapas Sir', qualification: 'Senior Faculty, Biology', experience: '10+ years teaching', photo: '/img/faculty/tapas-sir.webp' },
+  { subject: 'computer', name: 'Deb Sir', qualification: 'Senior Faculty, Computer Science', experience: '10+ years teaching', photo: '/img/faculty/deb-sir.webp' }
 ];
 
 // Only real content is shown on the site; anything still in [BRACKETS] stays hidden.
@@ -40,5 +41,6 @@ export const SUBJECT_BANDS = {
   physics: { label: 'PHYSICS FACULTY', glyph: 'F = ma', bg: 'linear-gradient(135deg,#0B1D45,#1B4290)' },
   chemistry: { label: 'CHEMISTRY FACULTY', glyph: 'H₂O', bg: 'linear-gradient(135deg,#B00808,#E8231A)' },
   maths: { label: 'MATHEMATICS FACULTY', glyph: '∫ f(x) dx', bg: 'linear-gradient(135deg,#13306B,#0B1D45)' },
-  biology: { label: 'BIOLOGY FACULTY', glyph: 'DNA', bg: 'linear-gradient(135deg,#7A0505,#D90A0A)' }
+  biology: { label: 'BIOLOGY FACULTY', glyph: 'DNA', bg: 'linear-gradient(135deg,#7A0505,#D90A0A)' },
+  computer: { label: 'COMPUTER SCIENCE', glyph: '0101', bg: 'linear-gradient(135deg,#1B3B6F,#0E244E)' }
 };
