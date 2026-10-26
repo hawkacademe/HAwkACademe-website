@@ -20,7 +20,7 @@ export const PROGRAMS = [
     icon: <><path d="M6 3v6a4 4 0 0 0 8 0V3" /><path d="M10 13v2a5 5 0 0 0 10 0v-2" /><circle cx="20" cy="11" r="2" /></>
   },
   {
-    key: 'school', name: 'School Tuition (Classes 7-12)', short: 'School Tuition', img: '/img/program-school.webp', alt: 'HAwk ACademe students studying with their notes in class',
+    key: 'school', name: 'School Tuition (Classes 7-12)', short: 'School Tuition', img: '/img/program-school.webp', alt: 'School tuition for Classes 7 to 12, CBSE, ICSE and ISC',
     classes: 'Classes 7 to 12 (CBSE, ICSE & ISC)',
     summary: 'Regular school-syllabus classes for CBSE, ICSE and ISC students in Classes 7 to 12, with board exam preparation.',
     card: 'For Classes 7 to 12, CBSE, ICSE & ISC. Stronger school marks and board results.',
