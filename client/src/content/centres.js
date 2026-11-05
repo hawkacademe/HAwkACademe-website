@@ -15,9 +15,9 @@ export const CENTRES = [
   {
     key: 'madhyamgram', tag: 'MADHYAMGRAM CENTRE', city: 'Madhyamgram', area: 'Madhyamgram, North 24 Parganas',
     address: 'Madhyamgram, Kolkata, West Bengal 700129',
-    street: '', locality: 'Madhyamgram', postalCode: '700129', geo: [22.6948935, 88.4623],
+    street: '', locality: 'Madhyamgram', postalCode: '700129', geo: [22.6952530, 88.4610861],
     mapsLink: 'https://maps.app.goo.gl/j4cwBHWBGnKAF2Zx9',
-    mapEmbed: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3680.8965821448437!2d88.45972507622211!3d22.69489347940481!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39f89f46336e3cbf%3A0xf8bab5d4dc027a0c!2sHAwk%20ACademe!5e0!3m2!1sen!2sin!4v1791384841127!5m2!1sen!2sin',
+    mapEmbed: 'https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3680.8869233781597!2d88.46108607530408!3d22.695252979404376!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!1zMjLCsDQxJzQyLjkiTiA4OMKwMjcnNDkuMiJF!5e0!3m2!1sen!2sin!4v1793889982047!5m2!1sen!2sin',
     img: '/img/classroom.webp', alt: 'Illustration of a classroom with a blackboard'
   },
   {
